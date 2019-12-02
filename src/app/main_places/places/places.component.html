@@ -1,0 +1,26 @@
+
+
+<div class="container">
+    <div class="row">
+       
+        <div class="col-md-3 mb-3" *ngFor="let place of myPlaces">
+             <div class="place">
+                 <img src="../../../assets/portfolio/{{place.image}}" class="myimg"> 
+
+                 <div class="layer p-3">
+
+                        <h1>{{place.type}}</h1>
+                        <p>{{place.description}}</p>
+                        <button class="btn btn-warning more-info" (click)="show(place.id)">More info...</button>
+                 </div>
+
+
+             </div>
+
+        </div>
+           
+
+       
+
+    </div>
+</div>

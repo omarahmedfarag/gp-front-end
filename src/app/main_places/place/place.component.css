@@ -1,0 +1,13 @@
+.main
+{
+    height: 100vh;
+    background-image: url("../../../assets/imgs/stadium.jpg");
+    background-size: cover;
+}
+
+
+.input-hieght
+{
+    height: 45px;
+
+}
