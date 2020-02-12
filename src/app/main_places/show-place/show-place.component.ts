@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MyPlacesService } from '../my-places.service';
-
+import { UserAuthService } from 'src/app/auth/user-auth.service';
+declare const $:any;
 @Component({
   selector: 'app-show-place',
   templateUrl: './show-place.component.html',
@@ -9,31 +10,44 @@ import { MyPlacesService } from '../my-places.service';
 })
 export class ShowPlaceComponent implements OnInit {
   id:number;
-  singlePlace:any
-  allPlaces:any
-  constructor(private activeRoute:ActivatedRoute,private _MyPlacesService:MyPlacesService) { }
+  singlePlace:object;
+  loggedIn:boolean=false;
+  constructor(private activeRoute:ActivatedRoute,
+    private router:Router,
+    private _MyPlacesService:MyPlacesService,
+    private log:UserAuthService) { }
 
   ngOnInit() {
 
+   this.loggedIn=this.log.loggedIn 
     this.activeRoute.params.subscribe( (params:Params)=>{
       this.id=params['id']
      
     } )
+    this._MyPlacesService.getSinglePlace(this.id).subscribe( data=>{
 
-    this._MyPlacesService.getAllPlaces().subscribe( data=>{
-
-      this.allPlaces=data.data;
+      this.singlePlace=data.data;
 
       //we get single place from all places
-      this.singlePlace=this.allPlaces.slice()[this.id-1];
       
 
     })
 
-
-
+    
 
 
   }
 
+  onConfirm()
+  {
+
+      $(".confirm-favorit").fadeIn();
+    
+  }
+  cancle()
+  {
+    $(".confirm-favorit").hide();
+  }
+
+  
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyPlacesService} from "../my-places.service";
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-places',
   templateUrl: './places.component.html',
@@ -14,6 +15,7 @@ export class PlacesComponent implements OnInit {
    }
 
   ngOnInit() {
+    
     this._MyPlacesService.getAllPlaces().subscribe( data=>{
 
       this.myPlaces=data.data;

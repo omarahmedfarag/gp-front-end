@@ -1,6 +1,6 @@
 
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
        
         <div class="col-md-3 mb-3" *ngFor="let place of myPlaces">
@@ -10,9 +10,10 @@
                  <div class="layer p-3">
 
                         <h1>{{place.type}}</h1>
-                        <p>{{place.description}}</p>
+                        <p>{{place.description | filter}}</p>
                         <button class="btn btn-warning more-info" (click)="show(place.id)">More info...</button>
-                 </div>
+                        
+                    </div>
 
 
              </div>
@@ -23,4 +24,5 @@
        
 
     </div>
+    
 </div>

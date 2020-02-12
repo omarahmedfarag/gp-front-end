@@ -19,4 +19,9 @@ export class MyPlacesService {
 
    }
 
+   getSinglePlace(id:number):Observable<any>
+   {
+      return this._HttpClient.get("http://localhost/play/public/api/places/"+id);
+   }
+
 }

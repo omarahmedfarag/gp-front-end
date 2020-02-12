@@ -21,6 +21,7 @@
     "@angular/router": "~8.2.4",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
+    "ngx-bar-rating": "^1.1.0",
     "popper.js": "^1.16.0",
     "rxjs": "~6.4.0",
     "skitter-slider": "^5.1.4",

@@ -1,24 +1,41 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top" >
-  <a class="navbar-brand" href="#">Sportivo</a>
+  <a class="navbar-brand" href="#" id="logo">Sportivo</a>
   <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
       aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavId">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      
       <li class="nav-item ">
-        <a class="nav-link" [routerLink]="['/Home']" routerLinkActive="active" >Home </a>
+            <a class="nav-link" [routerLink]="['/Home']" routerLinkActive="active" >Home </a>
       </li>
+
+      <li class="nav-item ">
+        <a class="nav-link" [routerLink]="['/Home1']" routerLinkActive="active" >Events </a>
+      </li>
+
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['places']" routerLinkActive="active" >Link</a>
+        <a class="nav-link" [routerLink]="['places']" routerLinkActive="active" >Discover</a>
       </li>
+
+      <li class="nav-item">
+          <a class="nav-link" [routerLink]="['places1']" routerLinkActive="active" >Products</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['places2']" routerLinkActive="active" >Favorits</a>
+          </li>
       
       
     </ul>
-    <div class="register mr-5">
+    <div  *ngIf="!loggedIn" class="register mr-5">
       <button class="btn btn-outline-light mr-3">Sigin in</button>
-      <button class=" btn btn-outline-success "> login</button>
-    </div>>
+      <button class=" btn btn-outline-success " (click)="logIn()"> login</button>
+    </div>
+    <div *ngIf="loggedIn" class="text-white mr-3">
+      Welcom : Ahmed
+    </div>
   </div>
 </nav>
 
