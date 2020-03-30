@@ -1,7 +1,7 @@
 
-
+<!--
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="isLodaing">
        
         <div class="col-md-3 mb-3" *ngFor="let place of myPlaces">
              <div class="place">
@@ -24,5 +24,120 @@
        
 
     </div>
+
+    <div class="sk-cube-grid" *ngIf="!isLodaing">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+      </div>
+
+
     
 </div>
+-->
+    
+<div class="body">
+    <div class="container">
+
+        <div class="search-container  d-flex justify-content-start align-items-start">
+
+            <div class="search d-flex justify-content-center mb-3" id="search-div">
+          
+                <select class=" w-50 input-hieght" >
+                    <option value="0" selected disabled>Select type of sports</option>
+                    <option value="1">Street Wourkout</option>
+                    <option value="2">Gym</option>
+                    <option value="3">Basket Ball</option>
+                    <option value="3">Tennis</option>
+                    <option value="3">Ballet</option>
+                    <option value="3">Basket Ball</option>
+                    <option value="3">All</option>
+                </select>
+          
+                <select class=" w-50 input-hieght" >
+                    <option value="0" selected disabled>Location</option>
+                    <option value="1">Alexandria</option>
+                    <option value="2">Aswan</option>
+                    <option value="3">Asyut</option>
+                    <option value="4">Beheira</option>
+                    <option value="6">Beni Suef</option>
+                    <option value="6">Cairo</option>
+                    <option value="7">Dakahlia</option>
+                    <option value="8">Damietta</option>
+                    <option value="9">Faiyum</option>
+                    <option value="10">Gharbia</option>
+                    <option value="11">Giza</option>
+                    <option value="12">Ismailia</option>
+                    <option value="13">Luxor</option>
+                    <option value="14">Matruh</option>
+                    <option value="15">All</option>
+                </select>
+                
+                <button class="btn btn-search w-25 input-hieght" (click)="onSearch()">Search</button>
+                
+              </div>
+
+              <div (click)="toggleSearch()" *ngIf="toogle" class="text-white"><i class="fas fa-search mt-3"></i> </div>
+         
+              <div class="hide-search input-hieght
+                            d-flex align-items-center
+                            justify-content-center
+                            text-white" *ngIf="!toogle"
+                            (click)="toggleSearch()">
+                            
+                            </div>
+        </div>
+      
+
+
+
+
+
+
+        <div class="row ">
+            <div class="col-md-3">
+                
+                <div class="card">
+                    <img src="../../../assets/street.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <a href="#" class="btn btn-success">Go somewhere</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" >
+                    <img src="../../../assets/football.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <a href="#" class="btn btn-success">Go somewhere</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="../../../assets/golf.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <a href="#" class="btn btn-success">Go somewhere</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="../../../assets/street.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <a href="#" class="btn btn-success">Go somewhere</a>
+                    </div>
+                  </div>
+            </div>
+    
+        </div>
+    </div>
+
+    
+</div>
+

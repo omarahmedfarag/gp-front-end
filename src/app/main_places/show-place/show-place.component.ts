@@ -19,7 +19,8 @@ export class ShowPlaceComponent implements OnInit {
 
   ngOnInit() {
 
-   this.loggedIn=this.log.loggedIn 
+    this.log.loggedIn.subscribe(loggedin=>{this.loggedIn=loggedin})
+
     this.activeRoute.params.subscribe( (params:Params)=>{
       this.id=params['id']
      

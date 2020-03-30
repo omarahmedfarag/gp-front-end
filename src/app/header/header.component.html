@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-sm fixed-top " >
+    <a class="navbar-brand" href="#" id="logo">Sportivo</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        
+        <li class="nav-item ">
+              <a class="nav-link" [routerLink]="['/Home']" routerLinkActive="active" >Home </a>
+        </li>
+  
+        <li class="nav-item ">
+          <a class="nav-link" [routerLink]="['/Home1']" routerLinkActive="active" >Events </a>
+        </li>
+  
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['places']" routerLinkActive="active" >Discover</a>
+        </li>
+  
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['places1']" routerLinkActive="active" >Products</a>
+          </li>
+  
+          <li class="nav-item">
+              <a class="nav-link" [routerLink]="['places2']" routerLinkActive="active" >Favorits</a>
+            </li>
+        
+        
+      </ul>
+      <div  *ngIf="!loggedIn" class="register mr-5">
+        <span class="text-white">You can Join us now ! </span> <button class="btn btn-outline-warning">login</button>
+      </div>
+      <div *ngIf="loggedIn" class="text-white mr-3">
+         <span class=" mr-3"> Welcom : Ahmed</span>
+        <button class="btn btn-danger mb-1" (click)="logOut()">log out </button>
+      </div>
+    </div>
+  </nav>
+  
+  

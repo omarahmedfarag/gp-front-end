@@ -1,3 +1,9 @@
+img
+{
+  height: 300px;
+  width: 250px;
+}
+
 .place
 {
     min-height: 200px;
@@ -13,6 +19,15 @@
 
 .place:hover img{
     transform:  scale(1.2);
+}
+.input-hieght
+{
+    height: 45px;
+
+}
+.btn-search
+{
+    background-color: #f9ec00;
 }
 
 .myimg
@@ -34,10 +49,13 @@
     height: 100%;
     transition: top 1s;
 }
-.container-fluid
+.body
 {
 
-    margin-top: 80px;
+  overflow: auto;
+   background-color: teal;
+   padding-top: 100px;
+   height: 1000px;
 }
 
 .more-info
@@ -46,3 +64,38 @@
     bottom: 15px;
     left: 15px;
 }
+.search
+{
+  
+  width: 0px ;
+  transition: 1s;
+  overflow: hidden;
+}
+.fa-search
+{
+  transform: scale(1.2);
+  color: white;
+  cursor: pointer;
+}
+.hide-search
+{
+  width: 25px;
+  background-color: rgb(243, 243, 243);
+  cursor: pointer;
+  font-weight: bolder;
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  position: relative;
+ 
+}
+.hide-search::before
+{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff017;
+  clip-path: polygon(86% 21%, 26% 50%, 86% 77%);
+}
+

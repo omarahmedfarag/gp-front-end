@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from './auth/user-auth.service';
+import { NgwWowService } from 'ngx-wow';
 declare const $: any;
 @Component({
   selector: 'app-root',
@@ -7,23 +8,23 @@ declare const $: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'sportivo';
-  loggedIn:boolean=false;
-  constructor(private log:UserAuthService)
+  
+  constructor(private log:UserAuthService,private wowService: NgwWowService)
   {
-
+    this.wowService.init();
   }
   ngOnInit()
   {
 
-   
-      
 
   }
-  logIn()
+  scrollTop()
   {
-    this.log.loggedIn=true;
-    this.loggedIn=this.log.loggedIn
+
+    $("html,body").animate({
+      scrollTop:0
+    },1000)
   }
+ 
 }
 

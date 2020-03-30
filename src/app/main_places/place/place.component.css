@@ -1,13 +1,158 @@
 .main
 {
     height: 100vh;
-    background-image: url("../../../assets/imgs/stadium.jpg");
+    background-image: url("../../../assets/imgs/player.jpg");
     background-size: cover;
+    background-position: top center;
 }
-
-
-.input-hieght
+h1
 {
-    height: 45px;
+    font-family: 'Hanalei Fill', cursive;
+    color: white;
+    line-height: 60px;
+}
+.main-text
+{
+    background-color:rgba(247,194,1,0.1) ;
+    padding: 30px 15px;
+}
+.second-setion
+{
+    overflow: auto;
+    background-color: rgb(229, 240, 128);
+    position: relative;
+    z-index: 2;
+}
+.col-md-4
+{
+    margin-bottom: 50px;
+}
+
+.card
+{
+    width: 250px;
+    height: 250px;
+    position: relative;
+    margin: auto;
+}
+
+.card img
+{
+    width: 100%;
+    height: 100%;
+    transition: 0.7s;
+}
+.card .sport-header
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.card .sport-header span
+{
+   font-size: 20px;
+   color: salmon;
+   font-weight: bolder;
+   transition: 0.4s;
+   margin-bottom: 30px;
+   font-family: 'Sriracha', cursive;
+   padding-left: 5px;
+}
+.card .sport-header p
+{
+  padding-top: 10px;
 
 }
+.card:hover img
+{
+    transform: scale(0.8);
+}
+.card:hover .sport-header
+{
+    height: 100%;
+    background-color: rgba(243, 242, 157, 0.4);
+    padding: 15px;
+    
+}
+.card .sport-header:hover span
+{
+   font-size: 30px;
+   color: rgb(165, 8, 139);
+}
+
+.fa-star
+{
+    color: rgba(0,0,0,0.6);
+    cursor: pointer;
+}
+.be-favorite
+{
+    color: rgb(13, 143, 13);
+}
+.fa-star:hover
+{
+    color: rgba(23, 206, 23, 0.6);
+}
+
+
+.colored-card
+{
+  
+    position: relative;
+}
+
+.fav-star
+{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: gold;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+
+}
+.colored-card::before
+{
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -2px;
+    right: -2px;
+    bottom: -4px;
+    z-index: -1;
+    transform: skew(3deg);
+
+}
+.card:nth-child(1)::before
+{
+    background:linear-gradient(315deg,#09ceff,#e60e7a);
+}
+.card:nth-child(2)::before
+{
+    background:linear-gradient(315deg,#89ff00,#00bcd4);
+}
+.colored-card:nth-child(3)::before
+{
+    background:linear-gradient(315deg,#ff0000,#e7e7e7);
+}
+.card:nth-child(4)::before
+{
+    background:linear-gradient(315deg,#09ceff,#e60e7a);
+}
+.colored:nth-child(5)::before
+{
+    background:linear-gradient(315deg,#192ea5,#f04613);
+}
+.colored-card:nth-child(6)::before
+{
+    background:linear-gradient(315deg,#89ff00,#00bcd4);
+}
+
