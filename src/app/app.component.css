@@ -7,7 +7,7 @@
   width: 70px;
   height: 65px;
   background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(252,7,242,1) 0%, rgba(249,15,181,1) 9%, rgba(0,0,0,1) 78%, rgba(11,11,8,1) 100%, rgba(230,0,35,1) 100%, rgba(22,208,198,1) 100%, rgba(0,0,0,1) 100%, rgba(166,122,149,1) 100%);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(197, 175, 196) 0%, rgb(88, 76, 85) 9%, rgba(0,0,0,1) 78%, rgba(11,11,8,1) 100%, rgba(230,0,35,1) 100%, rgba(22,208,198,1) 100%, rgba(0,0,0,1) 100%, rgba(166,122,149,1) 100%);
   cursor: pointer;
   z-index: 1000;
 }

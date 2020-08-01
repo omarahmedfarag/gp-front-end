@@ -16,7 +16,7 @@ export class MyPlacesService {
    getAllPlaces():Observable<any>
    {
 
-      return this._HttpClient.get("http://localhost/play/public/api/places");
+      return this._HttpClient.get("http://localhost:3000/api/place");
 
    }
 

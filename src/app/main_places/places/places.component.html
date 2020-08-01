@@ -41,45 +41,45 @@
     
 </div>
 -->
-    
-<div class="body">
-    <div class="container">
+<app-header></app-header>
+<div class="body ">
+    <div class="container  ">
 
         <div class="search-container  d-flex justify-content-start align-items-start">
 
             <div class="search d-flex justify-content-center mb-3" id="search-div">
           
-                <select class=" w-50 input-hieght" >
+                <select class=" w-50 input-hieght"  #type >
                     <option value="0" selected disabled>Select type of sports</option>
-                    <option value="1">Street Wourkout</option>
-                    <option value="2">Gym</option>
-                    <option value="3">Basket Ball</option>
-                    <option value="3">Tennis</option>
-                    <option value="3">Ballet</option>
-                    <option value="3">Basket Ball</option>
-                    <option value="3">All</option>
+                    <option value="Street Wourkout">Street Wourkout</option>
+                    <option value="Gym">Gym</option>
+                    <option value="Basket Ball">Basket Ball</option>
+                    <option value="Tennis">Tennis</option>
+                    <option value="Ballet">Ballet</option>
+                    <option value="Basket Ball">Basket Ball</option>
+                    <option value="All">All</option>
                 </select>
           
-                <select class=" w-50 input-hieght" >
+                <select class=" w-50 input-hieght"  #location>
                     <option value="0" selected disabled>Location</option>
-                    <option value="1">Alexandria</option>
-                    <option value="2">Aswan</option>
-                    <option value="3">Asyut</option>
-                    <option value="4">Beheira</option>
-                    <option value="6">Beni Suef</option>
-                    <option value="6">Cairo</option>
-                    <option value="7">Dakahlia</option>
-                    <option value="8">Damietta</option>
-                    <option value="9">Faiyum</option>
-                    <option value="10">Gharbia</option>
-                    <option value="11">Giza</option>
-                    <option value="12">Ismailia</option>
-                    <option value="13">Luxor</option>
-                    <option value="14">Matruh</option>
-                    <option value="15">All</option>
+                    <option value="Alexandria">Alexandria</option>
+                    <option value="Aswan">Aswan</option>
+                    <option value="Asyut">Asyut</option>
+                    <option value="Beheira">Beheira</option>
+                    <option value="Beni Suef">Beni Suef</option>
+                    <option value="Cairo">Cairo</option>
+                    <option value="Dakahlia">Dakahlia</option>
+                    <option value="Damietta">Damietta</option>
+                    <option value="Faiyum">Faiyum</option>
+                    <option value="Gharbia">Gharbia</option>
+                    <option value="Giza">Giza</option>
+                    <option value="Ismailia">Ismailia</option>
+                    <option value="Luxor">Luxor</option>
+                    <option value="Matruh">Matruh</option>
+                    <option value="All">All</option>
                 </select>
                 
-                <button class="btn btn-search w-25 input-hieght" (click)="onSearch()">Search</button>
+                <button class="btn btn-search w-25 input-hieght" (click)="onSearch(type,location)">Search</button>
                 
               </div>
 
@@ -93,48 +93,140 @@
                             
                             </div>
         </div>
-      
 
+        <!-- filtered by -->
+        <div class="alert cust-alert mb-3 px-5 py-2 d-flex align-items-center" *ngIf="filter.length !=0">
+          
+            
+            <div class="mr-3 each-filter-div" *ngFor="let item of filter" (click)=removeQueryParams(item.key)>
+              <div class="filter-key">
+                {{item.key}}
+                <div class="text-danger">
+                  {{item.value}}
+                </div>
+              </div>
+            
+          </div>
+          
+        </div>
+        
+        <!-- main data and filter section -->
+        <div class="row place-contianer">
+          <div class="col-md-9">
+            <div class="row">
+                    <div class="col-md-12 mb-4 place" *ngFor="let place of allPlaces">
+                        <div class="place-img">
+                              <div class="main-img">
+                                <img src="../../../assets/football.png" alt="">
+                              </div>
+                              <div class="sup-imgs">
+                                  <div class="sup-img">
+                                    <img src="../../../assets/street.png" alt="">
+                                  </div>
+                                  <div class="sup-img">
+                                    <img src="../../../assets/street.png" alt="">
+                                  </div>
+                                  <div class="sup-img">
+                                    <img src="../../../assets/street.png" alt="">
+                                  </div>
+                              </div>
 
+                        </div>
+                        <div class="place-info">
+                          <h3>{{place.name}}</h3>
+                          <p> {{place.governorate}} , {{place.area}} , main street... </p>
+                          <p>{{place.phoneNumber}}</p>
+                          <hr>
+                          <p>Here is some description about the place and you can see more information once you complet your reservation ...</p>
+                          <button class="btn btn-outline-light mr-3">Rever Now </button>
+                          <button class="btn btn-light">empty schadual </button>
 
-
-
-
-        <div class="row ">
-            <div class="col-md-3">
-                
-                <div class="card">
-                    <img src="../../../assets/street.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <a href="#" class="btn btn-success">Go somewhere</a>
+                        </div>
                     </div>
-                  </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card" >
-                    <img src="../../../assets/football.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <a href="#" class="btn btn-success">Go somewhere</a>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="../../../assets/golf.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <a href="#" class="btn btn-success">Go somewhere</a>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="../../../assets/street.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <a href="#" class="btn btn-success">Go somewhere</a>
-                    </div>
-                  </div>
-            </div>
+                  
+                  
     
+            </div>
+          </div>
+
+          <div class="col-md-3 filters">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="filter-section">
+                  <h3>Filter</h3>
+                    <!-- filter by gender -->
+                    <mat-expansion-panel class="mb-3">
+                      <mat-expansion-panel-header>
+                        Gender Filter
+                      </mat-expansion-panel-header>
+                      <mat-panel-description>
+                        <mat-radio-group aria-label="Select an option">
+                          <mat-radio-button value="1" name="gender" (click)="filterByQuery('gender','male')" >Male</mat-radio-button><br>
+                          <mat-radio-button value="2" name="gender" (click)="filterByQuery('gender','female')">Female</mat-radio-button><br>
+                          <mat-radio-button value="3" name="gender" (click)="filterByQuery('gender','all')" checked>All</mat-radio-button>
+                        </mat-radio-group>
+                      </mat-panel-description>
+                    </mat-expansion-panel>
+                     <!-- sort by creation time -->
+                    <mat-expansion-panel class="mb-3">
+                      <mat-expansion-panel-header>
+                        sort by
+                      </mat-expansion-panel-header>
+                      <mat-panel-description>
+                        <mat-radio-group aria-label="Select an option">
+                          <mat-radio-button value="5" name="sortBy" (click)="filterByQuery('sort','new')">new </mat-radio-button><br>
+                          <mat-radio-button value="6" name="sortBy" checked (click)="filterByQuery('sort','old')"> Old</mat-radio-button>
+                          
+                        </mat-radio-group>
+                      </mat-panel-description>
+                    </mat-expansion-panel>
+                     <!-- sort/filter by price -->
+                    <mat-expansion-panel >
+
+                          <mat-expansion-panel-header>
+                              price
+                          </mat-expansion-panel-header>
+
+                          <mat-panel-description>
+                            <div class="filter-bottom mt-2 bg-danger">
+                              <span>Price</span>    
+                              <hr> 
+                              <div class="d-flex justify-content-between">
+                                <span class="price-range">150 :LE</span>
+                                <span class="price-range">1000 :LE</span>
+                              </div>             
+                              <mat-slider thumbLabel  min="150" max="1000" step='50' value="1000" (change)="onTouched($event)"></mat-slider>
+                              <span>Selected price 150 - {{seletedPrice}}</span>
+                              <mat-chip-list aria-label="Fish selection">
+                                <mat-chip color="accent" selected class="ml-auto">Go</mat-chip>
+                              </mat-chip-list>
+                            </div>
+                          </mat-panel-description>
+
+                    </mat-expansion-panel>
+                   
+                </div>
+                
+              </div>
+            </div>
+            
+
+            </div>
+
+          
+          
+       
+        </div>
+        
+
+        <div class="paginator row mb-3">
+          <div class="col-md-9">
+            <mat-paginator [length]="length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="numOfPages">
+          </mat-paginator>
+          </div>
+           
         </div>
     </div>
 

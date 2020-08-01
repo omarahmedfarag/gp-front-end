@@ -1,0 +1,164 @@
+<form class="myForm" [formGroup]="placeForm">
+  <i class="fas fa-align-right d-inline"></i>
+  <span class="ml-2">You place Details</span>
+  <br>
+
+    <!-- the name of the place  -->
+    <mat-form-field class="example-full-width w-75">
+      <mat-label *ngIf="this.placeForm.get('placeName').valid || !this.placeForm.get('placeName').touched">Place Name</mat-label>
+      <mat-label *ngIf="!this.placeForm.get('placeName').valid && this.placeForm.get('placeName').touched">Requierd</mat-label>
+      <input matInput placeholder="white GYM" formControlName="placeName">
+    </mat-form-field>
+
+
+    <!-- the type of the place ex: GYM , Football , ect.. -->
+    <mat-form-field class="w-75">
+      <mat-label *ngIf="this.placeForm.get('placeType').valid || !this.placeForm.get('placeType').touched">Place Tpe</mat-label>
+      <mat-label *ngIf="!this.placeForm.get('placeType').valid && this.placeForm.get('placeType').touched">Requierd</mat-label>
+     
+      <mat-select   formControlName="placeType">
+        <mat-option>None</mat-option>
+        <mat-option  *ngFor="let placeType of placeTypes" [value]="placeType">{{placeType}}</mat-option>
+        
+      </mat-select>
+  </mat-form-field>
+
+
+    <!-- Phone number which user can ask form more information or make sure of some 
+    thing 
+    apper only when user reserve the place  -->
+    <mat-form-field class="example-full-width w-75">
+      <mat-label>Phone Number</mat-label>
+      <input matInput placeholder="Phone Number" formControlName="PhoneNumber">
+    </mat-form-field>
+
+
+      <!-- price per ??   -->
+    
+    <mat-form-field class="w-75">
+      <mat-label>Price per ?</mat-label>
+      <mat-select formControlName="pricePer">
+        <mat-option>None</mat-option>
+        <mat-option value="option1" *ngFor="let per of pricePerArr" [value]="per">{{per}}</mat-option>
+        
+      </mat-select>
+    </mat-form-field>
+ 
+
+     <!-- price for the place    -->
+    <mat-form-field class="example-full-width w-75">
+      <mat-label>Price </mat-label>
+      <input matInput placeholder="Price" formControlName="price" value="price per">
+    </mat-form-field>
+
+    <br>
+          <i class="fas fa-map-marker-alt"></i>
+          <span class="my-2 ml-2">Location Details</span>
+    <br>
+    <!-- **********location Information ***********
+    most of them not appear until the user reserve the place  -->
+
+    <!-- El mo7afza -->
+    <mat-form-field class="w-75">
+      <mat-label>Governorate</mat-label>
+      <mat-select formControlName="governrate">
+        <mat-option>None</mat-option>
+        <mat-option value="option1" *ngFor="let Governorate of Governorates" [value]="Governorate">{{Governorate}}</mat-option>
+        
+      </mat-select>
+    </mat-form-field>  
+
+    <!-- el manteq2 -->
+    <mat-form-field class="example-full-width w-75">
+      <mat-label>Area</mat-label>
+      <input matInput placeholder="EX: shobra" formControlName="area">
+      </mat-form-field>  
+      
+      <!-- the name of the street  -->
+      <mat-form-field class="example-full-width w-75">
+          <mat-label>Street Name </mat-label>
+          <input matInput placeholder="EX: 101 Main street " formControlName="streetName">
+       </mat-form-field>  
+
+       <!-- any mark that make the loaction easy to reach  -->
+       <mat-form-field class="example-full-width w-75">
+        <mat-label>Near By</mat-label>
+        <input matInput placeholder="EX: Khoshary el tahrir" formControlName="nearBy">
+     </mat-form-field>  <br>
+
+
+     <button class="btn btn-dark next-btn mb-5" type="button" (click)=addImgs()>Next</button>
+
+  
+  <!-- image section  -->
+  <div class="place-img" id="image-upload">
+
+    <button class="btn btn-warning" (click)="filePicker.click()">Pick Your Place Image</button>
+    <input type="file" #filePicker (change)="onImagePicked($event,'mainImage')" id="uploader">
+
+    <!-- main iamge -->
+    <div class="image-preview" *ngIf="mainImage !=='' && mainImage">
+      <i class="far fa-times-circle" (click)="removeImage('mainImage')"></i>
+      <img [src]="mainImage">
+    </div>
+    
+    <!-- optinal images section  -->
+    <div class="optinal-images m-auto py-4 " *ngIf="this.placeForm.get('mainImage').valid">
+        <button class="btn btn-outline-warning mb-3 optButton" (click)="showOptinalImages()">Add more images (optinal)</button>
+        <div class="row"  formArrayName="optimages" *ngIf="showOptinalImagesRow">
+
+          <!-- first optinal image -->
+          
+            <div class="col-md-4 mb-3 " *ngFor="let optoimage of optimages.controls,index as i">
+              <div class="optinal-image d-flex justify-content-center align-items-center">
+                <button class="btn btn-warning" (click)="filePicker.click()">upload image</button>
+                <input type="file"  #filePicker (change)="onOptImagePicked($event,i)" id="optinal-uploader">
+                <div class="uploaded-optinal-images" *ngIf="optoimage.value">
+                  <i class="far fa-times-circle" (click)="removeOptionalImage(i)"></i>
+                  <img [src]="optinalImages[i]" class="img-fluid h-100 w-100">
+                </div>
+  
+              </div>
+             
+            </div>
+          
+      
+          <!-- second optinal image  -->
+          <!-- <div class="col-md-4">
+            <div class="optinal-image d-flex justify-content-center align-items-center">
+              <button class="btn btn-warning" (click)="filePicker.click()">upload image</button>
+              <input type="file" #filePicker (change)="onImagePicked($event,'optinal')" id="optinal-uploader">
+              <div class="uploaded-optinal-images" *ngIf="optinalImage">
+                <i class="far fa-times-circle" (click)="removeImage('optinalImage')"></i>
+                <img [src]="optinalImage" class="img-fluid h-100">
+              </div>
+
+            </div>
+            
+          </div> -->
+          <!-- third optianl image  -->
+          <!-- <div class="col-md-4">
+             <div class="optinal-image d-flex justify-content-center align-items-center">
+              <button class="btn btn-warning" (click)="filePicker.click()">upload image</button>
+              <input type="file" #filePicker (change)="onImagePicked($event,'optinal')" id="optinal-uploader">
+              <div class="uploaded-optinal-images" *ngIf="optinalImage">
+                <i class="far fa-times-circle" (click)="removeImage('optinalImage')"></i>
+                <img [src]="optinalImage" class="img-fluid h-100">
+              </div>
+
+            </div>
+            
+          </div> -->
+         
+        </div>
+    </div>
+  
+  </div>
+
+  <div  class=" mt-5  m-auto w-75 d-flex justify-content-between ">
+    <button class="btn btn-success" (click)="onSubmitForm()" >Submit</button>
+    <button class="btn btn-outline-danger" (click)="onSubmitForm()" >Reset</button>
+  
+
+  </div>
+</form>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserAuthService } from '../auth/user-auth.service';
+import { LoginComponent } from '../auth/login/login.component';
+import { Router, ActivatedRoute } from '@angular/router';
 declare const $:any
 @Component({
   selector: 'app-header',
@@ -9,9 +11,12 @@ declare const $:any
 export class HeaderComponent implements OnInit {
   title = 'sportivo';
   loggedIn:boolean=false;
-  constructor(private log:UserAuthService)
+  
+  @ViewChild(LoginComponent) LoginComponent:LoginComponent;
+  constructor(private log:UserAuthService,private router:Router,private activeRouter:ActivatedRoute)
   {
 
+    /*
     $(window).scroll(()=>{
       if($(window).scrollTop()>100)
       {
@@ -21,26 +26,35 @@ export class HeaderComponent implements OnInit {
         $(".navbar").removeClass("onscroll-nav")
       }
     })
+    */
 
   }
   ngOnInit()
   {
 
-    
-     
-    
+        
     this.log.loggedIn.subscribe(loggedin=>{this.loggedIn=loggedin})
       
 
   }
-  logIn()
+  onLogin()
   {
-    this.log.loggedIn.next(true);
-    
+
+    console.log(this.LoginComponent)
+    $(".login-comp-contianer").css({"display":"block"})
+    this.router.navigate(["user/login"])
+
+
   }
+  close()
+  {
+    $(".login-comp-contianer").css({"display":"none"})
+  }
+
   logOut()
   {
     this.log.loggedIn.next(false);
+    this.router.navigate(["/Home"],{relativeTo:this.activeRouter})
   }
 
 }
