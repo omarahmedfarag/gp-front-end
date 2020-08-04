@@ -20,36 +20,11 @@ export class ShowPlaceComponent implements OnInit {
 
   ngOnInit() {
 
-    this.log.loggedIn.subscribe(loggedin=>{this.loggedIn=loggedin})
-
-    this.activeRoute.params.subscribe( (params:Params)=>{
-      this.id=params['id']
-     
-    } )
-    this._MyPlacesService.getSinglePlace(this.id).subscribe( data=>{
-
-      this.singlePlace=data.data;
-
-      //we get single place from all places
-      
-
-    })
-
     
 
-
   }
 
-  onConfirm()
-  {
-
-      $(".confirm-favorit").fadeIn();
-    
-  }
-  cancle()
-  {
-    $(".confirm-favorit").hide();
-  }
+ 
 
   
 }

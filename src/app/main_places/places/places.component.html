@@ -51,13 +51,8 @@
           
                 <select class=" w-50 input-hieght"  #type >
                     <option value="0" selected disabled>Select type of sports</option>
-                    <option value="Street Wourkout">Street Wourkout</option>
-                    <option value="Gym">Gym</option>
-                    <option value="Basket Ball">Basket Ball</option>
-                    <option value="Tennis">Tennis</option>
-                    <option value="Ballet">Ballet</option>
-                    <option value="Basket Ball">Basket Ball</option>
-                    <option value="All">All</option>
+                    <option [value]="type" *ngFor="let type of placeTypes">{{type}}</option>
+                    
                 </select>
           
                 <select class=" w-50 input-hieght"  #location>
@@ -93,48 +88,44 @@
                             
                             </div>
         </div>
-
+        
         <!-- filtered by -->
         <div class="alert cust-alert mb-3 px-5 py-2 d-flex align-items-center" *ngIf="filter.length !=0">
-          
-            
-            <div class="mr-3 each-filter-div" *ngFor="let item of filter" (click)=removeQueryParams(item.key)>
-              <div class="filter-key">
-                {{item.key}}
-                <div class="text-danger">
-                  {{item.value}}
-                </div>
+            <div class="mr-3 each-filter-div" *ngFor="let item of filter" >
+              <div class="filter-key mr-2">
+                {{item.value}}
               </div>
-            
+              <i class="far fa-times-circle" (click)=removeQueryParams(item.key)></i>
           </div>
           
         </div>
         
         <!-- main data and filter section -->
-        <div class="row place-contianer">
-          <div class="col-md-9">
+        
+        <div class="row place-contianer" >
+          <div class="col-md-9" *ngIf="isLodaing">
+            <mat-progress-bar mode="buffer"></mat-progress-bar>
+          </div>
+          
+          <div class="col-md-9" *ngIf="!isLodaing">
             <div class="row">
                     <div class="col-md-12 mb-4 place" *ngFor="let place of allPlaces">
                         <div class="place-img">
                               <div class="main-img">
-                                <img src="../../../assets/football.png" alt="">
+                                <img [src]="place.mainImgPath" alt="">
                               </div>
                               <div class="sup-imgs">
-                                  <div class="sup-img">
-                                    <img src="../../../assets/street.png" alt="">
+                                  <div class="sup-img" *ngFor="let image of place.imaArrary">
+                                    <img [src]="image" alt="">
                                   </div>
-                                  <div class="sup-img">
-                                    <img src="../../../assets/street.png" alt="">
-                                  </div>
-                                  <div class="sup-img">
-                                    <img src="../../../assets/street.png" alt="">
-                                  </div>
+                               \
                               </div>
 
                         </div>
                         <div class="place-info">
-                          <h3>{{place.name}}</h3>
+                          <h3>{{place.name}} <sub class="text-warning">{{place.placeType}}</sub></h3> 
                           <p> {{place.governorate}} , {{place.area}} , main street... </p>
+
                           <p>{{place.phoneNumber}}</p>
                           <hr>
                           <p>Here is some description about the place and you can see more information once you complet your reservation ...</p>
@@ -174,8 +165,8 @@
                       </mat-expansion-panel-header>
                       <mat-panel-description>
                         <mat-radio-group aria-label="Select an option">
-                          <mat-radio-button value="5" name="sortBy" (click)="filterByQuery('sort','new')">new </mat-radio-button><br>
-                          <mat-radio-button value="6" name="sortBy" checked (click)="filterByQuery('sort','old')"> Old</mat-radio-button>
+                          <mat-radio-button value="5" name="sortBy" (click)="filterByQuery('sort','-createdAt')">new </mat-radio-button><br>
+                          <mat-radio-button value="6" name="sortBy" checked (click)="filterByQuery('sort','createdAt')"> Old</mat-radio-button>
                           
                         </mat-radio-group>
                       </mat-panel-description>

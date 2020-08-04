@@ -1,5 +1,5 @@
 <div class="main" id="main">
-    <div *ngIf="mode=='login'" class="login-container d-flex justify-content-center">
+    <div  class="login-container d-flex justify-content-center">
         
 
         <div class="left-container overflow-auto">
@@ -12,20 +12,20 @@
 
             <div class="form-group ">
               <label>Email</label>
-              <small class="text-danger d-block" *ngIf="!userForm.get('userName').valid && userForm.get('userName').touched">User Name Required</small>
-              <input type="text"  class="form-control" formControlName="userName">
+              <small class="text-danger d-block" *ngIf="!userForm.get('email').valid && userForm.get('email').touched">User Name Required</small>
+              <input type="text"  class="form-control" formControlName="email">
             </div>
             
         
             <div class="form-group m-auto">
               <label>Passsword </label>
-              <small class="text-danger d-block" *ngIf="!userForm.get('userPassword').valid && userForm.get('userName').touched">Passowrd Required</small>
-              <input type="password" class="form-control" formControlName="userPassword">
+              <small class="text-danger d-block" *ngIf="!userForm.get('password').valid && userForm.get('password').touched">Passowrd Required</small>
+              <input type="password" class="form-control" formControlName="password">
             </div>
            
             <div class="mt-3 d-flex justify-content-between align-items-center">
               <button class="btn login-btn" (click)=onLogin()>Login</button>
-              <span class="tex" [routerLink]="['../register']" >Creat account</span>
+              <button class="btn btn-outline-light" [routerLink]="['../signup']" >Creat account</button>
             </div>
             
 
@@ -40,45 +40,5 @@
           
           
     </div>
-    <div *ngIf="mode=='register'" class="register-container d-flex justify-content-center">
-        
-
-      <div class="right-container overflow-auto">
-        
-        
-      </div>
-
-      <div class="left-container">
-        <h3 class="text-center text-white mt-5">Welcome in sportivo register</h3>
-        <div class="login-img">
-          <!-- image -->
-        </div>
-
-        <form class="w-75 m-auto" [formGroup]="userForm">
-
-          <div class="form-group ">
-            <label>Email</label>
-            <small class="text-danger d-block" *ngIf="!userForm.get('userName').valid && userForm.get('userName').touched">User Name Required</small>
-            <input type="text"  class="form-control" formControlName="userName">
-          </div>
-          
-      
-          <div class="form-group m-auto">
-            <label>Passsword </label>
-            <small class="text-danger d-block" *ngIf="!userForm.get('userPassword').valid && userForm.get('userName').touched">Passowrd Required</small>
-            <input type="password" class="form-control" formControlName="userPassword">
-          </div>
-         
-          <div class="mt-3 d-flex justify-content-between align-items-center">
-            <button class="btn login-btn" (click)=onLogin()>Sign up</button>
-            <span class="tex"  [routerLink]="['../login']"  >Already have account </span>
-          </div>
-          
-
-
-        </form>
-      </div>
-        
-        
-  </div>
+    
 </div>

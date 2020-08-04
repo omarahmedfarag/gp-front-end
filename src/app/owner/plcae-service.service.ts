@@ -13,10 +13,9 @@ export class PlcaeServiceService {
 
   postPlace(Place:any)
   { 
-
+    
   }
   getPlaces()
   {
-    console.log("from service")
   }
 }

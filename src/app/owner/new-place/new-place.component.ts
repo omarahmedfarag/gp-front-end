@@ -119,7 +119,11 @@ export class NewPlaceComponent implements OnInit {
    formPlace.append("streetName",this.placeForm.get("streetName").value);
    formPlace.append("nearBy",this.placeForm.get("nearBy").value);
    formPlace.append("mainImgPath",this.placeForm.get("mainImage").value);
-   formPlace.append("imaArrary",this.placeForm.get("optimages").value)
+
+   formPlace.append("imaArrary",this.placeForm.get("optimages").value[0])
+   formPlace.append("imaArrary",this.placeForm.get("optimages").value[1])
+   formPlace.append("imaArrary",this.placeForm.get("optimages").value[2])
+
    formPlace.append("pricePer",this.placeForm.get("pricePer").value);
    formPlace.append("price",this.placeForm.get("price").value);
   
@@ -127,10 +131,10 @@ export class NewPlaceComponent implements OnInit {
       console.log(result)
     },(err)=>{
       console.log(err);
-    })
+    }) 
 
-
-    console.log(formPlace)
+    console.log("here")
+    console.log(formPlace.getAll("imaArrary"))
    
     
   }

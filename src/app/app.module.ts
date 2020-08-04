@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from "@angular/common/http"
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http"
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgwWowModule } from 'ngx-wow';
@@ -14,6 +14,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 import { PlacesComponent } from './main_places/places/places.component';
@@ -27,6 +31,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewPlaceComponent } from './owner/new-place/new-place.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthIntercepter } from './auth/auth-intercepter';
+import { SignupComponent } from './auth/signup/signup.component';
+import { AuthGuard } from './auth/auth.guard';
+import { AdminComponent } from './adminside/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +47,8 @@ import { ProfileComponent } from './profile/profile.component';
     NewPlaceComponent,
     LoginComponent,
     ProfileComponent,
+    SignupComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,9 +67,12 @@ import { ProfileComponent } from './profile/profile.component';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressBarModule,
+    MatButtonModule,
+    MatIconModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthIntercepter,multi:true},AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

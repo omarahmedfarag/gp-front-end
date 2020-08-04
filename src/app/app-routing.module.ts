@@ -6,6 +6,8 @@ import { ShowPlaceComponent } from './main_places/show-place/show-place.componen
 import { NewPlaceComponent } from './owner/new-place/new-place.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
@@ -24,7 +26,8 @@ const routes: Routes = [
 
  {
    path:"places",
-   component:PlacesComponent
+   component:PlacesComponent,
+   canActivate:[AuthGuard]
  }
  ,
  {
@@ -43,8 +46,13 @@ const routes: Routes = [
 }
 ,
 {
-  path:"user/:registerMode",
+  path:"user/login",
   component:LoginComponent
+}
+,
+{
+  path:"user/signup",
+  component:SignupComponent
 }
  
 

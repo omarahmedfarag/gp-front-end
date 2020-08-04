@@ -12,25 +12,29 @@ declare const $:any;
 export class LoginComponent implements OnInit {
 
   public userForm=new FormGroup({
-    'userName':new FormControl(null,Validators.required),
-    'userPassword':new FormControl(null,Validators.required)
+    'email':new FormControl(null,Validators.required),
+    'password':new FormControl(null,Validators.required)
   })
-  mode:string="register"
+  
   constructor(private _UserAuthService:UserAuthService,private router:Router,private avtivatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
 
     // get prameter from the url to know if user want to login or register
-    this.avtivatedRoute.params.subscribe((param:Params)=>{
-     this.mode=param["registerMode"];
-    })
+    
 
   }
   onLogin(){
 
 
+    if(!this.userForm.valid)
+    {
+      return
+    }
+    console.log(this.userForm.value);
     this._UserAuthService.loggedIn.next(true);
-    this.router.navigate(['Home'])
+    this._UserAuthService.login(this.userForm.value)
+    this.router.navigate(['Home']);
 
   }
   close()

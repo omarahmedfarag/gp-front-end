@@ -1,0 +1,108 @@
+.main
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 100000;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-container
+{
+    height: 80%;
+    width: 80%;
+    background-color: rgb(216, 216, 212);
+    border-radius: 10px;
+    position: relative;
+}
+.register-container
+{
+  height: 80%;
+  width: 80%;
+  background-color: rgb(216, 216, 212);
+  border-radius: 10px;
+  position: relative;
+}
+.close
+{
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 25px;
+  height: 25px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+
+}
+
+.left-container
+   {
+    width: 50%;
+    height: 100%;
+    background-color: rgb(63, 156, 93);
+    
+  }
+  .login-btn
+  {
+    width: 150px;
+    border-radius: 20px;
+    background-color: rgb(9, 92, 23);
+    border: none;
+    color: wheat;
+    transition: 0.3s;
+  }
+  .login-btn:hover
+  {
+    transform: scale(0.9);
+    
+  }
+
+  .login-img
+  {
+    margin: auto;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-image: url(../../../assets/football.png);
+    background-size: cover;
+  }
+
+  .right-container
+   {
+    width: 50%;
+    height: 100%;
+    background-image: url(../../../assets/football.png);
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+  }
+
+  .right-container::before
+  {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.2);
+  }
+
+.forget-password
+{
+    padding-bottom: 5px;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: 0.4s;
+}
+.forget-password:hover
+{
+    border-bottom: 1px white solid;
+    transform: scale(0.9);
+}

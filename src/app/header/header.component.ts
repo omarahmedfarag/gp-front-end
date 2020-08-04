@@ -11,9 +11,10 @@ declare const $:any
 export class HeaderComponent implements OnInit {
   title = 'sportivo';
   loggedIn:boolean=false;
+  user:any
   
   @ViewChild(LoginComponent) LoginComponent:LoginComponent;
-  constructor(private log:UserAuthService,private router:Router,private activeRouter:ActivatedRoute)
+  constructor(private _UserAuthService:UserAuthService,private router:Router,private activeRouter:ActivatedRoute)
   {
 
     /*
@@ -33,7 +34,17 @@ export class HeaderComponent implements OnInit {
   {
 
         
-    this.log.loggedIn.subscribe(loggedin=>{this.loggedIn=loggedin})
+    this._UserAuthService.loggedIn.subscribe(user=>{
+     if(!user)
+     {
+       this.loggedIn=false;
+     }
+     else{
+       this.loggedIn=true;
+       this.user=user;
+     }
+
+    })
       
 
   }
@@ -53,7 +64,7 @@ export class HeaderComponent implements OnInit {
 
   logOut()
   {
-    this.log.loggedIn.next(false);
+    this._UserAuthService.logOut();
     this.router.navigate(["/Home"],{relativeTo:this.activeRouter})
   }
 

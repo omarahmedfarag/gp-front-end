@@ -1,3 +1,4 @@
+<!--
 <section class="display">
 
     <div class="container">
@@ -20,8 +21,8 @@
                         <option>month</option>
                         <option>year</option>
                     </select>
-                    <div class="btns d-flex  ">
-                        <button class="btn btn-warning mr-3 reserve" (click)="onConfirm()">Reserv</button>
+                    <div class="btns d-flex">
+                        <button class="btn btn-warning mr-3 reserve">Reserv</button>
                         <button class="btn btn-success">Favorit</button>
                     </div>
                 </div>
@@ -33,21 +34,25 @@
 
 </section>
 
+-->
 
+    <!--
 
-        <div class="rounded confirm-favorit ">
+            <div class="rounded confirm-favorit ">
             <div *ngIf="loggedIn">
                 <span>The toltal Cost is 200LE</span><br><br>
                 This is You Code To pay With <span class="fawry">Fawry</span>
                 <strong> #2253</strong><hr>
                 <button class="btn btn-success mr-3" [routerLink]="['/Home']" routerLinkActive="router-link-active"  >Confirm</button>
-                <button class="btn btn-danger" (click)="cancle()">Cancel</button>
+                <button class="btn btn-danger">Cancel</button>
             </div>
             <div class="warrning-to-login" *ngIf="!loggedIn">
                 You need to login First 
                 <hr>
-                <button class="btn btn-info" (click)="cancle()">OK</button>
+                <button class="btn btn-info">OK</button>
             </div>
                 
         </div>
 
+
+    -->

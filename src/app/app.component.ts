@@ -9,13 +9,14 @@ declare const $: any;
 })
 export class AppComponent implements OnInit {
   
-  constructor(private log:UserAuthService,private wowService: NgwWowService)
+  constructor(private _UserAuthService:UserAuthService,private wowService: NgwWowService)
   {
     this.wowService.init();
   }
   ngOnInit()
   {
-
+    
+    this._UserAuthService.loadUserFromLocalStorage();
 
   }
   scrollTop()
