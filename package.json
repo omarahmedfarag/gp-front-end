@@ -23,7 +23,7 @@
     "@angular/router": "~9.1.0-rc.2",
     "@fortawesome/fontawesome-free": "^5.12.1",
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mdbootstrap": "^4.19.1",
     "ngx-bar-rating": "^1.1.0",
     "ngx-owl-carousel-o": "^4.0.0",
