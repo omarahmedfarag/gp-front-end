@@ -111,15 +111,20 @@
             <div class="row">
                     <div class="col-md-12 mb-4 place" *ngFor="let place of allPlaces">
                         <div class="place-img">
-                              <div class="main-img">
-                                <img [src]="place.mainImgPath" alt="">
-                              </div>
-                              <div class="sup-imgs">
-                                  <div class="sup-img" *ngFor="let image of place.imaArrary">
-                                    <img [src]="image" alt="">
-                                  </div>
-                               \
-                              </div>
+                          <div class="place-image-slider">
+                           
+                            
+                            <owl-carousel-o [options]="customOptions" class="bg-danger">
+                                
+                              <ng-template carouselSlide *ngFor="let sub of place.imaArrary" class="m-auto bg-danger">
+                                <img [src]="sub">
+                                
+                              </ng-template>  
+                              
+                             
+                            </owl-carousel-o>
+                          </div>
+                             
 
                         </div>
                         <div class="place-info">
@@ -130,7 +135,9 @@
                           <hr>
                           <p>Here is some description about the place and you can see more information once you complet your reservation ...</p>
                           <button class="btn btn-outline-light mr-3">Rever Now </button>
-                          <button class="btn btn-light">empty schadual </button>
+                          <button class="btn btn-light" (click)="openSnackBar(place.name,'added to faVorite',place._id)">add to favorite </button>
+                                
+                                
 
                         </div>
                     </div>

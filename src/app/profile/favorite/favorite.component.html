@@ -1,0 +1,50 @@
+<div  *ngIf="lodaing">
+    <mat-progress-bar mode="buffer"></mat-progress-bar>
+  </div>
+<div class="row" *ngIf="!lodaing">
+  
+   
+    
+    <div class="col-md-6 text-white" *ngFor="let place of favoritPlaces">
+        <div class="empty-time">
+            
+           
+            <owl-carousel-o [options]="customOptions" class="bg-danger">
+              <ng-template carouselSlide *ngFor="let day of days" class="m-auto bg-danger">
+                <div class="each-day">
+                  <div class="day-header"> {{day}}</div>
+                  <div class="day-body">
+                    <div class="day-item mb-1 w-50 m-auto" *ngFor="let hour of hours , let i=index">
+                      <div *ngIf="i!=hours.length-1">
+                        <div *ngIf="i%2==0"><del>{{hour}}pm:{{hours[i+1]}}:pm</del></div>
+                        <div *ngIf="i%2==1">*{{hour}}pm:{{hours[i+1]}}:pm</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </ng-template>  
+              
+             
+            </owl-carousel-o>
+            
+                     
+            
+        </div>
+        <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image">
+                  <img [src]="place.imaArrary[0]">
+              </div>
+              <mat-card-title>{{place.name}}</mat-card-title>
+              <mat-card-subtitle class="text-warning">{{place.placeType}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="place.mainImgPath" alt="Photo of a Shiba Inu">
+           
+            <mat-card-actions>
+              <button class="btn btn-success" (click)=showSch($event)>reserv</button>
+              <button mat-button class="btn-outline-danger" (click)="removeFavorite(place._id)">Remove</button>
+            </mat-card-actions>
+          </mat-card>
+    </div>
+</div>

@@ -38,6 +38,24 @@ export class UserAuthService {
       console.log(err)
     })
   }
+  updatedImage(id,body)
+  {
+    const userForm = new FormData();
+    userForm.append("photo",body);
+    this.http.patch<{status:string,user:any}>(`http://localhost:3000/api/user//update/${id}`,userForm).subscribe((result)=>{
+      this.emiteNewUserValue(result.user);
+    },(err)=>{
+      console.log("Error")
+      console.log(err)
+    })
+  }
+  updatedUserInfo(id,body)
+  {
+    this.http.patch<{status:string,user:any}>(`http://localhost:3000/api/user//update/${id}`,body).subscribe((result)=>{
+      this.emiteNewUserValue(result.user);
+    },(err)=>{
+    })
+  }
 
   saveToLocal(token,user)
   { 
@@ -46,6 +64,15 @@ export class UserAuthService {
     const StringUser=JSON.stringify(user)
     localStorage.setItem("token",token);
     localStorage.setItem("user",StringUser)
+
+  }
+  //to next/emite new user and add new user value to localStorage
+  emiteNewUserValue(user)
+  {
+    this.loggedIn.next(user);
+    const StringUser=JSON.stringify(user)
+    localStorage.setItem("user",StringUser)
+
 
   }
   loadUserFromLocalStorage()
@@ -61,6 +88,7 @@ export class UserAuthService {
     localStorage.removeItem("token");
     localStorage.removeItem("user")
   }
+ 
 
 
 }

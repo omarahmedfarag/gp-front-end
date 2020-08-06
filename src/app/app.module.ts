@@ -4,6 +4,8 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http"
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgwWowModule } from 'ngx-wow';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
 
 import {MatSliderModule} from '@angular/material/slider';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -17,8 +19,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatStepperModule} from '@angular/material/stepper';
 
 import { PlacesComponent } from './main_places/places/places.component';
 import { PlaceComponent } from './main_places/place/place.component';
@@ -35,6 +39,10 @@ import { AuthIntercepter } from './auth/auth-intercepter';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AdminComponent } from './adminside/admin/admin.component';
+import { UserInfoComponent } from './profile/user-info/user-info.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FavoriteComponent } from './profile/favorite/favorite.component';
+import { RequestComponent } from './profile/request/request.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +57,10 @@ import { AdminComponent } from './adminside/admin/admin.component';
     ProfileComponent,
     SignupComponent,
     AdminComponent,
+    UserInfoComponent,
+    FavoriteComponent,
+    RequestComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -70,7 +82,14 @@ import { AdminComponent } from './adminside/admin/admin.component';
     MatMenuModule,
     MatProgressBarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule,
+    MatSnackBarModule,
+    CarouselModule,
+    MatStepperModule
+    
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthIntercepter,multi:true},AuthGuard],
   bootstrap: [AppComponent]

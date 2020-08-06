@@ -19,17 +19,13 @@
           <a class="nav-link" [routerLink]="['/places']" routerLinkActive="active" >Discover</a>
         </li>
   
-        <li class="nav-item">
-            <a class="nav-link" [routerLink]="['places1']" routerLinkActive="active" >Products</a>
-          </li>
+      
   
           <li class="nav-item">
-              <a class="nav-link" [routerLink]="['places2']" routerLinkActive="active" >Favorits</a>
+              <a class="nav-link" [routerLink]="['user/favorite']" routerLinkActive="active" >Favorits</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/user/profile']" routerLinkActive="active" >new place</a>
-          </li>
+          
         
         
       </ul>
@@ -58,7 +54,7 @@
                 <div class="col-md-9 pl-3">
                   <h4>{{user.userName}}</h4>
                   <p>Email: <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">{{user.email}}</a></p>
-                  <a [routerLink]="['/user/profile']" >View profile</a>
+                  <a [routerLink]="['/user/user-info']" >View profile</a>
                 </div>
               </div>
             </div>

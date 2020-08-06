@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
 
     console.log(this.LoginComponent)
     $(".login-comp-contianer").css({"display":"block"})
-    this.router.navigate(["user/login"])
+    this.router.navigate(["account/login"])
 
 
   }

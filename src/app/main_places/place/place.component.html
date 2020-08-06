@@ -1,34 +1,76 @@
 <app-header></app-header>
 <section class="main ">
-      
-   <!--   <div class="how-to">
-            <div class="contianer-how-to d-flex align-items-center">
-                  <span class="first">1-Discover</span>
-                  <div class="first-progress"></div>
-            </div>
-            <div class="contianer-how-to d-flex align-items-center">
-                  <span class="first">2-Discover</span>
-                  <div class="first-progress"></div>
-            </div>
-            <div class="contianer-how-to d-flex align-items-center">
-                  <span class="first">3-Discover</span>
-                  <div class="first-progress"></div>
-            </div>
-            <div class="contianer-how-to d-flex align-items-center">
-                  <span class="first">4-Discover</span>
-                  <div class="first-progress"></div>
-            </div>
+     
+     <div class="search-home">
+           <div class="home-h1"><h1>SPORTIVO</h1></div>
+           <div class="home-p text-white"><p>Pick up you next reservation in few steps </p></div> 
+      <div class="home-filter mt-5">
+           <div class="row">
+                 <div class="col-md-3">
+                       <div class="each-search search-type">
+                        <i class="fas fa-baseball-ball"></i>
+                          <span>SPORT TYPE</span><br>
+                          <select class="mt-2 w-75" [(ngModel)]="selectedtype" (chang)="selectedType()">
+                                <option *ngFor="let placeType of placeTypes" [value]="placeType">{{placeType}}</option>
+                                
+                          </select>
+                       </div>
+                 </div>
 
-      </div>
-     -->
-          
+                 <div class="col-md-3" >
+                  <div class="each-search search-type">
+                        <i class="fas fa-city"></i>
+                     <span>CITY</span><br>
+                     <select class="mt-2 w-75" [(ngModel)]="selectedcity" (change)="selectedCity()">
+                           <option disabled selected value="0">select city</option>
+                           <option *ngFor="let g of gocernates" [value]="g.code">{{g.value}}</option>
+                           
+                     </select>
+                  </div>
+                  </div>
+            
+                  <div class="col-md-3">
+                        <div class="each-search search-type">
+                              <i class="fas fa-chart-area"></i>
+                           <span>Area</span><br>
+                           <select class="mt-2 w-75" [(ngModel)]="selectedarea">
+                                 <option *ngFor="let area of areas">{{area.value}}</option>
+                                
+                           </select>
+                        </div>
+                  </div>
+
+
+                  <div class="col-md-3">
+                        <div class="each-search search-type">
+                              <i class="fas fa-venus-mars"></i>
+                           <span>GENDER</span><br>
+                           <select class="mt-2 w-75" [(ngModel)]="selectedgander">
+                                 <option *ngFor="let gend of gender" [value]="gend" >{{gend}}</option>
+                                 
+                           </select>
+                        </div>
+                  </div>
+
+
+           </div>
+           <div class="row mt-5">
+                 <div class="col-md-8 offset-2">
+                  <button class="btn btn-success go-btn w-100" (click)="onSearch()">DISCOVER</button>
+                 </div>
+           </div>
+      </div> 
+
+
+     </div>
+     
 </section>
       
 <section class="second-setion ">
      
-      <div class="container my-5 py-5">
-           
-            <div class="w-100 card try mb-5">
+      <div class="container my-5 py-4">
+           <!--
+<div class="w-100 card try mb-5">
                   <h5 class="card-header">Featured</h5>
                   <div class="card-body">
                     <h5 class="card-title">Special title treatment</h5>
@@ -153,7 +195,61 @@
 
 
           </div>
-      </div>
+           -->
+            <div class="slogen">
+                  <h1 class="">FEW STEPS TO RESERVE YOUR NEXT SPORT TIME</h1>
+                   <p class="mb-5 secure">SIMPLE  AND  SECURE</p>
+            </div>
+            <div class="row mt-5">
+                 <div class="col-md-4">
+                       <div class="step">
+                             <div class="step-icon">
+                              <i class="fas fa-search"></i>
+                             </div>
+                              <div class="step-content">
+                                    Search and filter till you find your suitable place 
+                              </div>
+                       </div>
+
+                
+                  </div>
+
+                 
+                  <div class="col-md-4">
+                        <div class="step">
+                              <div class="step-icon">
+                                    <i class="fas fa-clipboard-list"></i>
+
+                              </div>
+                               <div class="step-content">
+                                    
+                               </div>
+                        </div>
+ 
+                 
+                   </div>
+ 
+
+                   <div class="col-md-4">
+                        <div class="step">
+                              <div class="step-icon">
+                                    <i class="fas fa-check-circle"></i>
+                              </div>
+                               <div class="step-content">
+                                    your reservation will be keept temporarly 
+                                    so you need to confirm payment befor 1 Hour
+                               </div>
+                        </div>
+ 
+                 
+                   </div>
+ 
+
+                 </div>
+           </div>
+
+
+      
      
     
 

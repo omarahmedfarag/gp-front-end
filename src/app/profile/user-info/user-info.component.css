@@ -1,0 +1,10 @@
+.main
+{
+    background-color: white;
+    min-height:350px;
+    padding: 30px;
+    border-radius: 10px;
+}
+mat-form-field {
+    margin-right: 12px;
+  }

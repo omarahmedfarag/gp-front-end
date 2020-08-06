@@ -2,56 +2,57 @@
 {
     height: 100vh;
     background-image: url("../../../assets/imgs/player.jpg");
-    
     background-size: cover;
     background-position: top;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.how-to
+.search-home
 {
     width: 70%;
-    height: 350px;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate(0,-50%);
-    padding: 25px 0;
-    text-align: right;
-    filter: blur(1px);
-    background-color: yellow;
+    height: 70%;
+    text-align: center;
 }
-.contianer-how-to
+.home-h1
 {
-    width: 100%;
-    height: 75px;
-}
-.contianer-how-to:nth-child(2)
-{
-   
-}
-.contianer-how-to:nth-child(3)
-{
-   
-}
-.contianer-how-to:nth-child(4)
-{
-  
-}
-.contianer-how-to span
-{
-    font-size: 30px;
+    background-color: rgb(51, 170, 51);
     color: white;
-    font-family: consolas;
-    width: 20%;
-    text-align: right;
-    background-color: violet;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding: 10px 20px;
+    display: inline-block;
 }
-.contianer-how-to .first-progress
+.each-search
 {
-    height: 15px;
-    width: 80%;
-    background-color: rgb(219, 64, 64);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    height: 100px;
+    position: relative;
+    padding: 10px 0;
 }
+.each-search i
+{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform: scale(1.5);
+    color: green;
+}
+.each-search span
+{
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium';
+    color: green;
+}
+.home-p
+{
+    letter-spacing: 5px;
+    font-size: 35px;
+    line-height: 30px;
+}
+
+
 .second-setion
 {
     overflow: auto;
@@ -59,6 +60,19 @@
     position: relative;
     z-index: 2;
 }
+.go-btn
+{
+    transition: 0.3s;
+    padding: 7px 0;
+    letter-spacing: 10px;
+    font-size: 20px;
+}
+.go-btn:hover
+{
+    transform: scale(0.97) !important;
+    
+}
+/*
 .col-md-4
 {
     margin-bottom: 50px;
@@ -184,6 +198,69 @@
 {
     background:linear-gradient(315deg,#e00,#40c1aa);
 }
+
+*/
+.slogen
+{
+    margin-bottom: 70px;
+}
+.secure
+
+{
+    color: green;
+    font-family: Georgia;
+    letter-spacing: 5px;
+}
+
+.step
+{
+    height: 120px;
+    background-color: white;
+    position: relative;
+    box-shadow: 0 0 10px rgb(73, 73, 73);
+}
+.step-icon
+{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 1px solid green;
+    background-color: white;
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translate(-50%,0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-icon i
+{
+    transform: scale(2);
+    color: green;
+}
+.step-content
+{
+    padding: 35px 10px 10px 20px;
+    letter-spacing: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

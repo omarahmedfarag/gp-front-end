@@ -78,8 +78,8 @@ li a:hover
 .drop-icon
 {
     position: absolute;
-    bottom: 0px;
-    right: 0px;
+    bottom: 3px;
+    right: 4px;
     color: black;   
     width: 15px;
     height: 15px;
@@ -88,6 +88,7 @@ li a:hover
     display: flex;
     justify-content: center;
     align-items: center;
+    transform: scale(1.2);
     
 }
 .fa-bars

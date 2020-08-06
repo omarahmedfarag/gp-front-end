@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {observable, Observable} from "rxjs"
+import {observable, Observable, Subject} from "rxjs"
 @Injectable({
   providedIn: 'root'
 })
 export class MyPlacesService {
+   favPlaces=new Subject<any>();
 
   constructor(private _HttpClient:HttpClient) {
 
@@ -40,6 +41,29 @@ export class MyPlacesService {
 
    getSinglePlace(id:number)
    {
+   }
+
+   addToFavorite(placeId)
+   {
+         this._HttpClient.post(`http://localhost:3000/api/favorite/${placeId}`,"").subscribe(result=>{
+            console.log(result)
+         })
+   }
+   getFavoritePlaces()
+   {
+       this._HttpClient.get<any>("http://localhost:3000/api/favorite").subscribe(result=>{
+         this.favPlaces.next(result.places)
+      })
+   }
+   deleteFavorite(placeID)
+   {
+      this._HttpClient.delete(`http://localhost:3000/api/favorite/${placeID}`).subscribe(result=>{
+         console.log(result)
+         this.getFavoritePlaces();
+      },err=>{
+         console.log(err);
+      });
+
    }
 
 }

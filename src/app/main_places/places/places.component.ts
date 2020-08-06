@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MyPlacesService} from "../my-places.service";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Place } from '../place.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+
 declare const $:any
 @Component({
   selector: 'app-places',
@@ -18,9 +21,9 @@ export class PlacesComponent implements OnInit {
   allPlaces:Place[];
   toogle:boolean=true;
   filter:any[]=[];
-  queryParams:{}
-  
-  constructor(private _MyPlacesService:MyPlacesService,private route:Router,private activatedRoute:ActivatedRoute) {
+  queryParams:{};
+  durationInSeconds=3;
+  constructor(private _snackBar: MatSnackBar,private _MyPlacesService:MyPlacesService,private route:Router,private activatedRoute:ActivatedRoute) {
   
    }
 
@@ -146,6 +149,44 @@ export class PlacesComponent implements OnInit {
     this.filter.splice(index,1);
   }
 
+  openSnackBar(message: string, action: string,id) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
 
+    this._MyPlacesService.addToFavorite(id)    
+  }
+
+
+
+
+
+
+
+
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<', '>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 3
+      },
+      740: {
+        items: 2
+      },
+      940: {
+        items: 1
+      }
+    },
+    nav: true
+  }
 
 }

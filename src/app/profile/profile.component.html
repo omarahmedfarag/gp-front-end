@@ -5,19 +5,29 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
         
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              
               <ul class="navbar-nav m-auto">
                 
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Favorite</a>
+                  <a class="nav-link" [routerLink]="['user-info']" routerLinkActive="active" >Setting</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="['favorite']" routerLinkActive="active" >Favorite</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Reservation</a>
                   </li>
+                 
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Group</a>
+                    <a class="nav-link" [routerLink]="['request-to-be-owner']" routerLinkActive="active" >Be owner</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Be owner</a>
+
+                  <li class="nav-item" *ngIf="user.role=='admin'">
+                    <a class="nav-link" href="#">Request</a>
+                  </li>
+                  <li class="nav-item" *ngIf="user.role=='admin'">
+                    <a class="nav-link" [routerLink]="['profile']" routerLinkActive="active">Add place</a>
                   </li>
                
                 
@@ -28,25 +38,35 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="left-info py-4">
-                    <div class="user-img">
+                    <div class="personal-image bg-success">
+                      <i class="far fa-check-circle" [ngClass]="{'animate-correct-icon': updatedImage}"></i>
+                      <div class="user-img" *ngIf="!updatedImage">
                         <img [src]="user.photo">
                     </div>
-                    <div class="personal-info m-auto w-50">
+                    <div class="user-img" *ngIf="updatedImage">
+                      <img [src]="image" >
+                  </div>
+                    </div>
+                   <form [formGroup]="userForm">
+                    <div class="personal-info m-auto text-center pt-3">
+                      <input type="file" class="d-none" #piker (change)="onImagePicked($event)">
+                      <button mat-raised-button color="primary" type="button" (click)="piker.click()" class="m-auto">update photo</button>
 
-                      <button mat-raised-button color="primary" class="m-auto">Primary <i class="fas fa-upload"></i></button>
+
+                      
+                      <button mat-raised-button color="success" type="button" (click)="submitImage()" class="m-auto"> <i class="fas fa-upload"></i></button>
                     </div> 
+                   </form>
                 </div>
 
             </div>
             <div class="col-md-9">
                 <div class="right-info">
-                            <app-new-place ></app-new-place>
-                            
+                            <router-outlet></router-outlet>
                 </div>
             </div>
         </div>
        
-        
     </div>
 
    

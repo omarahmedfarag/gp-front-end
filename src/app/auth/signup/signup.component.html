@@ -1,9 +1,9 @@
-<div class="main" id="main">
-    <div  class="login-container d-flex justify-content-center">
+
+<div class="main" id="main" >
+    <div  class="login-container bg-success d-flex justify-content-center">
         
 
-        <div class="right-container overflow-auto">
-         
+        <div class="right-container overflow-auto text-success">
           
         </div>
 
@@ -11,58 +11,79 @@
             
             <form class="w-75 m-auto pt-3" [formGroup]="userForm">
 
-                <div class="form-group ">
-                    <div class="d-flex align-items-center">
-                        <label>User name</label>
-                         <small class="text-danger d-block" *ngIf="!userForm.get('userName').valid && userForm.get('userName').touched">: User Name Required</small>
-                    </div>
-                    <input type="text"  class="form-control" formControlName="userName">
-                  </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="standard" class="mr-3 text-light">
+                    <mat-label>FIRST NAME </mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="userName">
+                    <mat-hint *ngIf="!userForm.get('userName').valid && userForm.get('userName').touched">user name Required</mat-hint>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field appearance="standard">
+                    <mat-label>LAST NAME</mat-label>
+                    <input matInput placeholder="EX:john" formControlName="email">
+                  </mat-form-field>
+                </div>
+              </div>
+
   
-              <div class="form-group ">
-                <div class="d-flex align-items-center">
-                    <label>Email</label>
-                    <small class="text-danger d-block" *ngIf="!userForm.get('email').valid && userForm.get('email').touched">User Name Required</small>    
+              <div class="row">
+                <div class="col-md-12 bg-success">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="***" formControlName="email">
+                  </mat-form-field>
                 </div>
-
-                <input type="text"  class="form-control" formControlName="email">
               </div>
-
               
-              
-          
-              <div class="form-group ">
-                <div class="d-flex align-items-center">
-                    <label>Passsword </label>
-                    <small class="text-danger d-block" *ngIf="!userForm.get('userPassword').valid && userForm.get('userPassword').touched">: Passowrd Required</small>
-
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="standard">
+                      <mat-label>password</mat-label>
+                      <input matInput placeholder="***" formControlName="userPassword" type="password">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field appearance="standard">
+                      <mat-label>Confirm password</mat-label>
+                      <input matInput placeholder="EX:john" formControlName="confirmPassword" type="password">
+                    </mat-form-field>
+                  </div>
                 </div>
 
-                 <input type="password" class="form-control" formControlName="userPassword">
-              </div>
+                 
+  
+                
+               
 
-              <div class="form-group">
-                <div class="d-flex align-items-center">
-                    <label>Passsword </label>
-                    <small class="text-danger d-block" *ngIf="!userForm.get('confirmPassword').valid && userForm.get('confirmPassword').touched">Passowrd Required</small>    
-
-                </div>
-
-                <input type="password" class="form-control" formControlName="confirmPassword">
-              </div>
+            
+              <mat-form-field appearance="fill" class="text-light">
+                <mat-label>Data of Birth</mat-label>
+              <!-- #docregion toggle -->
+                <input matInput [matDatepicker]="picker" formControlName="age">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker color="primary"></mat-datepicker>
+              <!-- #enddocregion toggle -->
+              </mat-form-field>
              
               <div class="mt-3 d-flex justify-content-between align-items-center">
                 <button class="btn login-btn" (click)=onSignUp() [disabled]="!userForm.valid">sign up</button>
-                <button class="btn btn-outline-light" [routerLink]="['../login']" >log in</button>
+                <button class="btn btn-primary" [routerLink]="['../login']" >log in</button>
               </div>
-              <p class="mt-2 ml-2 forget-password">Forget password ?</p>
+              <p class="mt-2 ml-2 forget-password text-dark">Forget password ?</p>
               
   
   
             </form>
+            <div class="text-center back-home" [routerLink]="['/Home']" >
+              <h4 class="text-success m-auto">Back Home</h4>
+
+            </div>
 
         </div>
-          
           
     </div>
     

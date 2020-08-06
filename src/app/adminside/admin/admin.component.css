@@ -1,0 +1,10 @@
+.main
+{
+    height: 100vh;
+    background-color: rgb(197, 197, 197);
+}
+.top-header
+{
+    background-color: #010101;
+    height: 40px;
+}
