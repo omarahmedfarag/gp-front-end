@@ -171,7 +171,7 @@ export class PlacesComponent implements OnInit {
     pullDrag: false,
     dots: false,
     navSpeed: 700,
-    navText: ['<', '>'],
+    navText: ['<i class="fas fa-backward"></i>', '<i class="fas fa-forward"></i>'],
     responsive: {
       0: {
         items: 1

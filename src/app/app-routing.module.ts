@@ -12,6 +12,9 @@ import { UserInfoComponent } from './profile/user-info/user-info.component';
 import { FavoriteComponent } from './profile/favorite/favorite.component';
 import { AdminComponent } from './adminside/admin/admin.component';
 import { RequestComponent } from './profile/request/request.component';
+import { AggrementComponent } from './profile/aggrement/aggrement.component';
+import { HomeComponent } from './adminside/admin/home/home.component';
+import { OwnerRequestsComponent } from './adminside/admin/owner-requests/owner-requests.component';
 
 
 const routes: Routes = [
@@ -62,6 +65,11 @@ const routes: Routes = [
     }
     ,
     {
+      path:"aggrement",
+      component:AggrementComponent
+    }
+    ,
+    {
       path:"request-to-be-owner",
       component:RequestComponent
     }
@@ -70,7 +78,17 @@ const routes: Routes = [
 ,
 {
   path:"Cpanal",
-  component:AdminComponent
+  component:AdminComponent,
+  children:[
+    {
+      path:"home",
+      component:HomeComponent
+    },
+    {
+      path:"owner-requests",
+      component:OwnerRequestsComponent
+    }
+  ]
 }
 ,
 {

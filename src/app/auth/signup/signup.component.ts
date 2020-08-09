@@ -10,7 +10,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class SignupComponent implements OnInit {
 
   public userForm=new FormGroup({
-    'userName':new FormControl(null,Validators.required),
+
+    'firstName':new FormControl(null,Validators.required),
+    'lastName':new FormControl(null,Validators.required),
     'email':new FormControl(null,Validators.required),
     'userPassword':new FormControl(null,Validators.required),
     'confirmPassword':new FormControl(null,Validators.required,),

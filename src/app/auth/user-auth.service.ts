@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthService {
-  private token;
+  token;
+  ErrorMessage=""
   user:any;
   loggedIn=new BehaviorSubject(false);
   constructor(private http:HttpClient) { }
@@ -15,17 +16,10 @@ export class UserAuthService {
   {
     return this.token;
   }
-  login(body)
+  login(body):Observable<any>
   {
 
-    this.http.post<{status:string,token:string,user:any}>("http://localhost:3000/api/user/login",body).subscribe(result=>{
-      this.token=result.token;
-      this.loggedIn.next(result.user);
-      this.saveToLocal(result.token,result.user);
-      
-    },(err)=>{
-      console.log(err)
-    })
+    return this.http.post<{status:string,token:string,user:any}>("http://localhost:3000/api/user/login",body)
   }
   signUp(body)
   {

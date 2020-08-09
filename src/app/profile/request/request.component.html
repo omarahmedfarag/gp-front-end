@@ -1,36 +1,62 @@
-<mat-horizontal-stepper linear #stepper>
+<div class="request">
+  <mat-horizontal-stepper linear #stepper>
     <mat-step [stepControl]="firstFormGroup" [editable]="isEditable" [completed]="!isEditable">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input matInput formControlName="firstCtrl" placeholder="Last name, First name" required>
-        </mat-form-field>
+        <ng-template matStepLabel>Fill out place type</ng-template>
+        
+          
+          
+          <mat-form-field appearance="fill" class="mr-5">
+            <mat-label>Place Type</mat-label>
+            <mat-select formControlName="placeType" >
+              <mat-option *ngFor="let place of placeTypes" [value]="place">
+                {{place}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>CITY</mat-label>
+            <mat-select formControlName="governrate" >
+              <mat-option *ngFor="let gov of gocernate" [value]="gov.code">
+                {{gov.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your address</ng-template>
+    <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>uolpad doucment for your place </ng-template>
         <mat-form-field>
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
+          <input  class="d-none" #piker type="file" (change)="onImagePicked($event)" >
+          <button mat-raised-button color="primary" type="button" (click)="piker.click()" class="m-auto">update photo</button>
+          <input matInput class="d-none">
         </mat-form-field>
+        <div class="image-preview" *ngIf="image">
+          <img [src]="image" >
+        </div>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
+
+  
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button (click)="onSubmit()">submit</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
+  
+  
+</div>

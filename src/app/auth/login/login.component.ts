@@ -10,7 +10,8 @@ declare const $:any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  loading=false;
+  warrningMessege="";
   public userForm=new FormGroup({
     'email':new FormControl(null,Validators.required),
     'password':new FormControl(null,Validators.required)
@@ -26,15 +27,24 @@ export class LoginComponent implements OnInit {
   }
   onLogin(){
 
-
+    this.loading=true
+  //    console.log(this._UserAuthService.login(this.userForm.value));
     if(!this.userForm.valid)
     {
       return
     }
-    console.log(this.userForm.value);
-    this._UserAuthService.loggedIn.next(true);
-    this._UserAuthService.login(this.userForm.value)
-    this.router.navigate(['Home']);
+    this._UserAuthService.login(this.userForm.value).subscribe(result=>{
+      this._UserAuthService.token=result.token;
+      this._UserAuthService.loggedIn.next(result.user);
+      this._UserAuthService.saveToLocal(result.token,result.user);
+      this.router.navigate(['Home']);
+      
+    },err=>{
+      this.warrningMessege=err.error.Erorr
+      this.loading=false
+    })
+    
+    
 
   }
   close()

@@ -15,15 +15,15 @@
                 <div class="col-md-6">
                   <mat-form-field appearance="standard" class="mr-3 text-light">
                     <mat-label>FIRST NAME </mat-label>
-                    <input matInput placeholder="Placeholder" formControlName="userName">
-                    <mat-hint *ngIf="!userForm.get('userName').valid && userForm.get('userName').touched">user name Required</mat-hint>
+                    <input matInput placeholder="Placeholder" formControlName="firstName">
+                    <mat-hint *ngIf="!userForm.get('firstName').valid && userForm.get('firstName').touched">user name Required</mat-hint>
                   </mat-form-field>
                 </div>
 
                 <div class="col-md-6">
                   <mat-form-field appearance="standard">
                     <mat-label>LAST NAME</mat-label>
-                    <input matInput placeholder="EX:john" formControlName="email">
+                    <input matInput placeholder="EX:john" formControlName="lastName">
                   </mat-form-field>
                 </div>
               </div>
@@ -79,7 +79,7 @@
   
             </form>
             <div class="text-center back-home" [routerLink]="['/Home']" >
-              <h4 class="text-success m-auto">Back Home</h4>
+              <h4 class="text-success">Back Home</h4>
 
             </div>
 

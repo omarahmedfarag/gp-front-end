@@ -2,6 +2,7 @@
 {
     height: 100vh;
     background-image: url("../../../assets/imgs/player.jpg");
+    background-attachment: fixed;
     background-size: cover;
     background-position: top;
     display: flex;

@@ -1,5 +1,43 @@
 <div class="main">
     <div class="top-header">
-        
+        <div class="logo text-success">
+            SPORTIVO
+        </div>
     </div>
+    <div class="home d-flex justify-content-center align-content-center">
+        <div class="left">
+            <div class="admin-image">
+                <i class="fas fa-user-circle"></i>  
+                <div class="admin-name"><span>admin : OMAR</span> </div>
+            </div>
+            <hr>
+    
+            <div class="list"   >
+                <div class="list-item" [routerLink]="['home']" routerLinkActive="active">
+                    <i class="fas fa-home mr-3"></i>
+                    HOME
+                </div>
+
+                <div class="list-item" [routerLink]="['owner-requests']" routerLinkActive="active" >
+                    <i class="fas fa-book-reader mr-3"></i>
+                    OWNER REQUESTSS
+                </div>
+
+
+                <div class="list-item">
+                    <i class="fas fa-running mr-3"></i>
+                    PLACES REQUESTS 
+                </div>
+                <div class="list-item">UPDAED PLACE REQUESTS </div>
+                <div class="list-item">FIND USER BY EMAIL</div>
+                <div class="list-item">FIND PLACE </div>
+            </div>
+        </div>
+        <div class="right">
+           <router-outlet></router-outlet>
+        </div>
+
+    </div>
+    
+
 </div>

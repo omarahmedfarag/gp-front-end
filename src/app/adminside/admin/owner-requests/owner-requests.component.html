@@ -1,0 +1,29 @@
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8 mt-5">
+    <!-- Position Column -->
+    ['state', 'placeName', 'governorate', 'area'
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef> state </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.state}} </mat-cell>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> placeName </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.placeName}} </mat-cell>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef> governorate </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.governorate}} </mat-cell>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef> area </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.area}} </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>

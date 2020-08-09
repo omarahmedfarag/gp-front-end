@@ -151,7 +151,7 @@ img
 
 .place
 {
-  height: 500px;
+  height: 350px;
   background-color: #12383f;
   display: flex;
   padding: 0 ;
@@ -171,14 +171,18 @@ img
 .place .place-image-slider
 {
   width: 95%;
-  height: 95%;
+  height: 90%;
+}
+.place[_ngcontent-maw-c111] img[_ngcontent-maw-c111] {
+  width: 100%;
+  height: 450px;
+}
+.place img
+{
+  height: 250px;
 }
 
-.place-image-slider img
-{
-  width: 100%;
-  height: 95%;
-}
+
 .place-img .main-img
 { 
   height: 100%;
@@ -186,12 +190,6 @@ img
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.place-img .main-img img
-{
-  width: 90%;
-  height: 90%;
-  
 }
 
 .place-img .sup-imgs
@@ -217,14 +215,6 @@ img
 {
   width: 60%;
   height: 100%;
-  
   padding: 10px 25px;
   color: white;
 }
-.place img
-{
-  width: 100%;
-  height: 100%;
-
-}
-

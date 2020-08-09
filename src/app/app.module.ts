@@ -23,6 +23,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatTableModule} from '@angular/material/table';
 
 import { PlacesComponent } from './main_places/places/places.component';
 import { PlaceComponent } from './main_places/place/place.component';
@@ -43,6 +45,11 @@ import { UserInfoComponent } from './profile/user-info/user-info.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FavoriteComponent } from './profile/favorite/favorite.component';
 import { RequestComponent } from './profile/request/request.component';
+import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from './adminside/admin/home/home.component';
+import { EventComponent } from './event/event/event.component';
+import { AggrementComponent } from './profile/aggrement/aggrement.component';
+import { OwnerRequestsComponent } from './adminside/admin/owner-requests/owner-requests.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +67,11 @@ import { RequestComponent } from './profile/request/request.component';
     UserInfoComponent,
     FavoriteComponent,
     RequestComponent,
+    FooterComponent,
+    HomeComponent,
+    EventComponent,
+    AggrementComponent,
+    OwnerRequestsComponent,
     
   ],
   imports: [
@@ -88,7 +100,9 @@ import { RequestComponent } from './profile/request/request.component';
     MatCardModule,
     MatSnackBarModule,
     CarouselModule,
-    MatStepperModule
+    MatStepperModule,
+    MatBadgeModule,
+    MatTableModule
     
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthIntercepter,multi:true},AuthGuard],

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../auth/user-auth.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { RequestService } from './aggrement/request.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,10 +13,14 @@ export class ProfileComponent implements OnInit {
   userForm:FormGroup;
   image:string='';
   updatedImage:boolean=false;
-  constructor(private auth:UserAuthService) { }
+  aggrement:boolean
+  constructor(private auth:UserAuthService,private _RequestService:RequestService) { }
 
   ngOnInit(){
 
+    this._RequestService.aggrement.subscribe(result=>{
+      this.aggrement= result
+    })
     this.auth.loggedIn.subscribe(user=>{
       this.user=user;
     })

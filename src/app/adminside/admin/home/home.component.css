@@ -1,0 +1,52 @@
+.numbers
+{
+    height: 100px;
+    background-color: #c26f6f;
+    color: white;
+    font-family: monospace;
+    letter-spacing: 3px;
+    font-size: 30px;
+    position: relative;
+}
+
+.home-col:nth-child(2) .numbers
+{
+    background-color: #d2ff07;
+}
+.home-col:nth-child(3) .numbers
+{
+    background-color: #00ff55;
+}
+
+.numbers i
+{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+}
+.numbers .noOf
+{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(218, 181, 181);
+    color: black;
+    font-size: 18px;
+}
+.last-five-users
+{
+    border: 1PX solid black;
+    border-radius: 25px;
+}
+.card-img-top
+{
+    width: 200px;
+    height: 140px;
+}

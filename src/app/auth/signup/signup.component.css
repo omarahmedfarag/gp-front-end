@@ -41,6 +41,7 @@
     min-height: 100%;
     background-color: #ffffff;
     overflow: hidden;
+    position: relative;
     
   }
   .login-btn
@@ -104,6 +105,10 @@
   border-bottom: 1px rgb(29, 175, 41) solid;
     transform: scale(0.9);
 }
+input
+{
+  color: black;
+}
 
 mat-form-field
 {
@@ -119,6 +124,11 @@ mat-datepicker
 {
   cursor: pointer;
   transition: 0.2s;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%);
+  transition: 1px;
 }
 
 /*media query */
@@ -126,13 +136,16 @@ mat-datepicker
 @media only screen and (max-width: 700px) {
   .left-container {
     width: 100%;
+    overflow: auto;
   }
   .right-container{
     display: none;
   }
   .back-home
   {
+    top: 10px;
     font-size: 20px;
+    bottom: auto;
   }
   mat-form-field
   {
