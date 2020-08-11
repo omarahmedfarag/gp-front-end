@@ -50,6 +50,11 @@ import { HomeComponent } from './adminside/admin/home/home.component';
 import { EventComponent } from './event/event/event.component';
 import { AggrementComponent } from './profile/aggrement/aggrement.component';
 import { OwnerRequestsComponent } from './adminside/admin/owner-requests/owner-requests.component';
+import { ShowrequestComponent } from './adminside/admin/owner-requests/showrequest/showrequest.component';
+
+import { ShowplaceComponent } from './adminside/admin/placerequest/showplace/showplace.component';
+import { PlacerequestComponent } from './adminside/admin/placerequest/placerequest.component';
+import { ReservationComponent } from './profile/reservation/reservation.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +77,10 @@ import { OwnerRequestsComponent } from './adminside/admin/owner-requests/owner-r
     EventComponent,
     AggrementComponent,
     OwnerRequestsComponent,
+    ShowrequestComponent,
+    ShowplaceComponent,
+    PlacerequestComponent,
+    ReservationComponent,
     
   ],
   imports: [

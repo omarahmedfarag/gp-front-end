@@ -1,58 +1,87 @@
-<!--
-<section class="display">
 
-    <div class="container">
-        <div class="row">
-            <div class="col md- 7">
-                <div class="left">
-                        <img src="../../../assets/portfolio/{{singlePlace.image}}" alt="">
+    <app-header></app-header>
+    <div class="main ">
+        <div class="place" *ngIf="!loading">
+            
+            <div class="place-decs">
+                <h2><span class="welcome-at">welcome to </span> {{singlePlace.name}} {{singlePlace.placeType | lowercase}}</h2>
+                <p>to reserve click on the time that suite you    </p>
+                <hr class="bg-light">
+                
+            </div>
+            <div class="place-datails mb-3 py-1 px-3 d-flex">
+                <div class="w-25 ">
+                    <div>governorate {{singlePlace.governorate}}</div>
+                <div>area {{singlePlace.governorate}}</div>
+                <div>addres {{singlePlace.governorate}}</div>
+                </div>
+                <div class="w-25 ">
+                <div *ngIf="singlePlace.nearBy!='non'">nearby {{singlePlace.governorate}}</div>
+                <div>phone Number  {{singlePlace.governorate}}</div>
+                <div>addres {{singlePlace.governorate}}</div>
                 </div>
             </div>
-            <div class="col-md 5">
-                <div class="right">
-                    <h1>{{singlePlace.type}}</h1>
-                    <hr>
-                    <p>{{singlePlace.description}}</p>
-                    <p>Owner Name :  <strong>{{singlePlace.name}}</strong></p>
-                    <p>Location :  <strong>{{singlePlace.location}}</strong></p>
-                    <select class="mb-3 form-control w-75">
-                        <option>Lession</option>
-                        <option>week</option>
-                        <option>month</option>
-                        <option>year</option>
-                    </select>
-                    <div class="btns d-flex">
-                        <button class="btn btn-warning mr-3 reserve">Reserv</button>
-                        <button class="btn btn-success">Favorit</button>
+            <div class="place-body">
+                <div class="images">
+                    <owl-carousel-o [options]="customOptions" class="bg-danger">
+                                
+                        <ng-template carouselSlide *ngFor="let sub of singlePlace.imaArrary" class="m-auto bg-danger">
+                          <img [src]="sub" class="">
+                          
+                        </ng-template>  
+                        
+                       
+                      </owl-carousel-o>
+
+                </div>
+                <div class="empty-time text-center">
+                    <div class="empty">
+                        
+                    <owl-carousel-o [options]="customOptions2" class="bg-danger ">
+                        <ng-template carouselSlide *ngFor="let day of days,let i=index" class="m-auto bg-danger">
+                          <div class="each-day">
+                              <div class="day-header">
+                                <div class="dote" *ngIf="i==0"></div>
+                                {{day}} <span>{{todayIS+i}}/{{monthIS}}</span>
+                                </div>
+                            <div class="day-body">
+                              <div class="day-item mb-1 w-100 m-auto" *ngFor="let hour of hours , let j=index">
+                                <div *ngIf="j!=hours.length-1">
+                                  
+                                  <div *ngIf="j%2==1" (click)="reserve(i+todayIS,j+1,day)">*{{hour}}pm:{{hours[j+1]}}:pm</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </ng-template>  
+                        
+                       
+                      </owl-carousel-o>
                     </div>
                 </div>
             </div>
+          
+           
+            
         </div>
+        
+
     </div>
 
-   
-
-</section>
-
--->
-
-    <!--
-
-            <div class="rounded confirm-favorit ">
-            <div *ngIf="loggedIn">
-                <span>The toltal Cost is 200LE</span><br><br>
-                This is You Code To pay With <span class="fawry">Fawry</span>
-                <strong> #2253</strong><hr>
-                <button class="btn btn-success mr-3" [routerLink]="['/Home']" routerLinkActive="router-link-active"  >Confirm</button>
-                <button class="btn btn-danger">Cancel</button>
-            </div>
-            <div class="warrning-to-login" *ngIf="!loggedIn">
-                You need to login First 
-                <hr>
-                <button class="btn btn-info">OK</button>
-            </div>
-                
-        </div>
 
 
-    -->
+    <div class="alert-confirm " *ngIf="alert">
+      <div class="alert-box">
+          <div class="text-success confirmation-text">RESERVATION BOX</div>
+          <hr class="mb-3">
+          <p>The time chooesed is </p>
+          <p> From {{reservedHour}}:pm  to {{reservedHour+1}}:pm</p> 
+            <p>Confirm if it's suitable with you or cancle</p>
+          <div class="mt-3">
+              <button class="btn btn-outline-danger mr-3" (click)=cancle()>cancle</button>
+              <button class="btn btn-success" (click)="onConfirm()">CONFIRM</button>
+  
+          </div>
+      </div>
+  </div>

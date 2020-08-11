@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArrayName, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { mimeType } from './mime-type-validator';
 import {HttpClient} from "@angular/common/http"
-import { from } from 'rxjs';
 import { PlcaeServiceService } from '../plcae-service.service';
+import { PlaceService } from 'src/app/main_places/place/place.service';
 
 declare const $:any;
 @Component({
@@ -12,19 +12,22 @@ declare const $:any;
   styleUrls: ['./new-place.component.css']
 })
 export class NewPlaceComponent implements OnInit {
-  Governorates: string[]=['Cairo','Giza','kal','Alexandria',
-  'Aswan','Asyut','Beheira','Beni','Cairo','Dakahlia'];
+  Governorates:any
+  areas:any
   placeTypes:string[]=['GYM','TENNES','FOOTBALL','BASCKETBALL','SWIMMING','STREETWORKOUT'];
+
   pricePerArr:string[]=["hour",'lesson','day',"week","month"]
+
   placeForm:FormGroup;
   mainImage:string;
   optinalImage:string;
   optinalImages:string[]=[null,null,null];
   showOptinalImagesRow:boolean=false;
   allPlaces:any[];
-  constructor(private http:HttpClient,private _PlcaeServiceService:PlcaeServiceService) { }
+  constructor(private http:HttpClient,private _PlcaeServiceService:PlcaeServiceService,private _PlaceService:PlaceService) { }
 
   ngOnInit() {
+    this.Governorates=this._PlaceService.gocernate
     /*this._PlcaeServiceService
     .getPlaces().subscribe((result)=>{
       console.log("hrer")
@@ -126,13 +129,13 @@ export class NewPlaceComponent implements OnInit {
 
    formPlace.append("pricePer",this.placeForm.get("pricePer").value);
    formPlace.append("price",this.placeForm.get("price").value);
-  
+    console.log(formPlace)
+    
     this.http.post("http://localhost:3000/api/place",formPlace).subscribe((result)=>{
       console.log(result)
     },(err)=>{
       console.log(err);
     }) 
-
     console.log("here")
     console.log(formPlace.getAll("imaArrary"))
    
@@ -165,4 +168,9 @@ export class NewPlaceComponent implements OnInit {
     console.log(this.placeForm.valid) 
   }
 
+  onCitySelected()
+  {
+    let areasCode=this.placeForm.get("governrate").value.replace(/ /g,"_");
+    this.areas=this._PlaceService.areas[areasCode]
+  }
 }

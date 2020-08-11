@@ -39,8 +39,9 @@ export class MyPlacesService {
 
    }
 
-   getSinglePlace(id:number)
+   getSinglePlace(id:number):Observable<any>
    {
+     return  this._HttpClient.get(`http://localhost:3000/api/place/${id}`)
    }
 
    addToFavorite(placeId)

@@ -8,3 +8,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html {
     scroll-behavior: smooth;
   }
+
+  
+.owl-theme .owl-nav {
+    margin-top: 0px !important; 
+    background-color: transparent;
+}
+
+element.style {
+}
+.owl-theme .owl-nav [class*=owl-] {
+    
+    font-size: 14px;
+    margin: 5px;
+    padding: 4px 7px;
+    background: transparent;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 3px;
+}

@@ -15,6 +15,9 @@ import { RequestComponent } from './profile/request/request.component';
 import { AggrementComponent } from './profile/aggrement/aggrement.component';
 import { HomeComponent } from './adminside/admin/home/home.component';
 import { OwnerRequestsComponent } from './adminside/admin/owner-requests/owner-requests.component';
+import { ShowrequestComponent } from './adminside/admin/owner-requests/showrequest/showrequest.component';
+import { PlacerequestComponent } from './adminside/admin/placerequest/placerequest.component';
+import { ReservationComponent } from './profile/reservation/reservation.component';
 
 
 const routes: Routes = [
@@ -37,7 +40,7 @@ const routes: Routes = [
  }
  ,
  {
-   path:"show/:id",
+   path:"reserv/:id",
    component:ShowPlaceComponent
  }
  ,
@@ -65,6 +68,11 @@ const routes: Routes = [
     }
     ,
     {
+      path:"reservation",
+      component:ReservationComponent
+    }
+    ,
+    {
       path:"aggrement",
       component:AggrementComponent
     }
@@ -87,6 +95,22 @@ const routes: Routes = [
     {
       path:"owner-requests",
       component:OwnerRequestsComponent
+    },
+    
+    {
+      path:"place-requests",
+      component:PlacerequestComponent
+    }
+    ,
+    {
+      path:"add-place",
+      component:NewPlaceComponent
+    }
+   
+    ,
+    {
+      path:"owner-requests/:id",
+      component:ShowrequestComponent
     }
   ]
 }

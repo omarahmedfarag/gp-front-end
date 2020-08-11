@@ -1,30 +1,166 @@
-.display
+.main
 {
-    margin-top: 80px;
+    padding-top: 70px;
+    height: 1000px;
 }
-
-img
+.place
+{
+    width: 80%;
+    margin: auto;
+    height: 600px;
+    background-color: rgb(27, 26, 26);
+    border-radius: 10px;
+    box-shadow: 0 0 10px black;
+}
+.place-decs
+{
+    padding: 15px 20px;
+    color: white;
+    width: 100%;
+    height: 20%;
+}
+.place-body
 {
     width: 100%;
-    height: 400px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
-.left
+.place-body .images
 {
-    border: 1px solid black;
+    width: 45%;
+    height: 85%;
+    border-radius: 20px;
+    border:  2px solid black;
+    overflow: hidden;
+    box-shadow: 0  0 5px black;
+}
+.images img{
+    height: 300px !important;
+}
+.place-body .empty-time
+{
+
+    width: 45%;
+    height: 85%;
+    border-radius: 20px;
+    border:  2px solid black;
+    box-shadow: 0  0 5px black;
+}
+.schadual
+{
+    text-align: center;
+    color: white;
+    text-shadow: 0 0 20px white;
+    font-size: 30px;
+}
+.welcome-at
+{
+    color: green;
+    font-family: 'Sriracha', cursive;
 }
 
-.confirm-favorit
+.empty
 {
+    width: 90%;
+    height: 100%;
+    margin: auto;
 
 
-    width:30%;
-    height: 35%;
-    padding: 30px;
-    background-color: rgb(250,250,250);
-    border: solid 1px black;
+}
+.each-day
+{
+    height: 290px;
+    width: 90%;
+    border-radius: 10px;
+    background-color: honeydew;
+    overflow: hidden;
+    margin: auto;
+}
+.day-header
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: indigo;
+    flex-direction: column;
+    height: 15%;
+    color: white;
+    position: relative;
+}
+.dote
+{
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: brown;
     position: absolute;
-    top:30%;
-    left: 35%;
-    display: none;
+    top: 2px;
+    left: 5px;
+}
+.day-item
+{
+    text-align: center;
+    font-size: 15px;
+    
+}
+.day-body
+{
+
+    height: 85%;
+    color: black;
+}
+
+.place-datails
+{
+    width: 95%;
+    margin: auto;
+    background-color: tomato;
+    height: 80px;
+    border-radius: 20px;
+    background-color: black;
+    box-shadow: 0 0 10px black;
+    color: green;
+    font-family: 'Sriracha', cursive;
+}
+.confirm-res
+{
+    height: 75px;
+    background-color: brown;
+}
+
+
+
+/* alert box */
+.alert-confirm
+{
+    position: fixed;
+    background-color: rgba(0,0,0,0.6);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.alert-box
+{
+    width: 40%;
+    height: 40%;
+    background-color: white;
+    border-radius: 25px;
+    padding: 10px 15px;
+    
+
+}
+.confirmation-text
+{
+
+    font-family: 'Sriracha', cursive;
+    font-size: 30px;
 }
 

@@ -1,28 +1,53 @@
-<div class="request">
-  <mat-horizontal-stepper linear #stepper>
+<div class="request p-4">
+  <div class="" *ngIf="myRequest">
+    <span class="text-success">Gongratulation</span>
+    you applied successfuly the request <br>
+    Admin will review your request very soon
+    <div class="important"> <h5>after approving your request (add place ) tab will be unlockad as that you can add your place details</h5></div>
+  </div>
+  <div class="" *ngIf="user.role=='owner'" >
+    <span class="text-success">Gongratulation</span>
+    your become owner and can add new place now 
+  </div>
+  <mat-horizontal-stepper linear #stepper *ngIf="!myRequest && user.role=='user'">
     <mat-step [stepControl]="firstFormGroup" [editable]="isEditable" [completed]="!isEditable">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Fill out place type</ng-template>
         
+        <mat-form-field class="mr-5">
+          <mat-label>Place Name </mat-label>
+          <input matInput formControlName="placeName" placeholder="Place Namee" required>
+        </mat-form-field>
           
           
           <mat-form-field appearance="fill" class="mr-5">
             <mat-label>Place Type</mat-label>
             <mat-select formControlName="placeType" >
-              <mat-option *ngFor="let place of placeTypes" [value]="place">
+              <mat-option *ngFor="let place of placeTypes" [value]="place" required>
                 {{place}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill">
+            <mat-label>CITY</mat-label>
+            <mat-select formControlName="governorate" (selectionChange)="onCitySelected()">
+              <mat-option *ngFor="let gov of gocernate" [value]="gov.code" required>
+                {{gov.value}}
               </mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="fill">
-            <mat-label>CITY</mat-label>
-            <mat-select formControlName="governrate" >
-              <mat-option *ngFor="let gov of gocernate" [value]="gov.code">
-                {{gov.value}}
+            <mat-label>Area</mat-label>
+            <mat-select formControlName="areas" >
+              <mat-option *ngFor="let area of areas" [value]="area.code" required>
+                {{area.value}}
               </mat-option>
             </mat-select>
           </mat-form-field>
+
+
         <div>
           <button mat-button matStepperNext>Next</button>
         </div>
@@ -31,6 +56,7 @@
     <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
       <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>uolpad doucment for your place </ng-template>
+        <p class="text-danger">hint: this document is a Proof of ownership of the place</p>
         <mat-form-field>
           <input  class="d-none" #piker type="file" (change)="onImagePicked($event)" >
           <button mat-raised-button color="primary" type="button" (click)="piker.click()" class="m-auto">update photo</button>
@@ -40,7 +66,7 @@
           <img [src]="image" >
         </div>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
+          
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
@@ -51,9 +77,9 @@
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-        <button mat-button (click)="onSubmit()">submit</button>
+        
+        <button mat-button (click)="stepper.reset()">cancle</button>
+        <button mat-button (click)="onSubmit()" type="button">submit</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

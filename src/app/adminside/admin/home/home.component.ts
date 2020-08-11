@@ -9,12 +9,14 @@ import { OperationService } from '../../admin-service/operation.service';
 export class HomeComponent implements OnInit {
 
   details:any
+  loading:boolean=true
   constructor(private _OperationService:OperationService) { }
 
   ngOnInit(): void {
     this._OperationService.getDetails().subscribe(result=>{
       this.details=result;
       console.log(this.details)
+      this.loading=false
     },)
   }
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { OperationService } from '../../admin-service/operation.service';
 
   export interface PeriodicElement {
     state: string;
@@ -16,16 +18,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OwnerRequestsComponent implements OnInit {
 
-  requests: PeriodicElement[] 
-  displayedColumns: string[] = ['state', 'placeName', 'governorate', 'area'];
-  dataSource = this.requests
-  constructor(private http:HttpClient) { }
+  dataSource :any
+  loading:boolean=true
+  constructor(private _OperationService:OperationService, private http:HttpClient,private router:Router) { }
 
   ngOnInit(): void {
-    this.http.get("http://localhost:3000/api/request").subscribe((result:any)=>{
-      this.dataSource=result.request,
-      console.log(this.requests)
+     this._OperationService.getAllRequests().subscribe((result:any)=>{
+      this.dataSource=result,
+      this.loading=false
     })
+  }
+  showPlace(requestID)
+  {
+    this.router.navigate([`/Cpanal/owner-requests/${requestID}`])
   }
 
 }

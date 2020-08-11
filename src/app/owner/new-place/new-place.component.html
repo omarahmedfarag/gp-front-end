@@ -61,18 +61,20 @@
     <!-- El mo7afza -->
     <mat-form-field class="w-75">
       <mat-label>Governorate</mat-label>
-      <mat-select formControlName="governrate">
-        <mat-option>None</mat-option>
-        <mat-option value="option1" *ngFor="let Governorate of Governorates" [value]="Governorate">{{Governorate}}</mat-option>
+      <mat-select formControlName="governrate" (selectionChange)="onCitySelected()">
+        <mat-option  *ngFor="let Governorate of Governorates" [value]="Governorate.code">{{Governorate.value}}</mat-option>
+        
+      </mat-select>
+    </mat-form-field>  
+    <!-- el manteka -->
+    <mat-form-field class="w-75">
+      <mat-label>Area</mat-label>
+      <mat-select formControlName="area">
+        <mat-option  *ngFor="let area of areas" [value]="area.code">{{area.value}}</mat-option>
         
       </mat-select>
     </mat-form-field>  
 
-    <!-- el manteq2 -->
-    <mat-form-field class="example-full-width w-75">
-      <mat-label>Area</mat-label>
-      <input matInput placeholder="EX: shobra" formControlName="area">
-      </mat-form-field>  
       
       <!-- the name of the street  -->
       <mat-form-field class="example-full-width w-75">

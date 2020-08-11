@@ -23,12 +23,7 @@ export class FavoriteComponent implements OnInit {
 
   ngOnInit(){
 
-    const n=new Date().getDay()
     
-    const subday=[...this.days.slice(0,n)];
-    this.days.splice(0,n);
-    console.log(this.days)
-    this.days=this.days.concat(subday);
     this._MyPlacesService.getFavoritePlaces();
     this._MyPlacesService.favPlaces.subscribe(res=>{
       this.favoritPlaces=res;

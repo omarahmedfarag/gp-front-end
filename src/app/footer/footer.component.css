@@ -1,0 +1,49 @@
+.footer
+{
+    
+    background-color: #101010;
+}
+.each-section
+{
+    height: 250px;
+    background-color: blanchedalmond;
+    background-color: #101010;
+    box-shadow: 0 0 10px black;
+    padding: 8px 12px ;
+    color: white;
+}
+.contact
+{
+    font-size: 20px;
+    letter-spacing: 5px;
+}
+.each-contact
+{
+    height: 35px;
+    margin-bottom: 3px;
+}
+.each-contact i
+{
+    transform: scale(1.5);
+    color: green;
+}
+.about
+{
+    padding: 0 15px;
+    letter-spacing: 3px;
+
+}
+.place-owner
+{
+    font-size: 20px;
+}
+
+
+.col-md-4
+{
+    margin-bottom: 5px;
+}
+hr
+{
+    box-shadow: 0 0 20px white;
+}

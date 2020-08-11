@@ -1,0 +1,38 @@
+<canvas id="canvas" width="130" height="130" class="" *ngIf="reservations.length!=0">
+</canvas>
+<div class="not-reservations text-center text-light" *ngIf="reservations.length==0">
+    <h2>No reservations yes !!</h2>
+</div>
+<div class="main "*ngIf="!loading">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-3" *ngFor="let reservation of reservations;let i=index">
+                <div class="reservation">
+                    <div class="clock">
+                        <div class="text-danger"><span class="text-success">IPMORTANT</span> : You need to confirm you payment quickly
+                        Because now this reservation is reserved temtorarlly and will be removed after 
+                        </div>
+
+                    </div>
+                    <div class="reservation-info py-2 px-3">
+                        <div><i class="fas fa-unlock-alt"></i></div>
+                        <div>The reservation is From : {{reservation.startAt}} to : {{reservation.endAt}} </div>
+                        <div>price per {{reservation.startAt}}</div>
+                        <div> Price : <span class="text-success">{{reservation.price}}</span> LE</div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-5">
+                            <button class="btn btn-success">confirm</button>
+                        <button class="btn btn-outline-danger" (click)="deletedReservation(reservation._id)">remove</button>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

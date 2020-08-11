@@ -90,14 +90,16 @@
         </div>
         
         <!-- filtered by -->
-        <div class="alert cust-alert mb-3 px-5 py-2 d-flex align-items-center" *ngIf="filter.length !=0">
-            <div class="mr-3 each-filter-div" *ngFor="let item of filter" >
-              <div class="filter-key mr-2">
+        <div class="alert cust-alert mb-3 px-5 py-2 d-flex align-items-center" *ngIf="filter.length !=0 ">
+          <div *ngFor="let item of filter">
+            <div class="mr-3 each-filter-div" *ngIf="item.key != 'page'"  >
+              <div class="filter-key mr-2" >
                 {{item.value}}
               </div>
               <i class="far fa-times-circle" (click)=removeQueryParams(item.key)></i>
           </div>
           
+          </div>
         </div>
         
         <!-- main data and filter section -->
@@ -117,7 +119,9 @@
                             <owl-carousel-o [options]="customOptions" class="bg-danger">
                                 
                               <ng-template carouselSlide *ngFor="let sub of place.imaArrary" class="m-auto bg-danger">
+                               <div class="drop-shadow">
                                 <img [src]="sub" class="owl-img">
+                               </div>
                                 
                               </ng-template>  
                               
@@ -134,9 +138,9 @@
                           <p>{{place.phoneNumber}}</p>
                           <hr>
                           <p>Here is some description about the place and you can see more information once you complet your reservation ...</p>
-                          <button class="btn btn-outline-light mr-3">Rever Now </button>
-                          <button class="btn btn-light" (click)="openSnackBar(place.name,'added to faVorite',place._id)">add to favorite </button>
-                                
+                          <button class="btn btn-outline-light mr-3 place-btns" (click)=showPlace(place._id)>Rever Now </button>
+                          <button class="btn btn-light place-btns" (click)="openSnackBar(place.name,'added to faVorite',place._id)">add to favorite </button>
+                              
                                 
 
                         </div>
@@ -161,7 +165,7 @@
                         <mat-radio-group aria-label="Select an option">
                           <mat-radio-button value="1" name="gender" (click)="filterByQuery('gender','male')" >Male</mat-radio-button><br>
                           <mat-radio-button value="2" name="gender" (click)="filterByQuery('gender','female')">Female</mat-radio-button><br>
-                          <mat-radio-button value="3" name="gender" (click)="filterByQuery('gender','all')" checked>All</mat-radio-button>
+                          <mat-radio-button value="3" name="gender" (click)="filterByQuery('gender','ALL')" checked>All</mat-radio-button>
                         </mat-radio-group>
                       </mat-panel-description>
                     </mat-expansion-panel>
@@ -221,7 +225,7 @@
           <div class="col-md-9">
             <mat-paginator [length]="length"
             [pageSize]="pageSize"
-            [pageSizeOptions]="numOfPages">
+            [pageSizeOptions]="numOfPages" (page)=onChangesPage($event)>
           </mat-paginator>
           </div>
            

@@ -21,15 +21,15 @@ export class UserAuthService {
 
     return this.http.post<{status:string,token:string,user:any}>("http://localhost:3000/api/user/login",body)
   }
-  signUp(body)
+  signUp(body):any
   {
-    this.http.post<{status:string,token:string,user:any}>("http://localhost:3000/api/user/login",body).subscribe(result=>{
+    this.http.post<{status:string,token:string,user:any}>("http://localhost:3000/api/user/signup",body).subscribe(result=>{
       this.token=result.token;
       this.loggedIn.next(result.user);
       this.saveToLocal(result.token,result.user);
       
     },(err)=>{
-      console.log(err)
+      
     })
   }
   updatedImage(id,body)
@@ -50,7 +50,7 @@ export class UserAuthService {
     },(err)=>{
     })
   }
-
+  // saving the user and the tokne to local storage 
   saveToLocal(token,user)
   { 
 
@@ -60,13 +60,19 @@ export class UserAuthService {
     localStorage.setItem("user",StringUser)
 
   }
+
+  checkOwnerShip(id)
+  {
+
+  }
   //to next/emite new user and add new user value to localStorage
   emiteNewUserValue(user)
   {
+    
     this.loggedIn.next(user);
     const StringUser=JSON.stringify(user)
     localStorage.setItem("user",StringUser)
-
+    
 
   }
   loadUserFromLocalStorage()
@@ -74,6 +80,8 @@ export class UserAuthService {
     const user= JSON.parse(localStorage.getItem("user"));
     this.loggedIn.next(user);
     this.token=localStorage.getItem("token")
+    console.log("iam in the load srvice");
+    console.log(user);
   }
   logOut()
   {
@@ -81,6 +89,17 @@ export class UserAuthService {
     this.loggedIn.next(false);
     localStorage.removeItem("token");
     localStorage.removeItem("user")
+  }
+
+  //get the current user to check if he becomes owner 
+  getMe()
+  {
+    const userId=JSON.parse(localStorage.getItem("user"))._id;
+    this.http.get(`http://localhost:3000/api/user/${userId}`).subscribe((result:any)=>{
+    this.emiteNewUserValue(result.user);
+    },err=>{
+      console.log(err)
+    })
   }
  
 

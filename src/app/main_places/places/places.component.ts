@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Place } from '../place.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { PageEvent } from '@angular/material/paginator';
 
 declare const $:any
 @Component({
@@ -15,7 +16,7 @@ export class PlacesComponent implements OnInit {
   placeTypes:string[]=['GYM','TENNES','FOOTBALL','BASCKETBALL','SWIMMING','STREETWORKOUT'];
   numOfPages=[10];
   length=200;
-  pageSize=10;
+  pageSize=2;
   seletedPrice=1000;
   isLodaing:boolean=true;
   allPlaces:Place[];
@@ -63,6 +64,7 @@ export class PlacesComponent implements OnInit {
           }
           
         }
+        
         else{
           this.filter.push({key,value:params[key]})  
         }
@@ -71,6 +73,7 @@ export class PlacesComponent implements OnInit {
 
       this._MyPlacesService.getAllPlaces(this.queryParams).subscribe(result=>{
         this.allPlaces=result.data
+        this.length=result.length
       })
      
     })
@@ -130,7 +133,12 @@ export class PlacesComponent implements OnInit {
     this.seletedPrice=e.value;
     console.log(e)
   }
-
+  //pagenation
+  onChangesPage(pageData:PageEvent)
+  {
+    let pageindex=(pageData.pageIndex+1)+''
+    this.route.navigate([],{queryParams:{page:pageindex} ,queryParamsHandling:"merge"});
+  }
   //how to use query params on url deleting 
   filterByQuery(key,value)
   {
@@ -149,6 +157,10 @@ export class PlacesComponent implements OnInit {
     this.filter.splice(index,1);
   }
 
+  showPlace(placeId)
+  {
+    this.route.navigate([`reserv/${placeId}`])
+  }
   openSnackBar(message: string, action: string,id) {
     this._snackBar.open(message, action, {
       duration: 2000,

@@ -106,14 +106,6 @@ img
 
 
 
-.filter{
-  
-  position: fixed;
-  top: 65px;
-  left: 959.5px;
-  width: 285px;
-  
-}
 
 
 .filter-section
@@ -180,8 +172,10 @@ img
 .place img
 {
   height: 250px;
+  box-shadow: 0 0 10px black;
+  border: 1px solid white;
+  overflow: hidden;
 }
-
 
 .place-img .main-img
 { 
@@ -217,4 +211,16 @@ img
   height: 100%;
   padding: 10px 25px;
   color: white;
+}
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+  .filter {
+    position: inherit;
+  }
+  .place-btns
+  {
+    padding: 2px;
+  }
+ 
 }

@@ -1,29 +1,50 @@
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8 mt-5">
-    <!-- Position Column -->
-    ['state', 'placeName', 'governorate', 'area'
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef> state </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.state}} </mat-cell>
-    </ng-container>
+<div class="mt-5"  *ngIf="!loading">
+  <div class="container mt-5 ">
+    <div class="row">
+      <div class="col-md-3 home-col">
+        <div class="numbers d-flex justify-content-center align-items-center">
+            <i class="fas fa-user-circle"></i>
+            #REQUESTS
+            <div class="noOf">
+                {{dataSource.count}}
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="w-50 m-auto" *ngIf="loading">
+    <div class="">
+      <div class="loader">Loading...</div>
+    </div>
+  </div>
+  <div *ngIf="dataSource.request.length==0" class="text-center mt-3">
+    <h3 class="text-danger">*NO REQUESTS NOW</h3>
+  </div>
+
+  <table class="table table-striped table-dark mt-4" *ngIf="!loading && dataSource.request.length!=0">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Place Type </th>
+        <th scope="col">Governrate</th>
+        <th scope="col">area</th>
+        <th scope="col">state</th>
+        <th scope="col">review</th>
   
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> placeName </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.placeName}} </mat-cell>
-    </ng-container>
-  
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <mat-header-cell *matHeaderCellDef> governorate </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.governorate}} </mat-cell>
-    </ng-container>
-  
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <mat-header-cell *matHeaderCellDef> area </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.area}} </mat-cell>
-    </ng-container>
-  
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of dataSource.request,let i=index">
+        <th scope="row">{{i}}</th>
+        <td>{{request.placeName}}</td>
+        <td>{{request.governorate}}</td>
+        <td>{{request.area}}</td>
+        <td>{{request.state}}</td>
+        <td><button class="btn btn-warning" (click)=showPlace(request._id)>Review </button></td>
+      </tr>
+      
+     
+    </tbody>
+  </table>
+</div>
