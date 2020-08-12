@@ -85,42 +85,30 @@
           <div class="comment-form">
             <mat-form-field class="example-full-width">
               <mat-label>Leave a comment</mat-label>
-              <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+              <textarea matInput placeholder="Ex. It makes me feel..." [(ngModel)]="commnet"></textarea>
             </mat-form-field><br>
-            <button class="btn btn bg-success">submit comment </button>
+            <button class="btn btn bg-success" (click)="submitComment()">submit comment </button>
           </div>
           <div class="comment-body">
-            <div class="each-comment ">
+            <div class="each-comment " *ngFor="let com of comments">
                 <div class="user-info">
-                  <div class="user-image mr-3"></div>
+                  <div class="user-image mr-3">
+                    <img [src]="com.user.photo" alt="">
+                  </div>
                   <div class="user-name text-light">
-                    OMAR AHMED 
+                    {{com.user.firstName}}
                   </div>
                 </div>
                 <div class="comment">
                   <i class="far fa-comments"></i>
                   <div class="actual-comment">
-                   this place is amaging really this place is amaging really this place 
+                   {{com.comment}}
                   </div>
                 </div>
 
             </div>
-            <hr>
-            <div class="each-comment mb-3">
-              <div class="user-info">
-                <div class="user-image mr-3"></div>
-                <div class="user-name text-light">
-                  OMAR AHMED 
-                </div>
-              </div>
-              <div class="comment">
-                <i class="far fa-comments"></i>
-                <div class="actual-comment">
-                  oky
-                </div>
-              </div>
-
-          </div>
+            
+            
           </div>
           
           

@@ -5,6 +5,7 @@ import { UserAuthService } from 'src/app/auth/user-auth.service';
 import { Place } from '../place.model';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ReservationService } from 'src/app/profile/reservation/reservation.service';
+import { CommentsService } from './comments.service';
 declare const $:any;
 @Component({
   selector: 'app-show-place',
@@ -46,12 +47,14 @@ export class ShowPlaceComponent implements OnInit {
 
   //comment section 
   showcomment:boolean=false
-
+  commnet:String;
+  comments:any
   constructor(private activeRoute:ActivatedRoute,
     private router:Router,
     private _MyPlacesService:MyPlacesService,
     private _UserAuthService:UserAuthService,
-    private _ReservationService:ReservationService
+    private _ReservationService:ReservationService,
+    private _CommentsService:CommentsService
     ) { }
 
   ngOnInit() {
@@ -75,9 +78,16 @@ export class ShowPlaceComponent implements OnInit {
 
     })
 
+    // get the reserved time accoding to current place not to display it in the time section 
     this._ReservationService.getPlaceReservation(this.placeId).subscribe((result)=>{
       this.reservationsTime=result.reservationTime;
       
+    })
+
+
+    // get all comment for the current place 
+    this._CommentsService.getComments(this.placeId).subscribe((data)=>{
+      this.comments=data.data
     })
 
 
@@ -178,7 +188,20 @@ export class ShowPlaceComponent implements OnInit {
     this.showcomment=value
   }
 
+  submitComment()
+  {
+    if(!this.commnet)
+    {
+      return
+    }
+    alert(this.commnet)
+    this._CommentsService.postComment(this.placeId,this.commnet).subscribe((result)=>{
+      this.comments.unshift(result.review)
+    },err=>{
+      console.log(err)
+    })
 
+  }
 
   
 }
