@@ -57,21 +57,8 @@
           
                 <select class=" w-50 input-hieght"  #location>
                     <option value="0" selected disabled>Location</option>
-                    <option value="Alexandria">Alexandria</option>
-                    <option value="Aswan">Aswan</option>
-                    <option value="Asyut">Asyut</option>
-                    <option value="Beheira">Beheira</option>
-                    <option value="Beni Suef">Beni Suef</option>
-                    <option value="Cairo">Cairo</option>
-                    <option value="Dakahlia">Dakahlia</option>
-                    <option value="Damietta">Damietta</option>
-                    <option value="Faiyum">Faiyum</option>
-                    <option value="Gharbia">Gharbia</option>
-                    <option value="Giza">Giza</option>
-                    <option value="Ismailia">Ismailia</option>
-                    <option value="Luxor">Luxor</option>
-                    <option value="Matruh">Matruh</option>
-                    <option value="All">All</option>
+                    <option [value]="governrate.code" *ngFor="let governrate of governrates">{{governrate.value}}</option>
+                   
                 </select>
                 
                 <button class="btn btn-search w-25 input-hieght" (click)="onSearch(type,location)">Search</button>
@@ -118,6 +105,12 @@
                             
                             <owl-carousel-o [options]="customOptions" class="bg-danger">
                                 
+                              <ng-template carouselSlide  class="m-auto bg-danger">
+                                <div class="drop-shadow">
+                                 <img [src]="place.mainImgPath" class="owl-img">
+                                </div>
+                                 
+                               </ng-template>  
                               <ng-template carouselSlide *ngFor="let sub of place.imaArrary" class="m-auto bg-danger">
                                <div class="drop-shadow">
                                 <img [src]="sub" class="owl-img">
@@ -134,8 +127,9 @@
                         <div class="place-info">
                           <h3>{{place.name}} <sub class="text-warning">{{place.placeType}}</sub></h3> 
                           <p> {{place.governorate}} , {{place.area}} , main street... </p>
-
-                          <p>{{place.phoneNumber}}</p>
+                          <p class="text-danger">{{place.price | currency }} Per {{place.pricePer | uppercase}}</p>
+                          <p><span class="text-success">PHONE NUMBER </span>0155......</p>
+                          <p class="text-warning">note : after reserving the place you will see the all details</p>
                           <hr>
                           <p>Here is some description about the place and you can see more information once you complet your reservation ...</p>
                           <button class="btn btn-outline-light mr-3 place-btns" (click)=showPlace(place._id)>Rever Now </button>
@@ -183,28 +177,17 @@
                       </mat-panel-description>
                     </mat-expansion-panel>
                      <!-- sort/filter by price -->
-                    <mat-expansion-panel >
-
-                          <mat-expansion-panel-header>
-                              price
-                          </mat-expansion-panel-header>
-
-                          <mat-panel-description>
-                            <div class="filter-bottom mt-2 bg-danger">
-                              <span>Price</span>    
-                              <hr> 
-                              <div class="d-flex justify-content-between">
-                                <span class="price-range">150 :LE</span>
-                                <span class="price-range">1000 :LE</span>
-                              </div>             
-                              <mat-slider thumbLabel  min="150" max="1000" step='50' value="1000" (change)="onTouched($event)"></mat-slider>
-                              <span>Selected price 150 - {{seletedPrice}}</span>
-                              <mat-chip-list aria-label="Fish selection">
-                                <mat-chip color="accent" selected class="ml-auto">Go</mat-chip>
-                              </mat-chip-list>
-                            </div>
-                          </mat-panel-description>
-
+                     <mat-expansion-panel class="mb-3">
+                      <mat-expansion-panel-header>
+                        Price
+                      </mat-expansion-panel-header>
+                      <mat-panel-description>
+                        <mat-radio-group aria-label="Select an option">
+                          <mat-radio-button value="5" name="price" (click)="filterByQuery('sort','price')">cheap </mat-radio-button><br>
+                          <mat-radio-button value="6" name="price" checked (click)="filterByQuery('sort','-price')">expensive</mat-radio-button>
+                          
+                        </mat-radio-group>
+                      </mat-panel-description>
                     </mat-expansion-panel>
                    
                 </div>
@@ -220,7 +203,7 @@
        
         </div>
         
-
+        <!--pagnation-->
         <div class="paginator row mb-3">
           <div class="col-md-9">
             <mat-paginator [length]="length"

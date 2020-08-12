@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
   loggedIn:boolean=false;
   user:any
   
-  @ViewChild(LoginComponent) LoginComponent:LoginComponent;
   constructor(private _UserAuthService:UserAuthService,private router:Router,private activeRouter:ActivatedRoute)
   {
 
@@ -51,7 +50,6 @@ export class HeaderComponent implements OnInit {
   onLogin()
   {
 
-    console.log(this.LoginComponent)
     $(".login-comp-contianer").css({"display":"block"})
     this.router.navigate(["account/login"])
 

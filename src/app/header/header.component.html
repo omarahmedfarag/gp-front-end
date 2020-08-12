@@ -53,21 +53,34 @@
                 </div>
                 <div class="col-md-9 pl-3">
                   <h4><span class="text-success">WELCOME </span>{{user.firstName}}</h4>
-                  <p>Email: <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">{{user.email}}</a></p>
-                  <a [routerLink]="['/user/user-info']" >View profile</a>
+                  <p>YOUR Email: <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">{{user.email}}</a></p>
                 </div>
               </div>
             </div>
             <hr>
             <div class="px-2">
-              <div class="dropdown-item user-item" >
+              <div class="dropdown-item user-item" [routerLink]="['/user/user-info']" >
                 <i class="far fa-id-card"></i>
                 Profile
+              </div>
+              <div class="dropdown-item user-item" [routerLink]="['/user/favorite']" >
+                <i class="far fa-id-card"></i>
+                Favorites
               </div>
               <div class="dropdown-item user-item" (click)="logOut()">
                 <i class="fas fa-power-off"></i>
                 Log out
               </div>
+            </div>
+            <div class="owner" *ngIf="user.role=='owner'">
+              <hr>
+           <div class="px-2">
+            <div class="text-warning">OWNER SECTION</div>
+            <div class="dropdown-item user-item" [routerLink]="['/user/user-info']" >
+              <i class="far fa-id-card"></i>
+              Profile
+            </div>
+           </div>
             </div>
           </div>
         </div>

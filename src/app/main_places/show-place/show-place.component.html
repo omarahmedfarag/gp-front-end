@@ -9,22 +9,32 @@
                 <hr class="bg-light">
                 
             </div>
-            <div class="place-datails mb-3 py-1 px-3 d-flex">
-                <div class="w-25 ">
-                    <div>governorate {{singlePlace.governorate}}</div>
-                <div>area {{singlePlace.governorate}}</div>
-                <div>addres {{singlePlace.governorate}}</div>
+            <div class="place-datails mb-3 py-1 px-3 d-flex ">
+                <div class="info-section">
+                    <div class="mb-2"><span class="info">governorate</span> {{singlePlace.governorate}}</div>
+                <div><span class="info">area</span> {{singlePlace.governorate}}</div>
                 </div>
-                <div class="w-25 ">
-                <div *ngIf="singlePlace.nearBy!='non'">nearby {{singlePlace.governorate}}</div>
-                <div>phone Number  {{singlePlace.governorate}}</div>
-                <div>addres {{singlePlace.governorate}}</div>
+                <div class=" info-section">
+                <div *ngIf="singlePlace.nearBy!='non'" class="mb-2"><span class="info">near by</span>{{singlePlace.nearBy}}</div>
+                <div><span class="info">phone Number</span>  {{singlePlace.phoneNumber}}</div>
+                
                 </div>
+
+                <div class=" info-section">
+                  <div *ngIf="singlePlace.nearBy!='non'" class="mb-2"><span class="info">near by</span>{{singlePlace.nearBy}}</div>
+                  <div><span class="info">phone Number</span>  {{singlePlace.phoneNumber}}</div>
+                  
+                  </div>
             </div>
             <div class="place-body">
                 <div class="images">
                     <owl-carousel-o [options]="customOptions" class="bg-danger">
-                                
+                      <ng-template carouselSlide  class="m-auto bg-danger">
+                        <div class="drop-shadow">
+                         <img [src]="singlePlace.mainImgPath" class="owl-img">
+                        </div>
+                         
+                       </ng-template> 
                         <ng-template carouselSlide *ngFor="let sub of singlePlace.imaArrary" class="m-auto bg-danger">
                           <img [src]="sub" class="">
                           
@@ -34,26 +44,29 @@
                       </owl-carousel-o>
 
                 </div>
-                <div class="empty-time text-center">
-                    <div class="empty">
+                <div class="empty-time">
+                    <div class="empty-hours">
                         
                     <owl-carousel-o [options]="customOptions2" class="bg-danger ">
-                        <ng-template carouselSlide *ngFor="let day of days,let i=index" class="m-auto bg-danger">
+                       
+                      <ng-template carouselSlide *ngFor="let day of days,let i=index" class="m-auto">
                           <div class="each-day">
                               <div class="day-header">
                                 <div class="dote" *ngIf="i==0"></div>
-                                {{day}} <span>{{todayIS+i}}/{{monthIS}}</span>
+                                {{day}} <span>{{tomorrowIS+i}}/{{monthIS}}</span>
                                 </div>
                             <div class="day-body">
-                              <div class="day-item mb-1 w-100 m-auto" *ngFor="let hour of hours , let j=index">
+                              <div class="day-item ml-3  w-100" *ngFor="let hour of hours , let j=index">
                                 <div *ngIf="j!=hours.length-1">
                                   
-                                  <div *ngIf="j%2==1" (click)="reserve(i+todayIS,j+1,day)">*{{hour}}pm:{{hours[j+1]}}:pm</div>
+                                  <div class="" *ngIf="!checkIfTimeAvailable(j+1,tomorrowIS+i)" (click)="reserve(i+tomorrowIS,j+1,day)">
+                                    <i class="far fa-clock  mr-2"></i>
+                                    {{hour}}pm:{{hours[j+1]}}:pm</div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          
+                  
                         </ng-template>  
                         
                        
@@ -61,9 +74,56 @@
                     </div>
                 </div>
             </div>
-          
+          <button class="btn btn-light ml-5 mt-2" (click)=toggleComments(true)>show comment</button>
+          <button class="btn btn-outline-danger ml-2 mt-2" *ngIf="showcomment" (click)=toggleComments(false)>hide comment</button>
            
             
+        </div>
+
+        <div class="comment-section" *ngIf="showcomment">
+
+          <div class="comment-form">
+            <mat-form-field class="example-full-width">
+              <mat-label>Leave a comment</mat-label>
+              <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field><br>
+            <button class="btn btn bg-success">submit comment </button>
+          </div>
+          <div class="comment-body">
+            <div class="each-comment ">
+                <div class="user-info">
+                  <div class="user-image mr-3"></div>
+                  <div class="user-name text-light">
+                    OMAR AHMED 
+                  </div>
+                </div>
+                <div class="comment">
+                  <i class="far fa-comments"></i>
+                  <div class="actual-comment">
+                   this place is amaging really this place is amaging really this place 
+                  </div>
+                </div>
+
+            </div>
+            <hr>
+            <div class="each-comment mb-3">
+              <div class="user-info">
+                <div class="user-image mr-3"></div>
+                <div class="user-name text-light">
+                  OMAR AHMED 
+                </div>
+              </div>
+              <div class="comment">
+                <i class="far fa-comments"></i>
+                <div class="actual-comment">
+                  oky
+                </div>
+              </div>
+
+          </div>
+          </div>
+          
+          
         </div>
         
 
@@ -75,9 +135,10 @@
       <div class="alert-box">
           <div class="text-success confirmation-text">RESERVATION BOX</div>
           <hr class="mb-3">
+          <div class="mb-2">this reservation is {{reservedDate}}</div>
           <p>The time chooesed is </p>
           <p> From {{reservedHour}}:pm  to {{reservedHour+1}}:pm</p> 
-            <p>Confirm if it's suitable with you or cancle</p>
+          <p>Confirm if it's suitable with you or cancle</p>
           <div class="mt-3">
               <button class="btn btn-outline-danger mr-3" (click)=cancle()>cancle</button>
               <button class="btn btn-success" (click)="onConfirm()">CONFIRM</button>

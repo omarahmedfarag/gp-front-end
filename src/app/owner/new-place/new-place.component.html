@@ -1,4 +1,6 @@
-<form class="myForm" [formGroup]="placeForm">
+<!-- display only if the owner has no place yet-->
+
+<form class="myForm" [formGroup]="placeForm" *ngIf="!myPlace">
   <i class="fas fa-align-right d-inline"></i>
   <span class="ml-2">You place Details</span>
   <br>
@@ -164,3 +166,91 @@
 
   </div>
 </form>
+<!-- display if the place is being review by admin -->
+<div *ngIf="myPlace" >
+  <div *ngIf="!loading && myPlace.state =='active'">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 my-place">
+          <div class="layer">
+            <div class=" text-warning mb-2"><h3>{{myPlace.name}}</h3></div>
+            <div class="place-images">
+              <div class="each-image main-image">
+                <img [src]="myPlace.mainImgPath">
+              </div>
+              <div class="each-image" *ngFor="let item of myPlace.imaArrary">
+                <img [src]="item">
+              </div>
+            </div>
+            <div class="place-info mt-4  py-2 px-3 d-flex">
+  
+             <div class="info-section">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-file-signature mr-3 text-danger"></i>
+                  <div>{{myPlace.name}}</div>
+                </div>
+  
+                <div class="d-flex align-items-center mb-2">
+                  <i class="fab fa-typo3 mr-3 text-danger"></i>
+                  <div>{{myPlace.placeType}}</div>
+                </div>
+  
+                <div class="d-flex align-items-center mb-2">
+                  <i class="fas fa-phone-volume mr-3 text-danger"></i>
+                <div>{{myPlace.phoneNumber}}</div>
+              </div>
+             </div>
+  
+             <div class="info-section">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-city mr-3 text-danger"></i>
+  
+                  <div>{{myPlace.governorate}}</div>
+                </div>
+  
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="far fa-building mr-3 text-danger"></i>
+                    <div>{{myPlace.area}}</div>
+                  </div>
+  
+  
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-road mr-3 text-danger"></i>
+                    <div>{{myPlace.streetName}}</div>
+                  </div>
+             </div>
+  
+  
+  
+  
+             <div class="info-section">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-bars mr-3 text-danger"></i>
+                  <div>{{myPlace.pricePer}}</div>
+                </div>
+  
+                <div class="d-flex align-items-center">
+                  <i class="far fa-money-bill-alt mr-3 text-danger"></i>
+                  <div>{{myPlace.price}}</div>
+                </div>
+  
+  
+  
+             </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</div>
+
+<div *ngIf="myPlace">
+  <div *ngIf="!loading && myPlace.state =='deactive'">
+    <div>
+        your request is being review by admin , as soon as its reviewd place will appear here
+    </div>
+  </div>
+</div>

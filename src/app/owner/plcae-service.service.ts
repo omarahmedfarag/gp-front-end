@@ -11,11 +11,12 @@ export class PlcaeServiceService {
 
 
 
-  postPlace(Place:any)
+  getMyPlace():Observable<any>
   { 
-    
+    return this.http.get("http://localhost:3000/api/place/user/getplace")
   }
-  getPlaces()
+  postPlce(data):Observable<any>
   {
+    return this.http.post("http://localhost:3000/api/place",data)
   }
 }

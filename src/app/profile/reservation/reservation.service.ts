@@ -20,6 +20,10 @@ export class ReservationService {
   {
     return this.http.get("http://localhost:3000/api/reservation");
   }
+  getPlaceReservation(placeID):Observable<any>
+  {
+    return this.http.get(`http://localhost:3000/api/reservation/${placeID}`)
+  }
   deleteReservation(reservationID):Observable<any>
   {
     return this.http.delete(`http://localhost:3000/api/reservation/${reservationID}`);

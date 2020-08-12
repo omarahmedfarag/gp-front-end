@@ -23,11 +23,16 @@ export class NewPlaceComponent implements OnInit {
   optinalImage:string;
   optinalImages:string[]=[null,null,null];
   showOptinalImagesRow:boolean=false;
-  allPlaces:any[];
+  myPlace:any
+  loading:boolean=true
   constructor(private http:HttpClient,private _PlcaeServiceService:PlcaeServiceService,private _PlaceService:PlaceService) { }
 
   ngOnInit() {
     this.Governorates=this._PlaceService.gocernate
+    this._PlcaeServiceService.getMyPlace().subscribe((result)=>{
+      this.myPlace=result.place
+      this.loading=false
+    })
     /*this._PlcaeServiceService
     .getPlaces().subscribe((result)=>{
       console.log("hrer")

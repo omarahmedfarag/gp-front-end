@@ -13,52 +13,73 @@ declare const $:any;
 })
 export class ShowPlaceComponent implements OnInit {
 
+  //needed array to be desplaied
   hours=['1','2','3','4','5','6','7','8','9','10','11','12']
   days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
   ];
 
-  todayIS:number
+  // to know what is current day and moth 
+  tomorrowIS:number
   monthIS:number
   
-  
+  //place details
   placeId:number;
   singlePlace:any;
   loading=true
   loggedIn:boolean=false;
 
-
-
-
-  alert:boolean=false
+  //reservation information to be submited into db
   reservedHour:any
   reservedDay:any
+  reservedDate:any
 
+  //alert box to confirm reservation 
+  alert:boolean=false
+  
+
+  //reservedTime
+
+  reservationsTime:any[]
+
+
+  //comment section 
+  showcomment:boolean=false
 
   constructor(private activeRoute:ActivatedRoute,
     private router:Router,
     private _MyPlacesService:MyPlacesService,
     private _UserAuthService:UserAuthService,
-    private _ReservationService:ReservationService) { }
+    private _ReservationService:ReservationService
+    ) { }
 
   ngOnInit() {
     
+    // data handlling 
     const n=new Date().getDay()
-    this.todayIS=new Date().getDate();
+    this.tomorrowIS=new Date().getDate()+1;
     this.monthIS=new Date().getMonth()+1;
-    const subday=[...this.days.slice(0,n)];
-    this.days.splice(0,n);
+    const subday=[...this.days.slice(0,n+1)];
+    this.days.splice(0,n+1);
     this.days=this.days.concat(subday);
+
+
+    //get place by id 
     this.activeRoute.params.subscribe((result)=>{
       this.placeId=result.id
       this._MyPlacesService.getSinglePlace(result.id).subscribe((placeResult)=>{
         this.singlePlace=placeResult.place
-        console.log(this.singlePlace)
         this.loading=false
       })
 
     })
+
+    this._ReservationService.getPlaceReservation(this.placeId).subscribe((result)=>{
+      this.reservationsTime=result.reservationTime;
+      
+    })
+
 
   }
  
@@ -67,6 +88,7 @@ export class ShowPlaceComponent implements OnInit {
 
     this.reservedHour=hour
     this.reservedDay=dayNumber;
+    this.reservedDate=`${day} : ${dayNumber}-${this.monthIS}`
     console.log("Today is "+ day +" and in number is "+dayNumber+" and time to be reserved is "+ hour);
     this.alert=true
   }
@@ -137,6 +159,23 @@ export class ShowPlaceComponent implements OnInit {
       price:this.singlePlace.price}
       this._ReservationService.reserv(this.singlePlace._id,reservationData)
 
+  }
+
+
+  checkIfTimeAvailable(hour,day)
+  {
+    
+    const check = this.reservationsTime.filter(element => {
+      return (element.startAt==hour && element.startedDay==day)
+    });
+
+    return check.length!=0 ? true :false
+   
+  }
+
+  toggleComments(value)
+  {
+    this.showcomment=value
   }
 
 

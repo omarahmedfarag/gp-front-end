@@ -5,6 +5,7 @@ import { Place } from '../place.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { PageEvent } from '@angular/material/paginator';
+import { PlaceService } from '../place/place.service';
 
 declare const $:any
 @Component({
@@ -13,6 +14,7 @@ declare const $:any
   styleUrls: ['./places.component.css']
 })
 export class PlacesComponent implements OnInit {
+  governrates:any
   placeTypes:string[]=['GYM','TENNES','FOOTBALL','BASCKETBALL','SWIMMING','STREETWORKOUT'];
   numOfPages=[10];
   length=200;
@@ -24,11 +26,17 @@ export class PlacesComponent implements OnInit {
   filter:any[]=[];
   queryParams:{};
   durationInSeconds=3;
-  constructor(private _snackBar: MatSnackBar,private _MyPlacesService:MyPlacesService,private route:Router,private activatedRoute:ActivatedRoute) {
+  constructor(private _snackBar: MatSnackBar,
+    private _MyPlacesService:MyPlacesService,
+    private _PlaceService:PlaceService,
+    private route:Router,
+    private activatedRoute:ActivatedRoute) {
   
    }
 
   ngOnInit() {
+
+    this.governrates=this._PlaceService.gocernate
    
     $("html,body").animate({
       scrollTop:0

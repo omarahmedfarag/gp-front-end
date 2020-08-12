@@ -15,6 +15,7 @@ export class ReservationComponent implements OnInit ,AfterViewInit{
     this._ReservationService.getReservations().subscribe((result)=>{
       this.reservations=result.reservation
       this.loading=false
+      /*
       if(this.reservations.length>0)
       {
         this.reservations.forEach(element => {
@@ -23,6 +24,7 @@ export class ReservationComponent implements OnInit ,AfterViewInit{
           },1000*60*2);
         });
       }
+      */ 
       console.log(this.reservations)
     })  
   }
