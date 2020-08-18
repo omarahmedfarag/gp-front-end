@@ -42,18 +42,21 @@
 {
 
     width: 45%;
-    height: 85%;
+    height: 350px;
     border-radius: 20px;
     border:  2px solid black;
     box-shadow: 0  0 5px black;
+    overflow: hidden;
+    background-color: white;
 }
-.schadual
+
+.by-month
 {
-    text-align: center;
-    color: white;
-    text-shadow: 0 0 20px white;
-    font-size: 30px;
+    height: 100%;
+    padding: 30px 25px ;
+    color: black !important;
 }
+
 .welcome-at
 {
     color: green;
@@ -73,7 +76,8 @@
     height: 290px;
     width: 90%;
     border-radius: 10px;
-    background-color: honeydew;
+    background-color: black;
+    color: white !important;
     overflow: hidden;
     margin: auto;
 }
@@ -82,7 +86,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(252, 248, 16);
+    background-color: rgb(58, 172, 30);
     flex-direction: column;
     height: 15%;
     color: white;
@@ -108,12 +112,14 @@
     transform: scale(0.9);
     cursor: pointer;
     color: brown;
+    background-color: white;
+    border-radius: 10px;
 }
 .day-body
 {
 
     height: 85%;
-    color: black;
+    color: white;
 }
 
 .place-datails
@@ -240,12 +246,19 @@
 .alert-box
 {
     width: 40%;
-    height: 45%;
+    height: 50%;
     background-color: white;
     border-radius: 25px;
     padding: 10px 15px;
-    
+    position: relative;
 
+}
+.alert-box i
+{
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    transform: scale(1.5);
 }
 .confirmation-text
 {

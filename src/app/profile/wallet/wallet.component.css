@@ -1,0 +1,73 @@
+.wallet
+{
+    font-size: 30px;
+}
+.withdraw
+{
+    font-size: 20px;
+    color: white;
+}
+
+
+/*alert */
+
+
+.alert-confirm
+{
+    position: fixed;
+    background-color: rgba(0,0,0,0.6);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.alert-box
+{
+    width: 40%;
+    height: 45%;
+    border-radius: 25px;
+    padding: 10px 15px;
+    background-image: url("../../../assets/imgs/go-glocal_Fawry_en.png"); 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;   
+    position: relative;
+}
+.alert-box-cancle
+{
+    width: 40%;
+    height: 50%;
+    border-radius: 25px;
+    padding: 10px 15px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;   
+    position: relative;   
+}
+.alert-confirm i
+{
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    transform: scale(1.5);
+    color: white;
+    cursor: pointer;
+}
+.confirmation-text
+{
+
+    color: white;
+    height: 20%;
+}
+.payment-code
+{
+    font-family: 'Sriracha', cursive;
+    font-size: 30px;
+}

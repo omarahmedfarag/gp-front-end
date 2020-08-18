@@ -102,8 +102,13 @@ img
 
 
 
-
-
+.filter
+{
+  position: fixed;
+  top: 70px;
+  right: 105px;
+  width: 285px;
+}
 
 
 
@@ -148,7 +153,20 @@ img
   display: flex;
   padding: 0 ;
   box-shadow: 0 0 8px black;
-
+  position: relative;
+}
+.fav-icon
+{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.fav-icon img
+{
+  width: 100% !important;
+  height: 100% !important;
 }
 .place .place-img
 {
@@ -216,11 +234,51 @@ img
 /* On screens that are 600px or less, set the background color to olive */
 @media screen and (max-width: 600px) {
   .filter {
-    position: inherit;
+   display: none;
   }
   .place-btns
   {
     padding: 2px;
   }
+  .place{
+    font-size: 12px;
+  }
  
 }
+
+
+
+
+/* alert box */
+.alert-confirm
+{
+    position: fixed;
+    background-color: rgba(0,0,0,0.6);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.alert-box
+{
+    width: 40%;
+    height: 45%;
+    background-color: white;
+    border-radius: 25px;
+    padding: 10px 15px;
+    
+
+}
+.confirmation-text
+{
+
+    font-family: 'Sriracha', cursive;
+    font-size: 30px;
+}
+

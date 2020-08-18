@@ -24,6 +24,7 @@ export class RequestComponent implements OnInit {
 
   user:any
   myRequest:any=false
+
   constructor(
     private _formBuilder: FormBuilder,
     private _PlaceService:PlaceService,
@@ -56,8 +57,7 @@ export class RequestComponent implements OnInit {
 
     this._AppliedRequestService.getMyRequest().subscribe((result)=>{
       this.myRequest=result.request.length == 0 ? false :result.request 
-      console.log("wow")
-      console.log(this.myRequest)
+      
     },err=>{
       console.log(err)
     })
@@ -90,6 +90,7 @@ export class RequestComponent implements OnInit {
     console.log(formData.get("documentPhoto"))
     
     this._AppliedRequestService.postRequest(formData).subscribe((result)=>{
+      this.myRequest=true
       console.log(result)
     },err=>{
       console.log(err);

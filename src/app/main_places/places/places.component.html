@@ -49,19 +49,25 @@
 
             <div class="search d-flex justify-content-center mb-3" id="search-div">
           
-                <select class=" w-50 input-hieght"  #type >
+                <select class=" w-25 input-hieght"  #type  >
                     <option value="0" selected disabled>Select type of sports</option>
                     <option [value]="type" *ngFor="let type of placeTypes">{{type}}</option>
                     
                 </select>
           
-                <select class=" w-50 input-hieght"  #location>
+                <select class=" w-50 input-hieght"  #location (change)="onCitySelected(location.value)" >
                     <option value="0" selected disabled>Location</option>
                     <option [value]="governrate.code" *ngFor="let governrate of governrates">{{governrate.value}}</option>
                    
                 </select>
+
+                <select class=" w-25 input-hieght"  #area>
+                  <option value="0" selected disabled>Location</option>
+                  <option [value]="area.code" *ngFor="let area of areas">{{area.value}}</option>
+                 
+              </select>
                 
-                <button class="btn btn-search w-25 input-hieght" (click)="onSearch(type,location)">Search</button>
+                <button class="btn btn-search w-25 input-hieght" (click)="onSearch(type,location,area)">Search</button>
                 
               </div>
 
@@ -99,6 +105,13 @@
           <div class="col-md-9" *ngIf="!isLodaing">
             <div class="row">
                     <div class="col-md-12 mb-4 place" *ngFor="let place of allPlaces">
+
+                       <div class=""  *ngIf="user">
+                        <div class="fav-icon" *ngIf="checkIfVaforite(place._id)">
+                          <img src="../../../assets/imgs/favorites.png" > 
+                        </div>
+                        
+                       </div>
                         <div class="place-img">
                           <div class="place-image-slider">
                            
@@ -132,9 +145,17 @@
                           <p class="text-warning">note : after reserving the place you will see the all details</p>
                           <hr>
                           <p>Here is some description about the place and you can see more information once you complet your reservation ...</p>
-                          <button class="btn btn-outline-light mr-3 place-btns" (click)=showPlace(place._id)>Rever Now </button>
-                          <button class="btn btn-light place-btns" (click)="openSnackBar(place.name,'added to faVorite',place._id)">add to favorite </button>
-                              
+                          <div *ngIf="user">
+                            <div *ngIf="place.owner!=user._id">
+                              <button class="btn btn-outline-light mr-3 place-btns" (click)=showPlace(place._id)>Reserve Now </button>
+                              <button class="btn btn-light place-btns" (click)="openSnackBar(place.name,'added to faVorite',place._id)">add to favorite </button>  
+                            </div> 
+                            <div *ngIf="place.owner==user._id">
+                              <button class="btn btn-dark" [routerLink]="['/user/add-place']" routerLinkActive="router-link-active" >
+                                show my place 
+                              </button>
+                            </div> 
+                          </div>
                                 
 
                         </div>
@@ -183,8 +204,8 @@
                       </mat-expansion-panel-header>
                       <mat-panel-description>
                         <mat-radio-group aria-label="Select an option">
-                          <mat-radio-button value="5" name="price" (click)="filterByQuery('sort','price')">cheap </mat-radio-button><br>
-                          <mat-radio-button value="6" name="price" checked (click)="filterByQuery('sort','-price')">expensive</mat-radio-button>
+                          <mat-radio-button value="5" name="price" (click)="filterByQuery('price','price')">low price  </mat-radio-button><br>
+                          <mat-radio-button value="6" name="price" checked (click)="filterByQuery('price','-price')">hiegh price </mat-radio-button>
                           
                         </mat-radio-group>
                       </mat-panel-description>
@@ -213,8 +234,27 @@
           </div>
            
         </div>
+
     </div>
 
     
 </div>
 
+
+
+<!-- alert box to check if user logged in or not -->
+<div class="alert-confirm " *ngIf="alert">
+  <div class="alert-box">
+      <div class="text-success confirmation-text">RESERVATION BOX</div>
+      <hr class="mb-3">
+      <div class="mb-2">YOU NEED TO LOGIN FIRST SO THAT YOU CAN
+        SHOW THE PLACE SCHADLAU AND RESERVE 
+      </div>
+      
+      <div class="mt-3">
+         
+          <button class="btn btn-warning text-light" (click)="routeToLogin()">LOGIN</button>
+
+      </div>
+  </div>
+</div>

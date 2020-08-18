@@ -50,7 +50,22 @@
         By confirming this request user Will be owner 
         and can add place 
         <div class="mt-3">
-            <button class="btn btn-outline-danger mr-3" (click)=cancle()>cancle</button>
+            <button class="btn btn-outline-danger mr-3" (click)="cancle('alert')">cancle</button>
+            <button class="btn btn-success" (click)="onConfirm()">CONFIRM</button>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="alert-confirm "*ngIf="alertReject">
+    <div class="alert-box">
+        <div class="text-danger confirmation-text">Rejection</div>
+        <hr class="mb-3">
+        By rejecting  this request user should submit new one  
+       
+        <div class="mt-3">
+            <button class="btn btn-outline-danger mr-3" (click)="cancle('alertReject')">cancle</button>
             <button class="btn btn-success" (click)="onConfirm()">CONFIRM</button>
 
         </div>

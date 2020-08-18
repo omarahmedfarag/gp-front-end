@@ -19,4 +19,12 @@ export class PlcaeServiceService {
   {
     return this.http.post("http://localhost:3000/api/place",data)
   }
+  updatePlace(placeId,data):Observable<any>
+  {
+   
+    console.log("before update")
+    console.log(data)
+    return this.http.patch(`http://localhost:3000/api/place/${placeId}`,data)
+  }
+  
 }

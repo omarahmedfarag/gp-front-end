@@ -14,7 +14,7 @@ export class PlaceComponent implements OnInit {
   gocernates:any
   areas:any
   placeTypes:any
-  gender=['male','femal','ALL']
+  gender=['male','female','ALL']
   selectedtype:string="";
   selectedcity:string="";
   selectedarea:string="";
@@ -30,7 +30,7 @@ export class PlaceComponent implements OnInit {
     this.gocernates= this._PlaceService.gocernate;
     
     this.placeTypes=this._PlaceService.placeTypes;
-    console.log(this.gocernates)
+    
     $(".fa-star").click(function()
     {
      
@@ -47,11 +47,11 @@ export class PlaceComponent implements OnInit {
 
   onSearch()
   {
-    this.Route.navigate(["/places"])
 
     const searchQuery=
     {placeType:this.selectedtype==""?null:this.selectedtype,
-     governorate:this.selectedcity=='' || this.selectedcity== "ALL" ?null:this.selectedcity
+     governorate:this.selectedcity=='' || this.selectedcity== "ALL" ?null:this.selectedcity,
+     gender:this.selectedgander==""?null:this.selectedgander,
   }
     // in the query params --placeType:type.value!='0'?type.value:null-- to see wether the argument has value or not if not set it to null 
     this.Route.navigate(["places"],{queryParams:searchQuery ,queryParamsHandling:"merge"});

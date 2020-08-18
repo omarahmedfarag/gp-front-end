@@ -4,6 +4,7 @@ import { mimeType } from './mime-type-validator';
 import {HttpClient} from "@angular/common/http"
 import { PlcaeServiceService } from '../plcae-service.service';
 import { PlaceService } from 'src/app/main_places/place/place.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 declare const $:any;
 @Component({
@@ -15,8 +16,11 @@ export class NewPlaceComponent implements OnInit {
   Governorates:any
   areas:any
   placeTypes:string[]=['GYM','TENNES','FOOTBALL','BASCKETBALL','SWIMMING','STREETWORKOUT'];
+  gender=["male","female","ALL"]
+  pricePerArr:string[]=["hour","month"]
 
-  pricePerArr:string[]=["hour",'lesson','day',"week","month"]
+  //mode
+  mode:string=""
 
   placeForm:FormGroup;
   mainImage:string;
@@ -25,13 +29,29 @@ export class NewPlaceComponent implements OnInit {
   showOptinalImagesRow:boolean=false;
   myPlace:any
   loading:boolean=true
-  constructor(private http:HttpClient,private _PlcaeServiceService:PlcaeServiceService,private _PlaceService:PlaceService) { }
+  constructor(
+    private http:HttpClient,
+    private _PlcaeServiceService:PlcaeServiceService,
+    private _PlaceService:PlaceService,
+    private router:Router,
+    private _ActivatedRoute:ActivatedRoute) { }
 
   ngOnInit() {
     this.Governorates=this._PlaceService.gocernate
     this._PlcaeServiceService.getMyPlace().subscribe((result)=>{
       this.myPlace=result.place
       this.loading=false
+      this._ActivatedRoute.queryParams.subscribe((params)=>{
+        if(params["mode"])
+        {
+          this.mode="update"
+          this.loadDate()
+        }
+        else
+        {
+          this.mode=null;
+        }
+      })
     })
     /*this._PlcaeServiceService
     .getPlaces().subscribe((result)=>{
@@ -57,9 +77,14 @@ export class NewPlaceComponent implements OnInit {
         new FormControl(null,{validators:[Validators.required]})
       ]),
       'pricePer':new FormControl(null,{validators:[Validators.required]}),
+      'gender':new FormControl(null,{validators:[Validators.required]}),
       'price':new FormControl(null,{validators:[Validators.required]})
     })
     
+
+    //get the query params to check the mode 
+  
+
   }
 
   get optimages(): FormArray {
@@ -113,12 +138,47 @@ export class NewPlaceComponent implements OnInit {
  
   onSubmitForm()
   {
-    /*if(!this.placeForm.valid)
+    /*
+    if(!this.placeForm.valid)
     {
-      console.log("invalid form ");
+     
       return;
-    }*/
-   const formPlace=new FormData();
+    }
+    
+    */
+  
+  
+   if(this.mode=='update')
+   {
+    this.loading=true
+    const data=
+    {
+      name:this.placeForm.get("placeName").value,
+      placeType:this.placeForm.get("placeType").value,
+      phoneNumber:this.placeForm.get("PhoneNumber").value,
+      governorate:this.placeForm.get("governrate").value,
+      area:this.placeForm.get("area").value,
+      streetName:this.placeForm.get("streetName").value,
+      nearBy:this.placeForm.get("nearBy").value,
+      mainImgPath:this.placeForm.get("mainImage").value,
+      imaArrary:[this.placeForm.get("optimages").value[0],this.placeForm.get("optimages").value[1],this.placeForm.get("optimages").value[2]],
+      pricePer:this.placeForm.get("pricePer").value,
+      price:this.placeForm.get("price").value,
+      gender:this.placeForm.get("gender").value,
+      owner:this.myPlace.owner
+    }
+     this._PlcaeServiceService.updatePlace(this.myPlace._id,data).subscribe((result)=>{
+      console.log(result)
+      this.loading=true
+      this.router.navigate(['user/add-place'])
+    },(err)=>{
+       console.log(err);
+     }) 
+
+   }
+   else
+   {
+       const formPlace=new FormData();
    formPlace.append("name",this.placeForm.get("placeName").value);
    formPlace.append("placeType",this.placeForm.get("placeType").value);
    formPlace.append("phoneNumber",this.placeForm.get("PhoneNumber").value);
@@ -134,16 +194,18 @@ export class NewPlaceComponent implements OnInit {
 
    formPlace.append("pricePer",this.placeForm.get("pricePer").value);
    formPlace.append("price",this.placeForm.get("price").value);
-    console.log(formPlace)
+   formPlace.append("gender",this.placeForm.get("gender").value);
+     this._PlcaeServiceService.postPlce(formPlace).subscribe((result)=>{
+       this.loading=true
+     },(err)=>{
+       console.log(err);
+     }) 
+
+   }
     
-    this.http.post("http://localhost:3000/api/place",formPlace).subscribe((result)=>{
-      console.log(result)
-    },(err)=>{
-      console.log(err);
-    }) 
-    console.log("here")
-    console.log(formPlace.getAll("imaArrary"))
+     
    
+
     
   }
   removeImage(toBeRemoved:string)
@@ -171,6 +233,41 @@ export class NewPlaceComponent implements OnInit {
     this.showOptinalImagesRow=true;
     $('html,body').scrollTop($(".optinal-images").offset().top)
     console.log(this.placeForm.valid) 
+  }
+
+  
+
+  onUpdate()
+  {
+    this.router.navigate(['user/add-place'],{queryParams:{mode:"update"}})
+   this.loadDate()
+  }
+  loadDate()
+  {
+    this.placeForm.patchValue({placeName:this.myPlace.name})
+    this.placeForm.patchValue({placeType:this.myPlace.placeType})
+    this.placeForm.patchValue({PhoneNumber:this.myPlace.phoneNumber})
+    this.placeForm.patchValue({governrate:this.myPlace.governorate})
+    this.onCitySelected() // to fill the area array depinding on the selected governrate then path tha value  
+    this.placeForm.patchValue({area:this.myPlace.area})
+
+   
+    this.placeForm.patchValue({streetName:this.myPlace.streetName})
+    this.placeForm.patchValue({nearBy:this.myPlace.nearBy})
+    this.placeForm.patchValue({mainImage:this.myPlace.mainImgPath})
+    this.placeForm.patchValue({pricePer:this.myPlace.pricePer})
+    this.placeForm.patchValue({gender:this.myPlace.gender})
+    this.placeForm.patchValue({price:this.myPlace.price})
+    this.placeForm.patchValue({optimages:this.myPlace.imaArrary})
+    //patch Photo 
+    this.mainImage=this.myPlace.mainImgPath;
+    this.optinalImages=[];
+    this.myPlace.imaArrary.forEach(element => {
+      console.log(element)
+      this.optinalImages.push(element)
+    });
+  
+    
   }
 
   onCitySelected()

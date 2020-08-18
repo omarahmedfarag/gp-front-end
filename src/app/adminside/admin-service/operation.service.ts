@@ -39,6 +39,11 @@ export class OperationService {
     this.http.delete(`http://localhost:3000/api/request/${requestId}`).subscribe(()=>{
     })
   }
+  rejectRequest(requestId)
+  {
+    this.http.patch(`http://localhost:3000/api/request/rejectowner/${requestId}`,"").subscribe(()=>{
+    })
+  }
 
   //***************************    Place request section   ***************************/
 
@@ -50,5 +55,8 @@ export class OperationService {
   {
     return this.http.patch(`http://localhost:3000/api/place/${placeId}`,"")
   }
-
+  deletePlaceRquest(placeId):Observable<any>
+  {
+    return this.http.delete(`http://localhost:3000/api/place/${placeId}`)
+  }
 }

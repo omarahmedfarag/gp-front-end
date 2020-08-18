@@ -18,6 +18,10 @@ import { OwnerRequestsComponent } from './adminside/admin/owner-requests/owner-r
 import { ShowrequestComponent } from './adminside/admin/owner-requests/showrequest/showrequest.component';
 import { PlacerequestComponent } from './adminside/admin/placerequest/placerequest.component';
 import { ReservationComponent } from './profile/reservation/reservation.component';
+import { AdminLoginComponent } from './adminside/admin-login/admin-login.component';
+import { FawreyComponent } from './fawrey/fawrey.component';
+import { EventComponent } from './event/event/event.component';
+import { WalletComponent } from './profile/wallet/wallet.component';
 
 
 const routes: Routes = [
@@ -40,22 +44,31 @@ const routes: Routes = [
  }
  ,
  {
+   path:"events",
+   component:EventComponent
+ },
+ {
    path:"reserv/:id",
-   component:ShowPlaceComponent
+   component:ShowPlaceComponent,
+   canActivate:[AuthGuard]
+
  }
  ,
  {
    path:"owner/newplace",
-   component:NewPlaceComponent
+   component:NewPlaceComponent,
+   canActivate:[AuthGuard]
  }
  ,
  {
   path:"user",
   component:ProfileComponent,
+  canActivate:[AuthGuard],
   children:[
     {
       path:"add-place",
-      component:NewPlaceComponent
+      component:NewPlaceComponent,
+      
     },
     {
       path:"user-info",
@@ -81,7 +94,24 @@ const routes: Routes = [
       path:"request-to-be-owner",
       component:RequestComponent
     }
+    ,
+    {
+      path:"wallet",
+      component:WalletComponent
+    }
+    
   ]
+}
+,
+
+{
+  path:"fawrey",
+  component:FawreyComponent
+}
+,
+{
+  path:"account/admin/login",
+  component:AdminLoginComponent,
 }
 ,
 {
@@ -123,7 +153,6 @@ const routes: Routes = [
 {
   path:"account/signup",
   component:SignupComponent
-  
   
 }
  

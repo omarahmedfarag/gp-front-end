@@ -1,43 +1,145 @@
-<div class="main">
-    <div class="top-header">
-        <div class="logo text-success">
-            SPORTIVO
+<div class="cpanal  " id="dark-mode">
+    <!-- fixed ions on the left -->
+    <div class="setting">
+        <div class="color" id="toogle-dark-mode">
+            <div class="w-50 d-flex justify-content-center align-items-center">
+                <mat-slide-toggle></mat-slide-toggle>
+            </div>
+            <div class="w-50 d-flex justify-content-center align-items-center">
+                <i class="fas fa-adjust"></i>
+            </div>
+        </div>
+        <div class="color" id="container-scale">
+            <div class="w-50 d-flex justify-content-center align-items-center">
+                <mat-slide-toggle></mat-slide-toggle>
+            </div>
+            <div class="w-50 d-flex justify-content-center align-items-center">
+                <i class="fas fa-desktop"></i>
+            </div>
+            
+        </div>
+        <div class="color">
+
         </div>
     </div>
-    <div class="home d-flex justify-content-center align-content-center">
-        <div class="left">
-            <div class="admin-image">
-                <i class="fas fa-user-circle"></i>  
-                <div class="admin-name"><span>admin : OMAR</span> </div>
+
+    <div class="cust-container" id='toogle-conatainer'>
+        <div class="left left-collabse">
+            <div class="left-header">
+                <div class="admin-info">
+                    <div class="admin-img">
+                        <img src="../../../assets/imgs/chat/beautiful_girls_make_the_world_go_around_640_high_38.jpg" alt="">
+                    </div>
+                    <div class="admin-name"></div>
+                </div>
+                <div class="menu-icon">
+                    <i class="fas fa-ellipsis-v toggle-icon"></i>
+                    <i class="fas fa-bars toggle-icon"></i>
+
+                </div>
             </div>
-            <hr>
-    
-            <div class="list"   >
-                <div class="list-item" [routerLink]="['home']" routerLinkActive="active">
-                    <i class="fas fa-home mr-3"></i>
-                    HOME
+            <div class="left-menu">
+                <!-- main router home / about ... so on -->
+                <div class="routers">
+                    <div class="menu-item">
+                        <div class="menu-item-icon"><i class="fas fa-home"></i></div>
+                        <div class="menu-item-route">home</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-icon"><i class="fas fa-chart-bar"></i></div>
+                        <div class="menu-item-route">analytics</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-icon"><i class="fas fa-home"></i></div>
+                        <div class="menu-item-route">contact</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-icon"><i class="fas fa-chart-bar"></i></div>
+                        <div class="menu-item-route">about</div>
+                    </div>
+                    <hr>
+                    <div class="menu-item">
+                        <div class="menu-item-icon"><i class="fas fa-home"></i></div>
+                        <div class="menu-item-route">contact</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-icon"><i class="fas fa-chart-bar"></i></div>
+                        <div class="menu-item-route">about</div>
+                    </div>
+                    <hr>
+                    <div class="menu-item">
+                        <div class="menu-item-icon"><i class="fas fa-video"></i></div>
+                        <div class="menu-item-route">video confirance</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-icon"><i class="fas fa-comments"></i></div>
+                        <div class="menu-item-route">comments</div>
+                    </div>
+                    <hr class="mb-0">
                 </div>
-
-                <div class="list-item" [routerLink]="['owner-requests']" routerLinkActive="active" >
-                    <i class="fas fa-book-reader mr-3"></i>
-                    OWNER REQUESTSS
+                <!-- div chat rooms -->
+               <div class="admin-div">
+                <div class="admin-chat-badge w-50 text-light bg-danger m-auto text-center">
+                    <div class="chat-badge">admin chat</div>
                 </div>
-
-
-                <div class="list-item" [routerLink]="['place-requests']" routerLinkActive="active">
-                    <i class="fas fa-running mr-3"></i>
-                    PLACES REQUESTS 
+                <div class="admin-chat ">
+                    <div class="each-admin">
+                        <div class="admin-img">
+                            <img src="../../../assets/imgs/chat/beautiful_girls_make_the_world_go_around_640_high_38.jpg" alt="">
+                        </div>
+                        <div class="admin-chat-info">
+                            <div class="admin-name ml-2">omar ahmed </div>
+                             <div class="admin-state"></div>
+                        </div>
+                        
+                    </div>
+                    <hr>
+                    <div class="each-admin">
+                        <div class="admin-img">
+                            <img src="../../../assets/imgs/chat/beautiful_girls_make_the_world_go_around_640_high_38.jpg" alt="">
+                        </div>
+                        <div class="admin-chat-info">
+                            <div class="admin-name ml-2">omar ahmed </div>
+                             <div class="admin-state"></div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="each-admin">
+                        <div class="admin-img">
+                            <img src="../../../assets/imgs/chat/beautiful_girls_make_the_world_go_around_640_high_38.jpg" alt="">
+                        </div>
+                        <div class="admin-chat-info">
+                            <div class="admin-name ml-2">omar ahmed </div>
+                             <div class="admin-state"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="list-item">UPDAED PLACE REQUESTS </div>
-                <div class="list-item">FIND USER BY EMAIL</div>
-                <div class="list-item">FIND PLACE </div>
+               </div>
+                
             </div>
         </div>
         <div class="right">
-           <router-outlet></router-outlet>
+            <div class="header">
+                <div class="header-search">
+                    <input type="text">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="header-icon">
+                   <span class="logo">SPORTIVO SETTINGS</span>
+                   <div class="icons">
+                    <div class="icon">
+                        <i class="far fa-bell"></i>
+                        <div class="count">5</div>
+                    </div>
+                    <div class="icon"><i class="far fa-envelope"></i></div>
+                    <div class="icon"><i class="fab fa-cc-paypal"></i></div>
+                   </div>
+                </div>
+            </div>
+            <div class="right-body px-2">
+                <app-owner-requests></app-owner-requests>
+            </div>
         </div>
-
     </div>
-    
 
 </div>

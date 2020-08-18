@@ -11,18 +11,16 @@
               <a class="nav-link" [routerLink]="['/Home']" routerLinkActive="active" >Home </a>
         </li>
   
-        <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/Home1']" routerLinkActive="active" >Events </a>
-        </li>
+        
   
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/places']" routerLinkActive="active" >Discover</a>
+          <a class="nav-link" [routerLink]="['/places']"  [queryParams]="{ page: '1'}" routerLinkActive="active" >Discover</a>
         </li>
   
       
   
           <li class="nav-item">
-              <a class="nav-link" [routerLink]="['user/favorite']" routerLinkActive="active" >Favorits</a>
+              <a class="nav-link" [routerLink]="['/user/favorite']" routerLinkActive="active" >Favorits</a>
           </li>
 
           
@@ -53,7 +51,7 @@
                 </div>
                 <div class="col-md-9 pl-3">
                   <h4><span class="text-success">WELCOME </span>{{user.firstName}}</h4>
-                  <p>YOUR Email: <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">{{user.email}}</a></p>
+                  <p>YOUR Email:>{{user.email}}</p>
                 </div>
               </div>
             </div>
@@ -76,9 +74,9 @@
               <hr>
            <div class="px-2">
             <div class="text-warning">OWNER SECTION</div>
-            <div class="dropdown-item user-item" [routerLink]="['/user/user-info']" >
+            <div class="dropdown-item user-item" [routerLink]="['/user/add-place']" >
               <i class="far fa-id-card"></i>
-              Profile
+              My place
             </div>
            </div>
             </div>

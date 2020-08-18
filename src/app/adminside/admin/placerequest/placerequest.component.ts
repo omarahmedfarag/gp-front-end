@@ -46,5 +46,15 @@ export class PlacerequestComponent implements OnInit {
     
     
   }
+  deletePlaceRequest(id)
+  {
+    this._OperationService.deletePlaceRquest(id).subscribe(()=>{
+      this.loading=true
+      this._OperationService.getPlaceRequests().subscribe((result)=>{
+        this.places=result.places
+        this.loading=false
+      })
+    })
+  }
 
 }

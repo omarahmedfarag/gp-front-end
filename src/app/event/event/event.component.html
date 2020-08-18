@@ -1,1 +1,84 @@
-<p>event works!</p>
+<app-header></app-header>
+<div class="main ">
+    
+   <div class="filter pl-3">
+    <mat-form-field appearance="fill">
+        <mat-label>Favorite food</mat-label>
+        <mat-select #type>
+          <mat-option *ngFor="let placeType of placeTypes" [value]="placeType">
+            {{placeType}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="m-auto d-inline-block text-light" *ngIf="type.value">
+        SECELTED Event type IS <span>{{type.value}}</span>
+      </div>
+   </div>
+    <div class="free-events mt-3">
+        <div class="container">
+           <div class="row  mb-3">
+            <div class="col-md-6">
+                <div class="each-event">
+                    <div class="free-desc">
+                        here is some desc to describe the all thing in the place 
+                        the event will start at 25-9 ends in 5-10
+                        you can reserve your ticket now 
+                        to get the most out of this event you need to bring up notes and pin
+                        <div>
+                            <button class="btn btn-success mt-3 apply-btn"> Apply now </button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="each-event">
+                    <div class="free-desc">
+                        here is some desc to describe the all thing in the place 
+                        here is some desc to describe the all thing in the place 
+                        here is some desc to describe the all thing in the place 
+                        here is some desc to describe the all thing in the place 
+                        <div>
+                            <button class="btn btn-success mt-3"> Apply now </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           </div>
+           <div class="row  mb-3">
+            <div class="col-md-6">
+                <div class="each-event">
+                    <div class="free-desc">
+                        here is some desc to describe the all thing in the place 
+                        the event will start at 25-9 ends in 5-10
+                        you can reserve your ticket now 
+                        to get the most out of this event you need to bring up notes and pin
+                        <div>
+                            <button class="btn btn-success mt-3 apply-btn"> Apply now </button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="each-event">
+                    <div class="free-desc">
+                        here is some desc to describe the all thing in the place 
+                        here is some desc to describe the all thing in the place 
+                        here is some desc to describe the all thing in the place 
+                        here is some desc to describe the all thing in the place 
+                        <div>
+                            <button class="btn btn-success mt-3"> Apply now </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="footer">
+    
+</div>

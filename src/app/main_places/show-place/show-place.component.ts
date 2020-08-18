@@ -6,6 +6,7 @@ import { Place } from '../place.model';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ReservationService } from 'src/app/profile/reservation/reservation.service';
 import { CommentsService } from './comments.service';
+import { MoneyService } from 'src/app/profile/wallet/money.service';
 declare const $:any;
 @Component({
   selector: 'app-show-place',
@@ -17,6 +18,7 @@ export class ShowPlaceComponent implements OnInit {
   //needed array to be desplaied
   hours=['1','2','3','4','5','6','7','8','9','10','11','12']
   days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  daysNumber=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
   monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
   ];
@@ -29,19 +31,21 @@ export class ShowPlaceComponent implements OnInit {
   placeId:number;
   singlePlace:any;
   loading=true
-  loggedIn:boolean=false;
+  user:any
 
-  //reservation information to be submited into db
+  //reservation hours information to be submited into db
   reservedHour:any
   reservedDay:any
   reservedDate:any
+
+  //resertion by month
+  reservedMonth
 
   //alert box to confirm reservation 
   alert:boolean=false
   
 
   //reservedTime
-
   reservationsTime:any[]
 
 
@@ -49,17 +53,24 @@ export class ShowPlaceComponent implements OnInit {
   showcomment:boolean=false
   commnet:String;
   comments:any
+
+
+  //wallet
+
+  wallet:any
+  
   constructor(private activeRoute:ActivatedRoute,
     private router:Router,
     private _MyPlacesService:MyPlacesService,
     private _UserAuthService:UserAuthService,
     private _ReservationService:ReservationService,
-    private _CommentsService:CommentsService
+    private _CommentsService:CommentsService,
+    private _MoneyService:MoneyService
     ) { }
 
   ngOnInit() {
     
-    // data handlling 
+    // date handlling 
     const n=new Date().getDay()
     this.tomorrowIS=new Date().getDate()+1;
     this.monthIS=new Date().getMonth()+1;
@@ -88,6 +99,18 @@ export class ShowPlaceComponent implements OnInit {
     // get all comment for the current place 
     this._CommentsService.getComments(this.placeId).subscribe((data)=>{
       this.comments=data.data
+    })
+
+
+    //get wallet to check if user has enough money 
+    this._MoneyService.getMyMony().subscribe((result)=>{
+      this.wallet=result.wallet
+    })
+
+
+    // get user 
+    this._UserAuthService.loggedIn.subscribe((user)=>{
+      this.user=user
     })
 
 
@@ -170,10 +193,49 @@ export class ShowPlaceComponent implements OnInit {
       this._ReservationService.reserv(this.singlePlace._id,reservationData)
 
   }
+  onConfirmWallet()
+  {
+    this._MoneyService.withDraw(this.user._id,this.singlePlace.price).subscribe((result)=>{
+      const reservationData={
+        startAt:this.reservedHour,
+        startedDay:this.reservedDay,
+        endAt:this.reservedHour+1,
+        pricePer:this.singlePlace.pricePer,
+        price:this.singlePlace.price,
+        state:"confirmed"
+      }
+
+        this._ReservationService.reserv(this.singlePlace._id,reservationData)
+  
+    })
+  }
+
+  selectMonthPlace(day,month)
+  {
+    this.reservedDay=day;
+    this.reservedMonth=month
+    this.alert=true
+  }
+
+  onConfirmedMonth()
+  {
+
+    
+    const reservationData={
+      startAt:+this.reservedMonth,
+      startedDay:+this.reservedDay,
+      endAt:+this.reservedDay,
+      pricePer:this.singlePlace.pricePer,
+      price:this.singlePlace.price}
+      console.log(reservationData)
+      this._ReservationService.reserv(this.singlePlace._id,reservationData)
+    
+  }
 
 
   checkIfTimeAvailable(hour,day)
   {
+    
     
     const check = this.reservationsTime.filter(element => {
       return (element.startAt==hour && element.startedDay==day)
@@ -194,7 +256,6 @@ export class ShowPlaceComponent implements OnInit {
     {
       return
     }
-    alert(this.commnet)
     this._CommentsService.postComment(this.placeId,this.commnet).subscribe((result)=>{
       this.comments.unshift(result.review)
     },err=>{
@@ -202,6 +263,18 @@ export class ShowPlaceComponent implements OnInit {
     })
 
   }
+  checkIfTimeAvailableAndConfirmed(hour,day)
+  {
+    
+    
+    const check = this.reservationsTime.filter(element => {
+      return ( (element.startAt==hour) && (element.startedDay==day) && (element.state=="wait"))
+    });
+
+    return check.length!=0 ? true :false
+  
+  }
+ 
 
   
 }

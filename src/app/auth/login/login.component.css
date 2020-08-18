@@ -45,7 +45,23 @@
     width: 50%;
     height: 100%;
     background-color: rgb(63, 156, 93);
-    
+    position: relative;
+  }
+  .back-home
+  {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    cursor: pointer;
+  }
+  .back-home h4
+  {
+    transition: 0.3s;
+  }
+  .back-home:hover h4
+  {
+    transform: scale(1.1);
   }
   .login-btn
   {
@@ -92,6 +108,7 @@
     right: 0;
     background-color: rgba(0,0,0,0.2);
   }
+ 
  
 
  /* resposive */
@@ -166,3 +183,5 @@
     box-shadow: 0 2.5em 0 0;
   }
 }
+
+

@@ -6,6 +6,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { PageEvent } from '@angular/material/paginator';
 import { PlaceService } from '../place/place.service';
+import { UserAuthService } from 'src/app/auth/user-auth.service';
 
 declare const $:any
 @Component({
@@ -15,22 +16,40 @@ declare const $:any
 })
 export class PlacesComponent implements OnInit {
   governrates:any
+  areas:any
   placeTypes:string[]=['GYM','TENNES','FOOTBALL','BASCKETBALL','SWIMMING','STREETWORKOUT'];
+ 
+  //pagination pramenters
   numOfPages=[10];
   length=200;
   pageSize=2;
-  seletedPrice=1000;
+  
   isLodaing:boolean=true;
+
   allPlaces:Place[];
+
+  //get the user 
+  user:any
+
+
+  //alert to show alertBox 
+  alert:boolean=false;
+
+  //
   toogle:boolean=true;
   filter:any[]=[];
   queryParams:{};
   durationInSeconds=3;
+
+  favoritePlaces:any
+
   constructor(private _snackBar: MatSnackBar,
     private _MyPlacesService:MyPlacesService,
     private _PlaceService:PlaceService,
     private route:Router,
-    private activatedRoute:ActivatedRoute) {
+    private activatedRoute:ActivatedRoute,
+    private _UserAuthService:UserAuthService
+    ) {
   
    }
 
@@ -44,17 +63,30 @@ export class PlacesComponent implements OnInit {
 
     this._MyPlacesService.getAllPlaces("any").subscribe( data=>{
 
-      
       //this.myPlaces=data.data;
       this.allPlaces=data.data  
       this.isLodaing=false;
-      console.log(this.allPlaces)  
     },(err)=>{
-      console.log(err)
+     
     })
+
+    this._UserAuthService.loggedIn.subscribe((user)=>{
+      if(user)
+      {
+        this.user=user
+        this._MyPlacesService.getFavoritePlaces();
+        this._MyPlacesService.favPlaces.subscribe(res=>{
+        this.favoritePlaces=res
+        
+    })
+        
+      }
+    })
+    
 
     //get queryParams from url 
     this.activatedRoute.queryParams.subscribe((params)=>{
+      
       this.queryParams=params
       const filterarry=[];
       this.filter=[];
@@ -109,9 +141,12 @@ export class PlacesComponent implements OnInit {
 
   
   }
-  onSearch(type:HTMLInputElement,city:HTMLInputElement,area="initail")
+  onSearch(type:HTMLInputElement,city:HTMLInputElement,area:HTMLInputElement)
   {
-    const searchQuery={placeType:type.value!='0'?type.value:null,governorate:city.value=='0' || city.value== "All" ?null:city.value}
+    const searchQuery={
+      placeType:type.value!='0'?type.value:null,
+      governorate:city.value=='0' || city.value== "All" ?null:city.value,
+      area:area.value=='0' || area.value== "All" ?null:area.value}
     // in the query params --placeType:type.value!='0'?type.value:null-- to see wether the argument has value or not if not set it to null 
     this.route.navigate([],{queryParams:searchQuery ,queryParamsHandling:"merge"});
     
@@ -136,18 +171,14 @@ export class PlacesComponent implements OnInit {
     
     
   }
-  onTouched(e)
-  {
-    this.seletedPrice=e.value;
-    console.log(e)
-  }
+ 
   //pagenation
   onChangesPage(pageData:PageEvent)
   {
     let pageindex=(pageData.pageIndex+1)+''
     this.route.navigate([],{queryParams:{page:pageindex} ,queryParamsHandling:"merge"});
   }
-  //how to use query params on url deleting 
+
   filterByQuery(key,value)
   {
     this.activatedRoute.queryParams.subscribe((params)=>{
@@ -167,6 +198,11 @@ export class PlacesComponent implements OnInit {
 
   showPlace(placeId)
   {
+    if(!this.user)
+    {
+      this.alert=true
+      return;
+    }
     this.route.navigate([`reserv/${placeId}`])
   }
   openSnackBar(message: string, action: string,id) {
@@ -177,10 +213,31 @@ export class PlacesComponent implements OnInit {
     this._MyPlacesService.addToFavorite(id)    
   }
 
+  checkIfVaforite(placeId)
+  {
+    
+    const check = this.favoritePlaces.filter(element => {
+      return element._id==placeId
+    });
 
+    return check.length!=0 ? true :false
+   
+     
+   
+  }
+  
 
+  routeToLogin()
+  {
+    this.route.navigate([`account/login`])
+  }
 
-
+  onCitySelected(type)
+  {
+    let areasCode=type.replace(/ /g,"_");
+    this.areas=this._PlaceService.areas[areasCode]
+  }
+ 
 
 
 

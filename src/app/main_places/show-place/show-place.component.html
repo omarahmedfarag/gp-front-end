@@ -12,7 +12,7 @@
             <div class="place-datails mb-3 py-1 px-3 d-flex ">
                 <div class="info-section">
                     <div class="mb-2"><span class="info">governorate</span> {{singlePlace.governorate}}</div>
-                <div><span class="info">area</span> {{singlePlace.governorate}}</div>
+                <div><span class="info">area</span> {{singlePlace.area}}</div>
                 </div>
                 <div class=" info-section">
                 <div *ngIf="singlePlace.nearBy!='non'" class="mb-2"><span class="info">near by</span>{{singlePlace.nearBy}}</div>
@@ -21,8 +21,8 @@
                 </div>
 
                 <div class=" info-section">
-                  <div *ngIf="singlePlace.nearBy!='non'" class="mb-2"><span class="info">near by</span>{{singlePlace.nearBy}}</div>
-                  <div><span class="info">phone Number</span>  {{singlePlace.phoneNumber}}</div>
+                  <div *ngIf="singlePlace.nearBy!='non'" class="mb-2"><span class="info">Price</span>{{singlePlace.price}} :LE</div>
+                  <div><span class="info">Price Per</span>  {{singlePlace.pricePer}}</div>
                   
                   </div>
             </div>
@@ -44,8 +44,8 @@
                       </owl-carousel-o>
 
                 </div>
-                <div class="empty-time">
-                    <div class="empty-hours">
+                <div class="empty-time" >
+                    <div class="empty-hours" *ngIf="singlePlace.pricePer=='hour'">
                         
                     <owl-carousel-o [options]="customOptions2" class="bg-danger ">
                        
@@ -56,13 +56,22 @@
                                 {{day}} <span>{{tomorrowIS+i}}/{{monthIS}}</span>
                                 </div>
                             <div class="day-body">
-                              <div class="day-item ml-3  w-100" *ngFor="let hour of hours , let j=index">
+                              <div class="day-item  w-100" *ngFor="let hour of hours , let j=index">
                                 <div *ngIf="j!=hours.length-1">
-                                  
+                                 
+                                  <div class=" d-flex justify-content-between align-items-center" *ngIf="checkIfTimeAvailableAndConfirmed(j+1,tomorrowIS+i)">
+                                    <i class="far fa-clock  mr-2"></i>
+                                    {{hour}}pm:{{hours[j+1]}}:pm
+                                    <span class="ml-auto text-success">*pedding</span>
+                                  </div>
+
                                   <div class="" *ngIf="!checkIfTimeAvailable(j+1,tomorrowIS+i)" (click)="reserve(i+tomorrowIS,j+1,day)">
                                     <i class="far fa-clock  mr-2"></i>
-                                    {{hour}}pm:{{hours[j+1]}}:pm</div>
+                                    {{hour}}pm:{{hours[j+1]}}:pm
+                                  </div>
+                                  
                                 </div>
+                                
                               </div>
                             </div>
                           </div>
@@ -72,7 +81,52 @@
                        
                       </owl-carousel-o>
                     </div>
+                    <div class="by-month">
+                          <div class="from" >
+                          
+                            <h3 class="text-success">Starts At : </h3>
+                            
+                            <div>
+                              <mat-form-field appearance="fill" class="mr-2">
+                                <mat-label>DAY</mat-label>
+                                <mat-select class="text-warning" #selectedDay>
+                                  <ng-container *ngFor="let daynumber of daysNumber">
+                                    <mat-option *ngIf="daynumber >=  tomorrowIS" [value]="daynumber">
+                                      {{daynumber}}
+                                    </mat-option>
+                                  </ng-container>
+                                 
+                                </mat-select>
+                              </mat-form-field>
+
+                              <!--months-->
+                              <mat-form-field appearance="fill">
+                                <mat-label>MONTH</mat-label>
+                                <mat-select class="text-warning" #selectedMonth>
+                                  <mat-option  [value]="monthIS">
+                                    {{monthIS}}
+                                  </mat-option>
+                                  <mat-option  [value]="monthIS+1">
+                                    {{monthIS+1}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                        
+                          </div>
+
+                          <div class="To">
+                            <div class="text-success"><h3>Ends at </h3></div>
+                            <div *ngIf="selectedDay.value">
+                              {{selectedDay.value}}-<span *ngIf="selectedMonth.value">{{selectedMonth.value+1}}</span>
+                            </div>
+                          
+                          </div>
+                          <button class="btn btn-success mt-3" (click)="selectMonthPlace(selectedDay.value,selectedMonth.value)">Submit</button>
+                          
                 </div>
+                </div>
+
             </div>
           <button class="btn btn-light ml-5 mt-2" (click)=toggleComments(true)>show comment</button>
           <button class="btn btn-outline-danger ml-2 mt-2" *ngIf="showcomment" (click)=toggleComments(false)>hide comment</button>
@@ -119,11 +173,14 @@
 
 
 
-    <div class="alert-confirm " *ngIf="alert">
+    <div class="alert-confirm " *ngIf="alert && singlePlace.pricePer=='hour'">
+      
       <div class="alert-box">
+        <i class="far fa-times-circle text-dark" (click)="cancle()"></i>
           <div class="text-success confirmation-text">RESERVATION BOX</div>
           <hr class="mb-3">
-          <div class="mb-2">this reservation is {{reservedDate}}</div>
+          <div *ngIf="singlePlace.price > wallet.money">
+            <div class="mb-2">this reservation is {{reservedDate}}</div>
           <p>The time chooesed is </p>
           <p> From {{reservedHour}}:pm  to {{reservedHour+1}}:pm</p> 
           <p>Confirm if it's suitable with you or cancle</p>
@@ -132,5 +189,35 @@
               <button class="btn btn-success" (click)="onConfirm()">CONFIRM</button>
   
           </div>
+          </div>
+
+          <div *ngIf="wallet.money>=singlePlace.price">
+            <div class="mb-2">this reservation is {{reservedDate}} From {{reservedHour}}:pm  to {{reservedHour+1}}:pm</div>
+            <span>your balance is {{wallet.money}} so you can pay with from wallet </span>
+            <div class="mt-3">
+              <button class="btn btn-success" (click)="onConfirmWallet()">CONFIRM With Wallet</button>
+          </div>
+          <hr>
+          <span>or pay with fawry</span>
+            <div class="mt-3">
+              <button class="btn btn-warning" (click)="onConfirm()">CONFIRM With fawry</button>
+          </div>
+
+          </div>
       </div>
   </div>
+  <div class="alert-confirm " *ngIf="alert && singlePlace.pricePer=='month'">
+    <div class="alert-box">
+        <div class="text-success confirmation-text">RESERVATION BOX</div>
+        <hr class="mb-3">
+        <div class="mb-2"></div>
+        <p>The time chooesed is </p>
+        <p> From {{reservedDay}}-{{reservedMonth}}  to {{reservedDay}}-{{reservedMonth+1}}</p> 
+        <p>Confirm if it's suitable with you or cancle</p>
+        <div class="mt-3">
+            <button class="btn btn-outline-danger mr-3" (click)="cancle()">cancle</button>
+            <button class="btn btn-success" (click)="onConfirmedMonth()">CONFIRM</button>
+
+        </div>
+    </div>
+</div>

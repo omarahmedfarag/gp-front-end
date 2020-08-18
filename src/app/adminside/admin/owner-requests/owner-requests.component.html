@@ -1,12 +1,12 @@
-<div class="mt-5"  *ngIf="!loading">
-  <div class="container mt-5 ">
+<div class=""  *ngIf="!loading">
+  <div class="container mt-3">
     <div class="row">
       <div class="col-md-3 home-col">
-        <div class="numbers d-flex justify-content-center align-items-center">
+        <div class="numbers">
             <i class="fas fa-user-circle"></i>
-            #REQUESTS
+            
             <div class="noOf">
-                {{dataSource.count}}
+              
             </div>
         </div>
     </div>
@@ -36,12 +36,17 @@
     </thead>
     <tbody>
       <tr *ngFor="let request of dataSource.request,let i=index">
-        <th scope="row">{{i}}</th>
+        <th scope="row">
+        <input name="chechreq"  type="checkbox" value="">
+        </th>
         <td>{{request.placeName}}</td>
         <td>{{request.governorate}}</td>
         <td>{{request.area}}</td>
         <td>{{request.state}}</td>
-        <td><button class="btn btn-warning" (click)=showPlace(request._id)>Review </button></td>
+        <td class="">
+        <button class="btn btn-warning mr-2" (click)=showPlace(request._id)>Review </button>
+        <button class="btn btn-danger" (click)=showPlace(request._id)>Delete </button>
+        </td>
       </tr>
       
      

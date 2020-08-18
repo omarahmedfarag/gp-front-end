@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OperationService } from 'src/app/adminside/admin-service/operation.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserAuthService } from 'src/app/auth/user-auth.service';
+import { flatten } from '@angular/compiler';
 
 @Component({
   selector: 'app-showrequest',
@@ -10,11 +11,13 @@ import { UserAuthService } from 'src/app/auth/user-auth.service';
 })
 export class ShowrequestComponent implements OnInit {
   alert:boolean=false
+  alertReject:boolean=false
   showComment:boolean=false
   requestState:string='notreviewd'
   requestID:any
   request:any
   user:any
+
   constructor(private _OperationService:OperationService,
     private router:Router,
     private _ActivatedRoute:ActivatedRoute,
@@ -36,11 +39,14 @@ export class ShowrequestComponent implements OnInit {
   }
   onReject()
   {
-    this.showComment=!this.showComment
+    this.alertReject=true
   }
-  cancle()
+  cancle(soure)
   {
-    this.alert=!this.alert
+    this._OperationService.rejectRequest(this.requestID);
+     this.router.navigate(['Cpanal/owner-requests'])
+    this[soure]=!this[soure]
+
   }
   onConfirm()
   {

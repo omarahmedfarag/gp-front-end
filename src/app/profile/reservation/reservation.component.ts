@@ -1,5 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ReservationService } from './reservation.service';
+import { UserAuthService } from 'src/app/auth/user-auth.service';
+import { Router } from '@angular/router';
+import { MoneyService } from '../wallet/money.service';
 
 @Component({
   selector: 'app-reservation',
@@ -9,24 +12,56 @@ import { ReservationService } from './reservation.service';
 export class ReservationComponent implements OnInit ,AfterViewInit{
   loading=true
   reservations:any
-  constructor(private _ReservationService:ReservationService) { }
+  reservationState="not-confirmed"
+  code:string
+  alert:boolean=false
+  alertCancle:boolean=false
+  user:any
+  //clicked reservation
+  reservationPrice:number
+  reservationId:any
+  constructor(private _ReservationService:ReservationService,
+    private _UserAuthService:UserAuthService,
+    private router:Router,
+    private _MoneyService:MoneyService) { }
 
   ngOnInit(): void {
     this._ReservationService.getReservations().subscribe((result)=>{
       this.reservations=result.reservation
       this.loading=false
-      /*
+      
       if(this.reservations.length>0)
       {
         this.reservations.forEach(element => {
-          setTimeout(() => {
+         
+          if(element.state!='confirmed')
+          {
+            const def= new Date(element.exprieddAt).getTime()-new Date().getTime() 
+            if(def>0)
+            {
+              setTimeout(() => {
+                this.deletedReservation(element._id)
+              },1000*60*30);
+            }
+           else
+           {
             this.deletedReservation(element._id)
-          },1000*60*2);
+           }
+            
+          }
+
         });
       }
-      */ 
+      
       console.log(this.reservations)
+    },err=>{
+      console.log(err)
     })  
+
+    this._UserAuthService.loggedIn.subscribe((user)=>{
+      this.user=user
+    })
+
   }
   deletedReservation(id)
   {
@@ -39,6 +74,34 @@ export class ReservationComponent implements OnInit ,AfterViewInit{
       })
     })
   }
+  onConfirm(reservationId,reservationUser)
+  {
+    const code=reservationId+"-"+reservationUser
+    this.code=code;
+    this.alert=true
+  }
+
+  closeBox(soure)
+  {
+    this[soure]=false
+  }
+  oneCanlce(id,price)
+  {
+    this.alertCancle=true
+    this.reservationPrice=price
+    this.reservationId=id
+  }
+  confirmCanclation()
+  {
+    
+    this._ReservationService.deleteReservation(this.reservationId).subscribe(()=>{
+      this._MoneyService.deposite(this.user._id,Math.floor(this.reservationPrice*0.7)).subscribe(()=>{
+        this.router.navigate(['user/wallet'])
+      })
+    })
+
+  }
+
   ngAfterViewInit()
   {
       

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyPlacesService } from 'src/app/main_places/my-places.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Router } from '@angular/router';
 declare const $:any
 
 @Component({
@@ -19,7 +20,9 @@ export class FavoriteComponent implements OnInit {
 
   favoritPlaces:any
   lodaing:boolean=true;
-  constructor(private _MyPlacesService:MyPlacesService) { }
+  constructor(
+    private _MyPlacesService:MyPlacesService,
+    private router:Router )  { }
 
   ngOnInit(){
 
@@ -28,7 +31,6 @@ export class FavoriteComponent implements OnInit {
     this._MyPlacesService.favPlaces.subscribe(res=>{
       this.favoritPlaces=res;
       this.lodaing=false
-      console.log(this.favoritPlaces)
     })
 
   }
@@ -38,11 +40,11 @@ export class FavoriteComponent implements OnInit {
     this._MyPlacesService.deleteFavorite(id);
     this.lodaing=false
   }
-  showSch(event:any)
-  {
-    console.log(event)
-    $(".empty-time").css({top: event.offsetY, left:event.offsetY});
+  goToReserve(placeId)
+  { 
+    this.router.navigate([`/reserv/${placeId}`])
   }
+  
 
   customOptions: OwlOptions = {
     loop: true,

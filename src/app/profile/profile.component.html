@@ -27,10 +27,21 @@
                     <a class="nav-link" [routerLink]="['request-to-be-owner']" >Request</a>
                   </li>
                   <li class="nav-item" *ngIf="user.role=='owner'">
-                    <a class="nav-link" [routerLink]="['add-place']" routerLinkActive="active">Add place</a>
+                    <a class="nav-link" [routerLink]="['add-place']" routerLinkActive="active">
+                      <span *ngIf="!checkPlace"> Add place</span>
+                      <span *ngIf="checkPlace"> My place </span>
+                    </a>
                   </li>
                
                 
+              </ul>
+              <ul class="navbar-nav l-auto">
+                <li class="nav-item text-secondary ">
+                  <a class="nav-link" [routerLink]="['wallet']" routerLinkActive="active" >
+                    <i class="fas fa-wallet wallet"></i>
+                    MY WALLET
+                  </a>
+                </li>
               </ul>
               
             </div>

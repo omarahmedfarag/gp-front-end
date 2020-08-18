@@ -11,6 +11,7 @@ export class UserInfoComponent implements OnInit {
   alertUserMessege=""
   user:any
   userForm:FormGroup
+  checkPasswords:boolean=false
   constructor(private auth:UserAuthService) { }
 
   ngOnInit(){
@@ -18,9 +19,11 @@ export class UserInfoComponent implements OnInit {
     this.userForm=new FormGroup({
       "firstName":new FormControl(null),
       "lastName":new FormControl(null),
-      "age":new FormControl(null)
+      "age":new FormControl(null),
+      "currentPassword":new FormControl(null),
+      "newPassword":new FormControl(null),
+      "confirmPassword":new FormControl(null),
     })
-
 
     this.auth.loggedIn.subscribe(user=>{
       this.user=user;
@@ -53,5 +56,27 @@ export class UserInfoComponent implements OnInit {
     this.alertUserMessege="updated Suuccesfuly"
     this.auth.updatedUserInfo(this.user._id,userNames);
   }
-
+  updateAge()
+  {
+    let d:any= new Date(this.userForm.get("age").value)
+    d=2020-d.getFullYear()
+    const user={age:d};
+    this.auth.updatedUserInfo(this.user._id,user);
+  }
+  changePassword()
+  {
+    if(this.userForm.get("newPassword").value,this.userForm.get("confirmPassword").value)
+    {
+      const passwords={
+      currentPassword:this.userForm.get("currentPassword").value,
+      newPassword:this.userForm.get("newPassword").value
+      
+    }
+    this.auth.updatedUserInfo(this.user._id,passwords)
+    }
+    else
+    {
+      this.checkPasswords=true
+    }
+  }
 }

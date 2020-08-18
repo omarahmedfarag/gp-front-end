@@ -1,37 +1,130 @@
-<canvas id="canvas" width="130" height="130" class="" *ngIf="reservations.length!=0">
-</canvas>
-<div class="not-reservations text-center text-light" *ngIf="reservations.length==0">
-    <h2>No reservations yes !!</h2>
+<div class="d-flex justify-content-center align-items-center">
+    <canvas id="canvas" width="130" height="130" class="" *ngIf="true">
+    </canvas>
+    <div class=" ml-3">
+        <mat-form-field appearance="fill">
+            <mat-label>State</mat-label>
+            <mat-select  [(ngModel)]="reservationState">
+              <mat-option value="confirmd">
+                confirmed
+              </mat-option>
+              <mat-option value="not-confirmed">
+                not-confirmed
+              </mat-option>
+            </mat-select>
+            
+          </mat-form-field>
+    </div>
 </div>
+<div class="not-reservations text-center text-light" *ngIf="false">
+    <h2>No reservations !!</h2>
+</div>
+
+
 <div class="main "*ngIf="!loading">
     
     <div class="container">
         <div class="row">
             <div class="col-md-12 mb-3" *ngFor="let reservation of reservations;let i=index">
-                <div class="reservation">
-                    <div class="clock">
-                        <div class="text-danger"><span class="text-success">IPMORTANT</span> : You need to confirm you payment quickly
-                        Because now this reservation is reserved temtorarlly and will be removed after 
-                        </div>
-
+                <div class="reservation" *ngIf="reservationState == 'not-confirmed'  && reservation.state=='wait'" >
+                    <div class="place-image">
+                        <img [src]="reservation.place.mainImgPath" alt="">
                     </div>
-                    <div class="reservation-info py-2 px-3">
+                    <div class="reservation-info py-2 px-3" *ngIf="reservation.pricePer=='hour'">
                         <div><i class="fas fa-unlock-alt"></i></div>
-                        <div>The reservation is From : {{reservation.startAt}} to : {{reservation.endAt}} </div>
-                        <div>price per {{reservation.startAt}}</div>
+                        <div>The reservation is From : {{reservation.startAt}} to : {{reservation.endAt}}  day {{reservation.startedDay }}</div>
+                        <div>price per {{reservation.pricePer}}</div>
                         <div> Price : <span class="text-success">{{reservation.price}}</span> LE</div>
+                        <div> <span class="text-warning">IMPORTANT : </span> Your need to confirrm payment before {{reservation.exprieddAt | date:'hh:mm'}} </div>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <button class="btn btn-success" (click)="onConfirm(reservation._id,reservation.user)">confirm</button>
+                        <button class="btn btn-outline-danger" (click)="deletedReservation(reservation._id)">remove</button>
+                        </div>
+                    </div>
 
-                        <div class="d-flex justify-content-between align-items-center mt-5">
-                            <button class="btn btn-success">confirm</button>
+                    <div class="reservation-info py-2 px-3" *ngIf="reservation.pricePer=='month'">
+                        <div><i class="fas fa-unlock-alt"></i></div>
+                        <div>The reservation is From : {{reservation.startedDay}}-{{reservation.startAt}} to  {{reservation.startedDay }}-{{reservation.startAt+1}}</div>
+                        <div>price per {{reservation.pricePer}}</div>
+                        <div> Price : <span class="text-success">{{reservation.price}}</span> LE</div>
+                        <div> <span class="text-warning">IMPORTANT : </span> Your need to confirrm payment before {{reservation.startedDay+5}}-{{reservation.startAt}} </div>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <button class="btn btn-success" (click)="onConfirm(reservation._id,reservation.user)">confirm</button>
                         <button class="btn btn-outline-danger" (click)="deletedReservation(reservation._id)">remove</button>
                         </div>
                     </div>
                    
                 </div>
+
+                <div class="reservation" *ngIf="reservationState == 'confirmd' && reservation.state=='confirmed' ">
+                    <div class="place-image">
+                        <img [src]="reservation.place.mainImgPath" alt="">
+                    </div>
+
+                    <div class="reservation-info py-2 px-3 "  *ngIf="reservation.pricePer=='hour'">
+                        <div class="text-success">Congratualtion your confirmed this reservation </div>
+                        <br>
+                        <div> Price : <span class="text-success">{{reservation.price}}</span> LE</div>
+                        <div>The reservation is From : {{reservation.startAt}} to : {{reservation.endAt}}  day {{reservation.startedDay }}</div>
+                        <div class="cancle-reservation">
+                            <button class="btn btn-danger" (click)="oneCanlce(reservation._id,reservation.price)">cancle reservation</button>
+                        </div>
+                    </div>
+
+                    <div class="reservation-info py-2 px-3 "  *ngIf="reservation.pricePer=='month'">
+                        <div class="text-success">Congratualtion your confirmed this reservation </div>
+                        <br>
+                        <div> Price : <span class="text-success">{{reservation.price}}</span> LE</div>
+                        <div>The reservation is From : {{reservation.startedDay}}-{{reservation.startAt}} to  {{reservation.startedDay }}-{{reservation.startAt+1}}</div>
+                        <div class="cancle-reservation">
+                            <button class="btn btn-danger" (click)="oneCanlce(reservation._id,reservation.price)">cancel reservation</button>
+                        </div>
+                    </div>
+                 
+                   
+                </div>
+
             </div>
         </div>
     </div>
 
+</div>
+
+
+
+
+
+<div class="alert-confirm " *ngIf="alert">
+    <div class="alert-box">
+        <i class="far fa-times-circle" (click)="closeBox('alert')"></i>
+        <div class="text-success confirmation-text">
+            <span class="payment-code">PAYMENT CODE :</span><br>
+            <span class="text-light">{{code}}</span>
+        </div>
+        <hr class="mb-3">
+        <div> </div>
+        
+       
+    </div>
+</div>
+
+<div class="alert-confirm " *ngIf="alertCancle">
+    <div class="alert-box-cancle bg-light">
+        <i class="far fa-times-circle text-dark" (click)="closeBox('alertCancle')"></i>
+        <div class="pr-5">
+            <h3>!! <span class="text-warning">WARRNING</span> YOUR TRYING TO CANCEL PAID RESERVATION </h3>
+        </div>
+        <hr>
+        <div >
+            <h4>the price you have paid is <span class="text-success">{{reservationPrice}} :LE</span></h4>
+            <div>if your are willing to cancle this reservation 
+                the money will be deducted by 30%
+            </div>
+            <div><h6>SO <span class="text-success">{{reservationPrice *0.7}} :LE</span> Will back to you Wallet </h6></div>
+            <div>ARE YOU SURE YOU WANT TO CANCLE</div>
+            <div class="btn btn-danger" (click)="confirmCanclation()">YES, CANCEL </div>
+        </div>
+    </div>
 </div>
 
 

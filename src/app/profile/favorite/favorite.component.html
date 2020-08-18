@@ -18,7 +18,7 @@
             <img mat-card-image [src]="place.mainImgPath" alt="Photo of a Shiba Inu">
            
             <mat-card-actions>
-              <button class="btn btn-success" (click)=showSch($event)>reserv</button>
+              <button class="btn btn-success" (click)="goToReserve(place._id)" >reserv</button>
               <button mat-button class="btn-outline-danger" (click)="removeFavorite(place._id)">Remove</button>
             </mat-card-actions>
           </mat-card>

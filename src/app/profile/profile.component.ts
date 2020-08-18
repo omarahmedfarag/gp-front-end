@@ -3,6 +3,7 @@ import { UserAuthService } from '../auth/user-auth.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { RequestService } from './aggrement/request.service';
 import { AppliedRequestService } from './request/applied-request.service';
+import { PlcaeServiceService } from '../owner/plcae-service.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +17,12 @@ export class ProfileComponent implements OnInit {
   image:string='';
   updatedImage:boolean=false;
   aggrement:boolean
-  constructor(private auth:UserAuthService,private _RequestService:RequestService,private _AppliedRequestService:AppliedRequestService) { }
+  checkPlace:any
+  constructor(private auth:UserAuthService,
+    private _RequestService:RequestService,
+    private _AppliedRequestService:AppliedRequestService,
+    private _PlcaeServiceService:PlcaeServiceService
+    ) { }
 
   ngOnInit(){
     this.auth.getMe()
@@ -27,10 +33,18 @@ export class ProfileComponent implements OnInit {
       this.user=user;
     })
    
+    this._PlcaeServiceService.getMyPlace().subscribe((result)=>{
+      this.checkPlace=result.place
+      console.log(this.checkPlace)
+      
+    })
     this._AppliedRequestService.getMyRequest().subscribe(result=>{
       this.request=result.request.length == 0 ? false :result.request 
       console.log(this.request)
     })
+
+
+
     this.userForm=new FormGroup({
       "photo":new FormControl(null)
     })

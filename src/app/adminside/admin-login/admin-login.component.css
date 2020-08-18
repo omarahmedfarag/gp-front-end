@@ -1,0 +1,36 @@
+.main
+{
+    height: 100vh;
+    position: relative;
+}
+.layer
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-box
+{
+    width: 30%;
+    height: 50%;
+    background-color: white;
+    padding: 20px 20px;
+    border-radius: 10px;
+}
+.logo
+{
+    background-color: green;
+    width: 40%;
+    height: 40px;
+    color: white;
+    font-size: 25px;
+    margin: auto;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}

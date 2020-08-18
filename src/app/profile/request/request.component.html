@@ -9,7 +9,12 @@
     <span class="text-success">Gongratulation</span>
     your become owner and can add new place now 
   </div>
-  <mat-horizontal-stepper linear #stepper *ngIf="!myRequest && user.role=='user'">
+
+  <div>
+    
+  </div>
+
+  <mat-horizontal-stepper linear #stepper *ngIf="(!myRequest && user.role=='user') || myRequest.state=='rejected'" >
     <mat-step [stepControl]="firstFormGroup" [editable]="isEditable" [completed]="!isEditable">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Fill out place type</ng-template>

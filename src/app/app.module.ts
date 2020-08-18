@@ -25,6 +25,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatTableModule} from '@angular/material/table';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 import { PlacesComponent } from './main_places/places/places.component';
 import { PlaceComponent } from './main_places/place/place.component';
@@ -55,6 +57,9 @@ import { ShowrequestComponent } from './adminside/admin/owner-requests/showreque
 import { ShowplaceComponent } from './adminside/admin/placerequest/showplace/showplace.component';
 import { PlacerequestComponent } from './adminside/admin/placerequest/placerequest.component';
 import { ReservationComponent } from './profile/reservation/reservation.component';
+import { AdminLoginComponent } from './adminside/admin-login/admin-login.component';
+import { FawreyComponent } from './fawrey/fawrey.component';
+import { WalletComponent } from './profile/wallet/wallet.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +86,9 @@ import { ReservationComponent } from './profile/reservation/reservation.componen
     ShowplaceComponent,
     PlacerequestComponent,
     ReservationComponent,
+    AdminLoginComponent,
+    FawreyComponent,
+    WalletComponent,
     
   ],
   imports: [
@@ -111,7 +119,8 @@ import { ReservationComponent } from './profile/reservation/reservation.componen
     CarouselModule,
     MatStepperModule,
     MatBadgeModule,
-    MatTableModule
+    MatTableModule,
+    MatSlideToggleModule
     
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthIntercepter,multi:true},AuthGuard],

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class UserAuthService {
   ErrorMessage=""
   user:any;
   loggedIn=new BehaviorSubject(false);
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private router:Router) { }
 
   getToken()
   {
@@ -21,16 +22,9 @@ export class UserAuthService {
 
     return this.http.post<{status:string,token:string,user:any}>("http://localhost:3000/api/user/login",body)
   }
-  signUp(body):any
+  signUp(body):Observable<any>
   {
-    this.http.post<{status:string,token:string,user:any}>("http://localhost:3000/api/user/signup",body).subscribe(result=>{
-      this.token=result.token;
-      this.loggedIn.next(result.user);
-      this.saveToLocal(result.token,result.user);
-      
-    },(err)=>{
-      
-    })
+    return this.http.post<{status:string,token:string,user:any}>("http://localhost:3000/api/user/signup",body)
   }
   updatedImage(id,body)
   {
@@ -45,7 +39,17 @@ export class UserAuthService {
   }
   updatedUserInfo(id,body)
   {
-    this.http.patch<{status:string,user:any}>(`http://localhost:3000/api/user//update/${id}`,body).subscribe((result)=>{
+
+    if(body.newPassword)
+    {
+      this.http.patch<{status:string,user:any}>(`http://localhost:3000/api/user/update/${id}`,body).subscribe((result)=>{
+      this.logOut()
+      this.router.navigate(["account/login"])
+    },(err)=>{
+    })
+    return
+    }
+    this.http.patch<{status:string,user:any}>(`http://localhost:3000/api/user/update/${id}`,body).subscribe((result)=>{
       this.emiteNewUserValue(result.user);
     },(err)=>{
     })

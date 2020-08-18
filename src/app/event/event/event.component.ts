@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventComponent implements OnInit {
 
+  placeTypes:string[]=['GYM','TENNES','FOOTBALL','BASCKETBALL','SWIMMING','STREETWORKOUT'];
+
   constructor() { }
 
   ngOnInit(): void {

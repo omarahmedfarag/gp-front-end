@@ -23,7 +23,7 @@ export class MyPlacesService {
       if(queryobj != "any")
       {
          queryobj=`?${queryobj}`;
-         console.log(queryobj)
+         
       }
       else{
          queryobj='';

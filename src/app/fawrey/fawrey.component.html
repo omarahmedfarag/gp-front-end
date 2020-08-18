@@ -1,0 +1,27 @@
+<div class="main">
+    <div class="layer">
+        <div class="login-box">
+            <div class="text-center logo mb-2" > SPORTIVO & fawrey</div>
+            <div *ngIf="messege">
+                <div class="alert alert-danger" *ngIf="messege=='Invalid Code'">
+                    {{messege}}
+                 </div>
+                 <div class="alert alert-success" *ngIf="messege=='Confirmed Successfuly'">
+                    {{messege}}
+                 </div>
+            </div>
+            
+            <form [formGroup]="Fawryform">
+                <div class="form-group mt-2">
+                    <input type="text" placeholder="CODE" class="form-control mt-5" formControlName="code">
+                </div>
+    
+                <button class="btn btn-warning mt-3 w-75 text-light" [disabled]="Fawryform.invalid" 
+                type="button"
+                (click)="confirm()"
+                >CONFIRM RESERVATION </button>
+            </form>
+            
+        </div>
+    </div>
+</div>
